@@ -17,7 +17,7 @@ export function WinnersTicker() {
             key={`${winner.id}-${index}`}
             className="flex-shrink-0 w-[280px] bg-bg-raised border border-border px-5 py-5 flex items-center gap-3.5"
           >
-            <div className="w-10 h-10 bg-brass-dim flex items-center justify-center font-display font-bold text-sm text-brass-light flex-shrink-0">
+            <div className="w-10 h-10 bg-brass-dim flex items-center justify-center font-plus font-bold text-sm text-brass-light flex-shrink-0">
               {winner.initials}
             </div>
             <div>

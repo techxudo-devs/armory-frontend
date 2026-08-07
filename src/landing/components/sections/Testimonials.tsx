@@ -20,7 +20,7 @@ export function Testimonials() {
             </div>
             <p className="text-[14.5px] text-text-secondary leading-relaxed">&quot;{testimonial.quote}&quot;</p>
             <div className="flex items-center gap-3 mt-auto">
-              <div className="w-9 h-9 bg-brass-dim flex items-center justify-center font-display font-bold text-[13px] text-brass-light">
+              <div className="w-9 h-9 bg-brass-dim flex items-center justify-center font-plus font-bold text-[13px] text-brass-light">
                 {testimonial.initials}
               </div>
               <div>

@@ -25,7 +25,7 @@ export function Header() {
 
         <div className="hidden md:flex gap-9">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className="text-sm text-text-secondary font-pop hover:text-text-primary transition-colors">
+            <a key={link.href} href={link.href} className="text-sm text-text-secondary font-plus hover:text-text-primary transition-colors">
               {link.label}
             </a>
           ))}

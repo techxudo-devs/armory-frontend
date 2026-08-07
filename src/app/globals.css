@@ -26,11 +26,7 @@
   --color-signal-dim: #2A1613;
   --color-success: #6FA374;
 
-  --font-display: var(--font-oswald);
-  --font-sans: var(--font-plusjakarta);
-  --font-mono: var(--font-jbmono);
   --font-plus: var(--font-plusjakarta);
-  --font-pop: var(--font-poppins);
 
   --animate-fadeUp: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
   --animate-scroll: scroll 32s linear infinite;
