@@ -96,6 +96,7 @@ export default function PublicGamePage({
           </p>
           <Link
             href="/"
+            prefetch={false}
             className="mt-5 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
           >
             <ArrowLeft size={16} />
@@ -113,6 +114,7 @@ export default function PublicGamePage({
         <div className="flex items-center justify-between gap-3">
           <Link
             href="/"
+            prefetch={false}
             className="flex items-center gap-1.5 text-sm font-medium text-slate-500 transition-colors hover:text-slate-800"
           >
             <ArrowLeft size={16} />
@@ -253,6 +255,7 @@ export default function PublicGamePage({
               <div className="mt-4 flex flex-col gap-2.5 sm:flex-row sm:justify-center">
                 <Link
                   href={`/login?next=/game/${gameCode}`}
+                  prefetch={false}
                   className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 sm:flex-none"
                 >
                   <LogIn size={16} />
@@ -260,6 +263,7 @@ export default function PublicGamePage({
                 </Link>
                 <Link
                   href={`/register?next=/game/${gameCode}`}
+                  prefetch={false}
                   className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl border border-blue-600 bg-white px-5 py-2.5 text-sm font-semibold text-blue-600 transition-colors hover:bg-blue-50 sm:flex-none"
                 >
                   <UserPlus size={16} />

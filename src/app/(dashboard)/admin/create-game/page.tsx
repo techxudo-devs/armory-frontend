@@ -75,6 +75,7 @@ export default function CreateGamePage() {
       <div className="mb-8">
         <Link
           href="/admin/manage-games"
+          prefetch={false}
           className="mb-4 flex w-fit cursor-pointer items-center gap-2 text-sm font-medium text-[#8B93A7] transition-colors hover:text-[#A5B4FC]"
         >
           <ArrowLeft size={18} />
@@ -258,6 +259,7 @@ export default function CreateGamePage() {
           <div className="flex flex-col sm:flex-row gap-3 pt-4">
             <Link
               href="/admin/manage-games"
+              prefetch={false}
               className="flex-1 cursor-pointer rounded-xl border border-[#23272D] px-4 py-2.5 text-center text-sm font-medium text-[#9AA0AA] transition-colors hover:bg-white/5 hover:text-[#F2F3F5]"
             >
               Cancel

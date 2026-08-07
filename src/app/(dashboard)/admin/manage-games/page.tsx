@@ -164,6 +164,7 @@ export default function ManageGamesPage() {
           </div>
           <Link
             href="/admin/create-game"
+            prefetch={false}
             className="flex cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-r from-[#6667DD] to-[#8B5CF6] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#6667DD]/25 transition-all hover:from-[#5A5BD1] hover:to-[#7C3AED] hover:shadow-[#6667DD]/40 active:scale-[0.98]"
           >
             <Plus size={18} />

@@ -107,6 +107,7 @@ export default function UserDashboard() {
             <Link
               key={action.href}
               href={action.href}
+              prefetch={false}
               className={`group rounded-2xl border border-[#1F293D] bg-gradient-to-b from-[#151A2A] to-[#0F1422] p-6 text-center shadow-xl shadow-black/20 transition-all hover:-translate-y-0.5 hover:shadow-lg ${action.ring}`}
             >
               <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 transition-colors group-hover:bg-white/10">
@@ -128,6 +129,7 @@ export default function UserDashboard() {
           <h2 className="text-xl font-bold text-[#F2F3F5]">Featured Games</h2>
           <Link
             href="/dashboard/active-games"
+            prefetch={false}
             className="flex items-center gap-1 text-sm font-semibold text-[#6667DD] transition-colors hover:text-[#A5B4FC]"
           >
             View all <ArrowRight size={14} />
@@ -231,6 +233,7 @@ function GameCard({ game, isJoined }: GameCardProps) {
       ) : (
         <Link
           href="/dashboard/active-games"
+          prefetch={false}
           className="block w-full cursor-pointer rounded-xl bg-gradient-to-r from-[#6667DD] to-[#8B5CF6] py-2.5 text-center text-sm font-semibold text-white shadow-lg shadow-[#6667DD]/25 transition-all hover:from-[#5A5BD1] hover:to-[#7C3AED] active:scale-[0.98]"
         >
           Join Game

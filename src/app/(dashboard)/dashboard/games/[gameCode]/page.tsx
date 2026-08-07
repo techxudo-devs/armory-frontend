@@ -67,6 +67,7 @@ export default function GameSeatSelectionPage({
       <div className="mb-6">
         <Link
           href="/dashboard/active-games"
+          prefetch={false}
           className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-[#8B93A7] transition-colors hover:text-[#F2F3F5]"
         >
           <ArrowLeft size={16} />
@@ -87,6 +88,7 @@ export default function GameSeatSelectionPage({
             </p>
             <Link
               href="/dashboard/active-games"
+              prefetch={false}
               className="mt-5 inline-flex cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-r from-[#6667DD] to-[#8B5CF6] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:from-[#5A5BD1] hover:to-[#7C3AED]"
             >
               <ArrowLeft size={16} />
@@ -180,6 +182,7 @@ export default function GameSeatSelectionPage({
                   </p>
                   <Link
                     href="/dashboard/active-games"
+                    prefetch={false}
                     className="mt-2 inline-flex cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-r from-[#6667DD] to-[#8B5CF6] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:from-[#5A5BD1] hover:to-[#7C3AED]"
                   >
                     <ArrowLeft size={16} />

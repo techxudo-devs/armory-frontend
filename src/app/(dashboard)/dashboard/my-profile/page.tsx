@@ -219,6 +219,7 @@ export default function MyProfilePage() {
             </div>
             <Link
               href="/forgot-password"
+              prefetch={false}
               className="flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#6667DD] to-[#8B5CF6] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#6667DD]/25 transition-all hover:from-[#5A5BD1] hover:to-[#7C3AED] active:scale-[0.98]"
             >
               <ShieldCheck size={16} />
