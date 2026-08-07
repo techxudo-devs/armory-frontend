@@ -59,6 +59,7 @@ export function HeaderDash({ user, onMenuClick }: HeaderProps) {
         {/* Quick Explorer Pill */}
         <Link
           href={user.role === "admin" ? "/admin/manage-games" : "/dashboard"}
+          prefetch={false}
           className="hidden md:flex items-center gap-2 text-xs font-semibold px-3 py-2 rounded-lg bg-[#0B101D] border border-[#1F293D] text-[#94A3B8] hover:text-white hover:border-[#6667DD] transition-colors"
         >
           <Sparkles className="w-3.5 h-3.5 text-[#6667DD]" />
@@ -71,6 +72,7 @@ export function HeaderDash({ user, onMenuClick }: HeaderProps) {
         {user.role === "user" && (
           <Link
             href="/dashboard/notifications"
+            prefetch={false}
             className="relative p-2 rounded-lg bg-[#0B101D] border border-[#1F293D] text-[#94A3B8] hover:text-white hover:border-[#6667DD] transition-colors"
             title="Notifications"
           >

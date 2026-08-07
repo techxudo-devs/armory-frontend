@@ -12,7 +12,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-bg/85 backdrop-blur-md">
       <nav className="max-w-[1300px] mx-auto px-8 h-[78px] flex items-center justify-between">
-        <Link href="/">
+        <Link href="/" prefetch={false}>
         <div className="flex items-center gap-2.5">
           <div className="w-[30px] h-[30px] bg-brass relative">
             <span className="absolute inset-1.5 bg-bg" />
@@ -34,6 +34,7 @@ export function Header() {
         <div className="flex items-center gap-5">
           <Link
             href="/login"
+            prefetch={false}
             className="text-sm font-plus text-text-secondary hover:text-text-primary transition-colors"
           >
             Log in

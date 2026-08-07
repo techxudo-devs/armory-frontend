@@ -7,7 +7,7 @@ export default function AuthLayout({
 }) {
   return (
     <div className="min-h-screen bg-bg text-text-primary relative overflow-y-auto flex flex-col items-center px-6 py-6 bg-[radial-gradient(ellipse_800px_500px_at_50%_-10%,rgba(229,53,53,0.10),transparent_60%)]">
-      <Link href="/" className="flex items-center gap-2.5 mb-6">
+      <Link href="/" prefetch={false} className="flex items-center gap-2.5 mb-6">
         <div className="w-[30px] h-[30px] bg-brass relative">
           <span className="absolute inset-1.5 bg-bg" />
         </div>

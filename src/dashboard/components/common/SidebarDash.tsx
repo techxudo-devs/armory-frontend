@@ -136,6 +136,7 @@ function SidebarContent({
               <Link
                 key={link.href}
                 href={link.href}
+                prefetch={false}
                 title={link.label}
                 onClick={() => onNavigate?.()}
                 className={`flex items-center gap-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${linkWrap} ${

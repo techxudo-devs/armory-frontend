@@ -124,6 +124,7 @@ function RegisterForm() {
         Already have an account?{" "}
         <Link
           href="/login"
+          prefetch={false}
           className="text-brass-light hover:underline font-semibold"
         >
           Log in

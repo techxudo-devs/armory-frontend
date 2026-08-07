@@ -57,6 +57,7 @@ export default function ForgotPasswordPage() {
         Remembered your password?{" "}
         <Link
           href="/login"
+          prefetch={false}
           className="text-brass-light hover:underline font-semibold"
         >
           Log in
@@ -64,6 +65,7 @@ export default function ForgotPasswordPage() {
       </p>
       <Link
         href="/login"
+        prefetch={false}
         className="mt-4 flex items-center justify-center gap-1.5 text-xs text-text-secondary font-plus hover:text-text-primary transition-colors"
       >
         <ArrowLeft size={13} />

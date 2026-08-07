@@ -81,6 +81,7 @@ function LoginForm() {
           </label>
           <Link
             href="/forgot-password"
+            prefetch={false}
             className="text-brass-light hover:underline font-medium"
           >
             Forgot password?
@@ -94,6 +95,7 @@ function LoginForm() {
         Don&apos;t have an account?{" "}
         <Link
           href="/register"
+          prefetch={false}
           className="text-brass-light hover:underline font-semibold"
         >
           Register

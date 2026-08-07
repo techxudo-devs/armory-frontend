@@ -55,6 +55,7 @@ function ResetPasswordForm() {
         <div className="mt-4">
           <Link
             href="/forgot-password"
+            prefetch={false}
             className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-brass via-brass-light to-brass px-6 py-3 text-xs font-medium uppercase tracking-wide text-white shadow-md shadow-brass/10 transition-all hover:brightness-110 active:scale-[0.99]"
           >
             Request a new link
@@ -97,6 +98,7 @@ function ResetPasswordForm() {
 
       <Link
         href="/login"
+        prefetch={false}
         className="mt-4 flex items-center justify-center gap-1.5 text-xs text-text-secondary font-plus hover:text-text-primary transition-colors"
       >
         <ArrowLeft size={13} />

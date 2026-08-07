@@ -102,7 +102,7 @@ export const baseApi = createApi({
   reducerPath: 'api',
   baseQuery: axiosBaseQuery,
   tagTypes: ['Game', 'User', 'History', 'Analytics', 'Auth', 'JoinedGames', 'Notifications'],
-  refetchOnFocus: true,
-  refetchOnReconnect: true,
+  refetchOnFocus: false,
+  refetchOnReconnect: false,
   endpoints: () => ({}),
 })
