@@ -33,6 +33,33 @@ export default function ActiveGamesPage() {
         </p>
       </div>
 
+      <div>
+        <h2 className="mb-4 text-xl font-bold text-[#F2F3F5]">Available Games</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {gamesLoading ? (
+            Array.from({ length: 3 }).map((_, i) => <GameCardSkeleton key={i} />)
+          ) : joinableGames.length > 0 ? (
+            joinableGames.map((game) => (
+              <GameCard
+                key={game._id}
+                game={game}
+                onJoin={() => router.push(`/dashboard/games/${game.gameCode}`)}
+              />
+            ))
+          ) : (
+            <div className="col-span-full rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] py-14 text-center shadow-xl shadow-black/20">
+              <Trophy className="mx-auto mb-3 text-[#9AA0AA] opacity-50" size={28} />
+              <p className="font-semibold text-[#F2F3F5]">
+                {availableGames.length > 0
+                  ? 'You have joined all active games'
+                  : 'No active games right now'}
+              </p>
+              <p className="mt-1 text-sm text-[#9AA0AA]">Check back soon for new games</p>
+            </div>
+          )}
+        </div>
+      </div>
+
       {activeParticipations.length > 0 && (
         <div className="mb-8">
           <div className="mb-4 flex items-center gap-2">
@@ -78,33 +105,6 @@ export default function ActiveGamesPage() {
           </div>
         </div>
       )}
-
-      <div>
-        <h2 className="mb-4 text-xl font-bold text-[#F2F3F5]">Available Games</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {gamesLoading ? (
-            Array.from({ length: 3 }).map((_, i) => <GameCardSkeleton key={i} />)
-          ) : joinableGames.length > 0 ? (
-            joinableGames.map((game) => (
-              <GameCard
-                key={game._id}
-                game={game}
-                onJoin={() => router.push(`/dashboard/games/${game.gameCode}`)}
-              />
-            ))
-          ) : (
-            <div className="col-span-full rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] py-14 text-center shadow-xl shadow-black/20">
-              <Trophy className="mx-auto mb-3 text-[#9AA0AA] opacity-50" size={28} />
-              <p className="font-semibold text-[#F2F3F5]">
-                {availableGames.length > 0
-                  ? 'You have joined all active games'
-                  : 'No active games right now'}
-              </p>
-              <p className="mt-1 text-sm text-[#9AA0AA]">Check back soon for new games</p>
-            </div>
-          )}
-        </div>
-      </div>
     </div>
   )
 }

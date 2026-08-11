@@ -8,6 +8,7 @@ import { toast } from 'sonner'
 import { useForm } from '@/hooks/useForm'
 import { useCreateGameMutation } from '@/lib/api/gamesApi'
 import { getErrorMessage } from '@/lib/api/baseApi'
+import { publishGameCreated } from '@/lib/realtime/gameCreatedEvents'
 
 interface GameForm {
   title: string
@@ -56,7 +57,14 @@ export default function CreateGamePage() {
       if (prizeImage) formData.append('prizeImage', prizeImage)
 
       try {
-        await createGame(formData).unwrap()
+        const created = await createGame(formData).unwrap()
+        publishGameCreated({
+          gameId: created._id,
+          gameCode: created.gameCode,
+          title: created.title,
+          prize: created.prize,
+          createdAt: created.createdAt,
+        })
         toast.success('Game created successfully!')
         setPrizeImage(null)
         resetRef.current()

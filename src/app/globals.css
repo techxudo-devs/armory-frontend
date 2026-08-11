@@ -30,6 +30,8 @@
 
   --animate-fadeUp: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
   --animate-scroll: scroll 32s linear infinite;
+  --animate-toast-in: toastIn 0.35s ease-out both;
+  --animate-toast-progress: toastProgress 6s linear forwards;
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(14px); }
@@ -39,6 +41,16 @@
   @keyframes scroll {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
+  }
+
+  @keyframes toastIn {
+    from { opacity: 0; transform: translateX(110%); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes toastProgress {
+    from { width: 100%; }
+    to { width: 0%; }
   }
 }
 

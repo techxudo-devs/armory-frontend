@@ -18,9 +18,11 @@ import {
   X,
 } from 'lucide-react'
 import { toast } from 'sonner'
+import { useDispatch } from 'react-redux'
 import { useGetGameByCodeQuery } from '@/lib/api/gamesApi'
 import { useReserveSeatsMutation } from '@/lib/api/userApi'
-import { getErrorMessage } from '@/lib/api/baseApi'
+import { getErrorMessage, baseApi } from '@/lib/api/baseApi'
+import { usePusherEvents } from '@/lib/pusher/usePusher'
 import { PAYMENT_ACCOUNT } from '@/lib/paymentConfig'
 import type { SeatInfo } from '@/lib/api/types'
 
@@ -63,6 +65,11 @@ export default function GameSeatSelectionPage({
   const seatMap = data?.seatMap ?? []
   const mySeats = data?.userReservedSeats ?? []
   const pendingSeats = data?.pendingSeats ?? []
+
+  const dispatch = useDispatch()
+  usePusherEvents(game?._id ? `game-${game._id}` : null, ['seat-map:updated'], () => {
+    dispatch(baseApi.util.invalidateTags(['Game']))
+  })
 
   const canSubmitPayment =
     paymentReference.trim().length > 0 || paymentProofFile !== null

@@ -3,14 +3,23 @@
 import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { useGetMeQuery } from '@/lib/api/authApi'
+import { usePusherAdminNotifications, usePusherNotifications } from '@/lib/pusher/usePusher'
 import { HeaderDash } from './HeaderDash'
 import { MobileSidebar, SidebarDash } from './SidebarDash'
+import { RealtimeToasts } from '../RealtimeToasts'
 
 export function DashboardShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const router = useRouter()
   const { data: user, isLoading, isError } = useGetMeQuery()
   const [mobileOpen, setMobileOpen] = useState(false)
+
+  usePusherNotifications({
+    userId: user?._id,
+    enabled: user?.role === 'user',
+  })
+
+  usePusherAdminNotifications({ enabled: user?.role === 'admin' })
 
   useEffect(() => {
     if (isError) {
@@ -56,6 +65,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}
       />
+      <RealtimeToasts />
     </div>
   )
 }
