@@ -40,7 +40,7 @@ export function CategoryGrid() {
           <a
             key={category.id}
             href="#raffles"
-            className="block bg-panel px-6 py-8 hover:bg-panel-2 transition-colors duration-300"
+            className="block bg-gradient-to-b from-panel-2 to-panel px-6 py-8 hover:from-[#3D2715] hover:to-panel-2 transition-all duration-300"
           >
             <CategoryIcon
               category={category.name}

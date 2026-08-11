@@ -12,7 +12,7 @@ export function Testimonials() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {testimonials.map((testimonial) => (
-          <div key={testimonial.id} className="bg-panel border border-border p-7 flex flex-col gap-5">
+          <div key={testimonial.id} className="surface-card border border-border p-7 flex flex-col gap-5">
             <div className="flex gap-1">
               {Array.from({ length: 5 }).map((_, index) => (
                 <Star key={index} className="w-3.5 h-3.5 fill-brass-light text-brass-light" />

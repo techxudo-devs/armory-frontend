@@ -30,8 +30,8 @@ const initialGameState: Partial<Game> = {
 }
 
 const inputClass =
-  'w-full rounded-xl border border-[#2E1C0E] bg-[#1B0F08] px-3.5 py-2.5 text-sm text-[#F2E8DC] placeholder-[#8A6A50] outline-none transition-colors duration-300 focus:border-[#C78C3A] focus:ring-2 focus:ring-[#C78C3A]/20 disabled:opacity-50 disabled:cursor-not-allowed'
-const labelClass = 'mb-1.5 block text-sm font-medium text-[#B08A6C]'
+  'w-full rounded-xl border border-[#3D2715] bg-[#24140B] px-3.5 py-2.5 text-sm text-[#F4EADD] placeholder-[#9A7A5C] outline-none transition-colors duration-300 focus:border-[#D29A45] focus:ring-2 focus:ring-[#D29A45]/20 disabled:opacity-50 disabled:cursor-not-allowed'
+const labelClass = 'mb-1.5 block text-sm font-medium text-[#C09A76]'
 
 const toDateTimeLocal = (iso: string) => {
   const d = new Date(iso)
@@ -70,7 +70,7 @@ export function GameModal({ isOpen, type, game, onClose, onSubmit, isLoading = f
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
-      <div className="flex max-h-[80vh] w-full max-w-lg flex-col rounded-2xl border border-[#2E1C0E] bg-[#1B0F08] p-5 text-[#F2E8DC] shadow-2xl shadow-black/60">
+      <div className="flex max-h-[80vh] w-full max-w-lg flex-col rounded-2xl border border-[#3D2715] bg-[#24140B] p-5 text-[#F4EADD] shadow-2xl shadow-black/60">
         <div className="mb-6 flex shrink-0 items-center justify-between">
           <h2 className="text-lg font-semibold tracking-wide">
             {type === 'create' && 'Create New Game'}
@@ -79,7 +79,7 @@ export function GameModal({ isOpen, type, game, onClose, onSubmit, isLoading = f
           </h2>
           <button
             onClick={handleClose}
-            className="cursor-pointer rounded-lg p-1.5 text-[#B08A6C] transition-colors duration-300 hover:bg-white/5 hover:text-[#F2E8DC]"
+            className="cursor-pointer rounded-lg p-1.5 text-[#C09A76] transition-colors duration-300 hover:bg-white/5 hover:text-[#F4EADD]"
           >
             <X size={18} />
           </button>
@@ -145,7 +145,7 @@ export function GameModal({ isOpen, type, game, onClose, onSubmit, isLoading = f
               {!isViewOnly && (
                 <label
                   htmlFor="prizeImage"
-                  className="flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-[#2E1C0E] bg-[#1B0F08] px-3.5 py-2.5 text-sm text-[#B08A6C] transition-colors duration-300 hover:border-[#C78C3A] hover:text-[#D0AE95]"
+                  className="flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-[#3D2715] bg-[#24140B] px-3.5 py-2.5 text-sm text-[#C09A76] transition-colors duration-300 hover:border-[#D29A45] hover:text-[#E3C49A]"
                 >
                   <ImageIcon size={18} className="shrink-0" />
                   <span className="truncate">
@@ -172,7 +172,7 @@ export function GameModal({ isOpen, type, game, onClose, onSubmit, isLoading = f
                   alt="Prize"
                   width={64}
                   height={64}
-                  className="mt-2 h-16 w-16 rounded-lg border border-[#2E1C0E] object-cover"
+                  className="mt-2 h-16 w-16 rounded-lg border border-[#3D2715] object-cover"
                 />
               )}
             </div>
@@ -332,14 +332,14 @@ export function GameModal({ isOpen, type, game, onClose, onSubmit, isLoading = f
                 type="button"
                 onClick={handleClose}
                 disabled={isLoading}
-                className="flex-1 cursor-pointer rounded-xl border border-[#2E1C0E] px-4 py-2.5 text-sm font-medium text-[#B08A6C] transition-colors duration-300 hover:bg-white/5 hover:text-[#F2E8DC] disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex-1 cursor-pointer rounded-xl border border-[#3D2715] px-4 py-2.5 text-sm font-medium text-[#C09A76] transition-colors duration-300 hover:bg-white/5 hover:text-[#F4EADD] disabled:cursor-not-allowed disabled:opacity-50"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={isLoading}
-                className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#C78C3A] to-[#D0AE95] px-4 py-2.5 text-sm font-semibold text-[#1a1408] shadow-lg shadow-[#C78C3A]/25 transition-all duration-300 hover:from-[#B4522C] hover:to-[#B4522C] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+                className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#D29A45] to-[#E3C49A] px-4 py-2.5 text-sm font-semibold text-[#1a1408] shadow-lg shadow-[#D29A45]/25 transition-all duration-300 hover:from-[#B4522C] hover:to-[#B4522C] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
                 {isLoading
@@ -357,7 +357,7 @@ export function GameModal({ isOpen, type, game, onClose, onSubmit, isLoading = f
             <button
               type="button"
               onClick={handleClose}
-              className="w-full cursor-pointer rounded-xl bg-gradient-to-r from-[#C78C3A] to-[#D0AE95] px-4 py-2.5 text-sm font-semibold text-[#1a1408] shadow-lg shadow-[#C78C3A]/25 transition-all duration-300 hover:from-[#B4522C] hover:to-[#B4522C] active:scale-[0.98]"
+              className="w-full cursor-pointer rounded-xl bg-gradient-to-r from-[#D29A45] to-[#E3C49A] px-4 py-2.5 text-sm font-semibold text-[#1a1408] shadow-lg shadow-[#D29A45]/25 transition-all duration-300 hover:from-[#B4522C] hover:to-[#B4522C] active:scale-[0.98]"
             >
               Close
             </button>

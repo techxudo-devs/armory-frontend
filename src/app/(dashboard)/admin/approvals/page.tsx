@@ -75,24 +75,24 @@ export default function PendingApprovalsPage() {
 
       {/* Summary */}
       <div className="mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="flex items-center gap-4 rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] p-5 shadow-xl shadow-black/20">
+        <div className="flex items-center gap-4 rounded-2xl border border-[#3D2715] bg-gradient-to-b from-[#331E10] to-[#24140B] p-5 shadow-xl shadow-black/20">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/5">
-            <Clock size={20} className="text-[#D0AE95]" />
+            <Clock size={20} className="text-[#E3C49A]" />
           </div>
           <div>
-            <p className="text-xs font-medium text-[#B08A6C]">Pending Requests</p>
-            <p className="mt-0.5 text-2xl font-bold text-[#F2E8DC]">
+            <p className="text-xs font-medium text-[#C09A76]">Pending Requests</p>
+            <p className="mt-0.5 text-2xl font-bold text-[#F4EADD]">
               {isLoading ? '—' : groups.length}
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-4 rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] p-5 shadow-xl shadow-black/20">
+        <div className="flex items-center gap-4 rounded-2xl border border-[#3D2715] bg-gradient-to-b from-[#331E10] to-[#24140B] p-5 shadow-xl shadow-black/20">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/5">
-            <Ticket size={20} className="text-[#D0AE95]" />
+            <Ticket size={20} className="text-[#E3C49A]" />
           </div>
           <div>
-            <p className="text-xs font-medium text-[#B08A6C]">Seats Awaiting Approval</p>
-            <p className="mt-0.5 text-2xl font-bold text-[#F2E8DC]">
+            <p className="text-xs font-medium text-[#C09A76]">Seats Awaiting Approval</p>
+            <p className="mt-0.5 text-2xl font-bold text-[#F4EADD]">
               {isLoading ? '—' : totalSeats}
             </p>
           </div>
@@ -105,19 +105,19 @@ export default function PendingApprovalsPage() {
           {Array.from({ length: 2 }).map((_, i) => (
             <div
               key={i}
-              className="h-[180px] animate-pulse rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08]"
+              className="h-[180px] animate-pulse rounded-2xl border border-[#3D2715] bg-gradient-to-b from-[#331E10] to-[#24140B]"
             />
           ))}
         </div>
       ) : isError ? (
-        <div className="rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] py-14 text-center shadow-xl shadow-black/20">
-          <p className="text-sm text-[#B08A6C]">Failed to load pending approvals.</p>
+        <div className="rounded-2xl border border-[#3D2715] bg-gradient-to-b from-[#331E10] to-[#24140B] py-14 text-center shadow-xl shadow-black/20">
+          <p className="text-sm text-[#C09A76]">Failed to load pending approvals.</p>
         </div>
       ) : groups.length === 0 ? (
-        <div className="rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] py-14 text-center shadow-xl shadow-black/20">
-          <CheckCircle2 className="mx-auto mb-3 text-[#7E9C6B] opacity-60" size={28} />
-          <p className="font-semibold text-[#F2E8DC]">No pending approvals</p>
-          <p className="mt-1 text-sm text-[#B08A6C]">
+        <div className="rounded-2xl border border-[#3D2715] bg-gradient-to-b from-[#331E10] to-[#24140B] py-14 text-center shadow-xl shadow-black/20">
+          <CheckCircle2 className="mx-auto mb-3 text-[#8FAD7A] opacity-60" size={28} />
+          <p className="font-semibold text-[#F4EADD]">No pending approvals</p>
+          <p className="mt-1 text-sm text-[#C09A76]">
             New seat reservations will show up here for verification.
           </p>
         </div>
@@ -126,20 +126,20 @@ export default function PendingApprovalsPage() {
           {groups.map((group) => (
             <div
               key={`${group.userId}-${group.gameId}`}
-              className="rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#241409] to-[#1B0F08] p-5 shadow-xl shadow-black/20"
+              className="rounded-2xl border border-amber-500/20 bg-gradient-to-b from-[#331E10] to-[#24140B] p-5 shadow-xl shadow-black/20"
             >
               <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div className="flex items-start gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#C78C3A]/10">
-                    <User size={18} className="text-[#D0AE95]" />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#D29A45]/10">
+                    <User size={18} className="text-[#E3C49A]" />
                   </div>
                   <div>
-                    <p className="font-semibold text-[#F2E8DC]">{group.user.fullName}</p>
-                    <p className="mt-0.5 text-xs text-[#B08A6C]">
+                    <p className="font-semibold text-[#F4EADD]">{group.user.fullName}</p>
+                    <p className="mt-0.5 text-xs text-[#C09A76]">
                       {group.user.email}
                       {group.user.phone ? ` · ${group.user.phone}` : ''}
                     </p>
-                    <div className="mt-1.5 flex items-center gap-1.5 text-xs text-[#B08A6C]">
+                    <div className="mt-1.5 flex items-center gap-1.5 text-xs text-[#C09A76]">
                       <Clock size={12} />
                       Reserved{' '}
                       {new Date(group.reservedAt).toLocaleString('en-US', {
@@ -157,17 +157,17 @@ export default function PendingApprovalsPage() {
                 </span>
               </div>
 
-              <div className="mb-4 flex flex-col gap-2 rounded-xl border border-[#2E1C0E] bg-[#1B0F08] px-4 py-3 sm:flex-row sm:items-center sm:gap-2">
+              <div className="mb-4 flex flex-col gap-2 rounded-xl border border-[#3D2715] bg-[#24140B] px-4 py-3 sm:flex-row sm:items-center sm:gap-2">
                 <div className="flex min-w-0 items-center gap-2">
-                  <Gamepad2 size={15} className="shrink-0 text-[#C78C3A]" />
-                  <span className="min-w-0 truncate text-sm font-semibold text-[#F2E8DC]">
+                  <Gamepad2 size={15} className="shrink-0 text-[#D29A45]" />
+                  <span className="min-w-0 truncate text-sm font-semibold text-[#F4EADD]">
                     {group.game.title}
                   </span>
-                  <span className="shrink-0 rounded bg-white/5 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#B08A6C]">
+                  <span className="shrink-0 rounded bg-white/5 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#C09A76]">
                     {group.game.gameCode}
                   </span>
                 </div>
-                <span className="shrink-0 text-sm font-semibold text-[#D0AE95] sm:ml-auto">
+                <span className="shrink-0 text-sm font-semibold text-[#E3C49A] sm:ml-auto">
                   {group.game.prize}
                 </span>
               </div>
@@ -176,24 +176,24 @@ export default function PendingApprovalsPage() {
                 {group.seats.map((seat) => (
                   <div
                     key={seat.seatId}
-                    className="flex flex-col gap-1 rounded-xl border border-[#2E1C0E] bg-[#1B0F08]/60 px-4 py-3 sm:flex-row sm:items-center sm:gap-3"
+                    className="flex flex-col gap-1 rounded-xl border border-[#3D2715] bg-[#24140B]/60 px-4 py-3 sm:flex-row sm:items-center sm:gap-3"
                   >
-                    <span className="inline-flex w-fit items-center rounded-lg bg-[#C78C3A]/10 px-2.5 py-1 text-xs font-bold text-[#D0AE95]">
+                    <span className="inline-flex w-fit items-center rounded-lg bg-[#D29A45]/10 px-2.5 py-1 text-xs font-bold text-[#E3C49A]">
                       Seat #{seat.seatNumber}
                     </span>
                     <div className="flex min-w-0 flex-1 flex-col sm:flex-row sm:items-center sm:justify-between sm:gap-3">
                       <div className="flex min-w-0 items-center gap-2">
-                        <span className="truncate text-xs text-[#B08A6C]">
-                          <span className="text-[#B08A6C]">Reference:</span>{' '}
+                        <span className="truncate text-xs text-[#C09A76]">
+                          <span className="text-[#C09A76]">Reference:</span>{' '}
                           {seat.paymentReference || (
-                            <span className="italic text-[#8A6A50]">not provided</span>
+                            <span className="italic text-[#9A7A5C]">not provided</span>
                           )}
                         </span>
                         {seat.paymentProof && (
                           <button
                             onClick={() => setLightbox(seat.paymentProof)}
                             title="View payment screenshot"
-                            className="group relative h-10 w-10 shrink-0 cursor-pointer overflow-hidden rounded-lg ring-1 ring-[#2E1C0E] transition-transform hover:scale-105"
+                            className="group relative h-10 w-10 shrink-0 cursor-pointer overflow-hidden rounded-lg ring-1 ring-[#3D2715] transition-transform hover:scale-105"
                           >
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
@@ -207,7 +207,7 @@ export default function PendingApprovalsPage() {
                           </button>
                         )}
                       </div>
-                      <span className="shrink-0 text-xs text-[#8A6A50]">
+                      <span className="shrink-0 text-xs text-[#9A7A5C]">
                         {new Date(seat.reservedAt).toLocaleTimeString('en-US', {
                           hour: 'numeric',
                           minute: '2-digit',
@@ -247,7 +247,7 @@ export default function PendingApprovalsPage() {
       {/* Confirm modal */}
       {confirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
-          <div className="w-full max-w-md rounded-2xl border border-[#2E1C0E] bg-[#1B0F08] p-6 text-[#F2E8DC] shadow-2xl shadow-black/60">
+          <div className="w-full max-w-md rounded-2xl border border-[#3D2715] bg-[#24140B] p-6 text-[#F4EADD] shadow-2xl shadow-black/60">
             <div className="mb-6 flex items-center gap-3">
               <div
                 className={`flex h-10 w-10 items-center justify-center rounded-xl ${
@@ -265,7 +265,7 @@ export default function PendingApprovalsPage() {
               </h2>
             </div>
 
-            <p className="mb-6 text-sm text-[#B08A6C]">
+            <p className="mb-6 text-sm text-[#C09A76]">
               {confirm.type === 'approve'
                 ? `Approve ${confirm.group.total} seat${confirm.group.total > 1 ? 's' : ''} for ${confirm.group.user.fullName} in "${confirm.group.game.title}"? The user will be notified and the seats will become confirmed.`
                 : `Reject ${confirm.group.total} seat${confirm.group.total > 1 ? 's' : ''} for ${confirm.group.user.fullName} in "${confirm.group.game.title}"? The seats will be released and the user will be notified.`}
@@ -275,7 +275,7 @@ export default function PendingApprovalsPage() {
               <button
                 onClick={() => setConfirm(null)}
                 disabled={isApproving || isRejecting}
-                className="flex-1 cursor-pointer rounded-xl border border-[#2E1C0E] px-4 py-2.5 text-sm font-medium text-[#B08A6C] transition-colors duration-300 hover:bg-white/5 hover:text-[#F2E8DC] disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex-1 cursor-pointer rounded-xl border border-[#3D2715] px-4 py-2.5 text-sm font-medium text-[#C09A76] transition-colors duration-300 hover:bg-white/5 hover:text-[#F4EADD] disabled:cursor-not-allowed disabled:opacity-50"
               >
                 Cancel
               </button>
@@ -309,20 +309,20 @@ export default function PendingApprovalsPage() {
           onClick={() => setLightbox(null)}
         >
           <div
-            className="flex h-[80vh] w-full max-w-3xl flex-col rounded-2xl border border-[#2E1C0E] bg-[#1B0F08] shadow-2xl shadow-black/60"
+            className="flex h-[80vh] w-full max-w-3xl flex-col rounded-2xl border border-[#3D2715] bg-[#24140B] shadow-2xl shadow-black/60"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between border-b border-[#2E1C0E] px-5 py-3.5">
+            <div className="flex items-center justify-between border-b border-[#3D2715] px-5 py-3.5">
               <div className="flex items-center gap-2">
-                <Ticket size={16} className="text-[#D0AE95]" />
-                <h2 className="text-sm font-semibold tracking-wide text-[#F2E8DC]">
+                <Ticket size={16} className="text-[#E3C49A]" />
+                <h2 className="text-sm font-semibold tracking-wide text-[#F4EADD]">
                   Payment screenshot
                 </h2>
               </div>
               <button
                 onClick={() => setLightbox(null)}
                 title="Close"
-                className="cursor-pointer rounded-lg p-1.5 text-[#B08A6C] transition-colors duration-300 hover:bg-white/5 hover:text-[#F2E8DC]"
+                className="cursor-pointer rounded-lg p-1.5 text-[#C09A76] transition-colors duration-300 hover:bg-white/5 hover:text-[#F4EADD]"
               >
                 <X size={18} />
               </button>

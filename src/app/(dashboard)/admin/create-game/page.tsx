@@ -23,8 +23,8 @@ interface GameForm {
 }
 
 const inputClass =
-  'w-full rounded-xl border border-[#2E1C0E] bg-[#1B0F08] px-3.5 py-2.5 text-sm text-[#F2E8DC] placeholder-[#8A6A50] outline-none transition-colors duration-300 focus:border-[#C78C3A] focus:ring-2 focus:ring-[#C78C3A]/20'
-const labelClass = 'mb-1.5 block text-sm font-medium text-[#B08A6C]'
+  'w-full rounded-xl border border-[#3D2715] bg-[#24140B] px-3.5 py-2.5 text-sm text-[#F4EADD] placeholder-[#9A7A5C] outline-none transition-colors duration-300 focus:border-[#D29A45] focus:ring-2 focus:ring-[#D29A45]/20'
+const labelClass = 'mb-1.5 block text-sm font-medium text-[#C09A76]'
 
 export default function CreateGamePage() {
   const router = useRouter()
@@ -87,7 +87,7 @@ export default function CreateGamePage() {
         <Link
           href="/admin/manage-games"
           prefetch={false}
-          className="mb-4 flex w-fit cursor-pointer items-center gap-2 text-sm font-medium text-[#B08A6C] transition-colors duration-300 hover:text-[#D0AE95]"
+          className="mb-4 flex w-fit cursor-pointer items-center gap-2 text-sm font-medium text-[#C09A76] transition-colors duration-300 hover:text-[#E3C49A]"
         >
           <ArrowLeft size={18} />
           Back to Games
@@ -99,12 +99,12 @@ export default function CreateGamePage() {
       <div className="w-full">
         <form
           onSubmit={handleSubmit}
-          className="space-y-8 rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] p-6 shadow-xl shadow-black/20"
+          className="space-y-8 rounded-2xl border border-[#3D2715] bg-gradient-to-b from-[#331E10] to-[#24140B] p-6 shadow-xl shadow-black/20"
         >
           {/* Basic Info */}
           <div>
-            <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[#B08A6C]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#C78C3A]" />
+            <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[#C09A76]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#D29A45]" />
               Basic Information
             </h2>
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
@@ -144,7 +144,7 @@ export default function CreateGamePage() {
                 </label>
                 <label
                   htmlFor="prizeImage"
-                  className="flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-[#2E1C0E] bg-[#1B0F08] px-3.5 py-3 text-sm text-[#B08A6C] transition-colors duration-300 hover:border-[#C78C3A] hover:text-[#D0AE95]"
+                  className="flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-[#3D2715] bg-[#24140B] px-3.5 py-3 text-sm text-[#C09A76] transition-colors duration-300 hover:border-[#D29A45] hover:text-[#E3C49A]"
                 >
                   <ImageIcon size={18} className="shrink-0" />
                   <span className="truncate">
@@ -193,8 +193,8 @@ export default function CreateGamePage() {
 
           {/* Game Settings */}
           <div>
-            <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[#B08A6C]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#D0AE95]" />
+            <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[#C09A76]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#E3C49A]" />
               Game Settings
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -289,14 +289,14 @@ export default function CreateGamePage() {
             <Link
               href="/admin/manage-games"
               prefetch={false}
-              className="flex-1 cursor-pointer rounded-xl border border-[#2E1C0E] px-4 py-2.5 text-center text-sm font-medium text-[#B08A6C] transition-colors duration-300 hover:bg-white/5 hover:text-[#F2E8DC]"
+              className="flex-1 cursor-pointer rounded-xl border border-[#3D2715] px-4 py-2.5 text-center text-sm font-medium text-[#C09A76] transition-colors duration-300 hover:bg-white/5 hover:text-[#F4EADD]"
             >
               Cancel
             </Link>
             <button
               type="submit"
               disabled={isLoading}
-              className="group relative flex flex-1 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-[#C78C3A] to-[#D0AE95] px-4 py-2.5 text-sm font-semibold text-[#1a1408] shadow-lg shadow-[#C78C3A]/25 transition-all duration-300 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+              className="group relative flex flex-1 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-[#D29A45] to-[#E3C49A] px-4 py-2.5 text-sm font-semibold text-[#1a1408] shadow-lg shadow-[#D29A45]/25 transition-all duration-300 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-[#B4522C] to-[#B4522C] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <span className="relative flex items-center justify-center gap-2">

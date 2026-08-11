@@ -35,7 +35,7 @@ function LoginForm() {
         next && next.startsWith("/") && !next.startsWith("//") ? next : null;
       router.replace(
         safeNext ??
-          (result.user.role === "admin" ? "/admin" : "/dashboard")
+          (result.user.role === "admin" ? "/admin" : "/dashboard/active-games")
       );
     } catch (error) {
       toast.error(getErrorMessage(error));

@@ -13,7 +13,7 @@ import {
 
 const toneStyles: Record<RealtimeToastTone, { border: string; bar: string }> = {
   success: { border: 'border-emerald-500', bar: 'bg-emerald-500' },
-  info: { border: 'border-[#D0AE95]', bar: 'bg-[#D0AE95]' },
+  info: { border: 'border-[#E3C49A]', bar: 'bg-[#E3C49A]' },
   warning: { border: 'border-amber-500', bar: 'bg-amber-500' },
 }
 
@@ -57,13 +57,13 @@ function ToastCard({
     <div
       role="status"
       onClick={onClick}
-      className={`relative animate-toast-in cursor-pointer overflow-hidden rounded-2xl border-l-4 ${tone.border} bg-[#1B0F08]/95 shadow-2xl shadow-black/50 backdrop-blur`}
+      className={`relative animate-toast-in cursor-pointer overflow-hidden rounded-2xl border-l-4 ${tone.border} bg-[#24140B]/95 shadow-2xl shadow-black/50 backdrop-blur`}
     >
       <div className="flex items-start gap-3 p-4">
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-semibold text-[#F2E8DC]">{toast.title}</p>
+          <p className="truncate text-sm font-semibold text-[#F4EADD]">{toast.title}</p>
           {toast.message && (
-            <p className="mt-0.5 text-sm leading-snug text-[#B08A6C]">{toast.message}</p>
+            <p className="mt-0.5 text-sm leading-snug text-[#C09A76]">{toast.message}</p>
           )}
         </div>
         <button
@@ -72,7 +72,7 @@ function ToastCard({
             e.stopPropagation()
             onDismiss()
           }}
-          className="shrink-0 rounded-lg p-1 text-[#B08A6C] transition-colors duration-300 hover:bg-white/5 hover:text-[#F2E8DC]"
+          className="shrink-0 rounded-lg p-1 text-[#C09A76] transition-colors duration-300 hover:bg-white/5 hover:text-[#F4EADD]"
         >
           <X size={15} />
         </button>

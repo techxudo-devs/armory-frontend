@@ -19,8 +19,8 @@ export function RaffleCard({ raffle }: RaffleCardProps) {
     : "#";
 
   return (
-    <div className="bg-panel border border-border rounded-xl flex flex-col transition-all duration-300 hover:border-border-strong hover:-translate-y-1">
-      <div className="relative h-60 flex items-center justify-center bg-gradient-to-br from-[#241409] to-[#100602] border-b border-border rounded-xl overflow-hidden">
+    <div className="surface-card border border-border rounded-xl flex flex-col transition-all duration-300 hover:border-brass/60 hover:-translate-y-1">
+      <div className="relative h-60 flex items-center justify-center bg-gradient-to-br from-[#331E10] to-[#150A06] border-b border-border rounded-xl overflow-hidden">
         {raffle.imageUrl ? (
           <Image
             src={raffle.imageUrl}
@@ -49,7 +49,7 @@ export function RaffleCard({ raffle }: RaffleCardProps) {
         <SeatGauge raffle={raffle} />
         <a
           href={href}
-          className="mt-1 w-full text-center border border-border-strong font-plus font-medium text-[12.5px] tracking-wide uppercase py-3 transition-colors hover:bg-brass hover:border-brass hover:text-[#1a1408] duration-300"
+          className="mt-1 w-full text-center border border-border-strong font-plus font-medium text-[12.5px] tracking-wide uppercase py-3 transition-colors hover:bg-brass hover:border-brass hover:text-[#241409] duration-300"
         >
           Claim your seat
         </a>

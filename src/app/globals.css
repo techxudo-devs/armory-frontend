@@ -1,30 +1,32 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #100602;
-  --color-background: #100602;
-  --color-foreground: #F2E8DC;
-  --color-card: #1B0F08;
-  --color-card-foreground: #F2E8DC;
-  --color-muted: #241409;
-  --color-muted-foreground: #A1836A;
-  --color-input: #2A1A0F;
-  --color-ring: #C78C3A;
-  --color-bg-raised: #160B05;
-  --color-panel: #1B0F08;
-  --color-panel-2: #241409;
-  --color-border: #2E1C0E;
-  --color-border-strong: #4F2D17;
-  --color-text-primary: #F2E8DC;
-  --color-text-secondary: #B08A6C;
-  --color-text-muted: #8A6A50;
-  --color-brass: #C78C3A;
-  --color-brass-light: #D0AE95;
-  --color-brass-dim: #4F2D17;
+  --color-bg: #150A06;
+  --color-background: #150A06;
+  --color-foreground: #F4EADD;
+  --color-card: #24140B;
+  --color-card-foreground: #F4EADD;
+  --color-muted: #331E10;
+  --color-muted-foreground: #B08A68;
+  --color-input: #38210F;
+  --color-ring: #D29A45;
+  --color-bg-raised: #1D0F08;
+  --color-panel: #24140B;
+  --color-panel-2: #331E10;
+  --color-border: #3D2715;
+  --color-border-strong: #5E3B1D;
+  --color-text-primary: #F4EADD;
+  --color-text-secondary: #C09A76;
+  --color-text-muted: #9A7A5C;
+  --color-brass: #D29A45;
+  --color-brass-light: #E3C49A;
+  --color-brass-dim: #5E3B1D;
+  --color-gold: #E9C980;
+  --color-gold-deep: #A96E1F;
   --color-signal: #B4522C;
   --color-signal-light: #D08A5A;
-  --color-signal-dim: #33180A;
-  --color-success: #7E9C6B;
+  --color-signal-dim: #3A1D0D;
+  --color-success: #8FAD7A;
 
   --font-plus: var(--font-plusjakarta);
 
@@ -63,6 +65,29 @@
     background-color: var(--color-bg);
     color: var(--color-text-primary);
     -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(1000px 420px at 82% -12%, rgba(210, 154, 69, 0.13), transparent 60%),
+      radial-gradient(760px 520px at -8% 34%, rgba(180, 82, 44, 0.10), transparent 55%),
+      radial-gradient(1200px 700px at 50% 118%, rgba(169, 110, 31, 0.12), transparent 60%);
+    background-attachment: fixed;
+  }
+}
 
+@layer components {
+  .surface-card {
+    background-image:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0) 42%),
+      linear-gradient(180deg, var(--color-panel-2), var(--color-panel));
+  }
+
+  .surface-raised {
+    background-image:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0) 38%),
+      linear-gradient(180deg, var(--color-muted), var(--color-panel));
+  }
+
+  .btn-gold {
+    background-image: linear-gradient(135deg, #E9C980 0%, #D29A45 48%, #A96E1F 100%);
+    box-shadow: 0 8px 22px -10px rgba(210, 154, 69, 0.55);
   }
 }

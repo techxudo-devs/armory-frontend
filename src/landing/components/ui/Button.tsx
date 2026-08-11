@@ -8,7 +8,7 @@ interface ButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-brass border border-brass text-[#1a1408] hover:bg-brass-light",
+    "btn-gold border border-brass-light/40 text-[#241409] hover:brightness-110",
   outline:
     "border border-border-strong text-text-primary hover:border-brass hover:text-brass-light",
   ghost:

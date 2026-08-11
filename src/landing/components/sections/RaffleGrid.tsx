@@ -82,7 +82,7 @@ export function RaffleGrid() {
           ))}
         </div>
       ) : (
-        <div className="rounded-xl border border-border-strong bg-panel py-16 text-center">
+        <div className="rounded-xl border border-border-strong surface-card py-16 text-center">
           <p className="text-lg font-plus font-semibold text-text-primary">
             No live raffles right now
           </p>
@@ -107,8 +107,8 @@ export function RaffleGrid() {
 
 function RaffleCardSkeleton() {
   return (
-    <div className="animate-pulse bg-panel border border-border rounded-xl">
-      <div className="h-60 bg-gradient-to-br from-[#241409] to-[#100602] border-b border-border rounded-t-xl" />
+    <div className="animate-pulse surface-card border border-border rounded-xl">
+      <div className="h-60 bg-gradient-to-br from-[#331E10] to-[#150A06] border-b border-border rounded-t-xl" />
       <div className="p-5 flex flex-col gap-3">
         <div className="h-6 w-24 rounded bg-border-strong/60" />
         <div className="h-5 w-full rounded bg-border-strong/60" />

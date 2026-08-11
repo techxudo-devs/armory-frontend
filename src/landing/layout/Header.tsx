@@ -33,7 +33,7 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-border bg-bg/85 backdrop-blur-md">
+      <header className="sticky top-0 z-50 border-b border-border bg-gradient-to-b from-bg/95 via-bg/90 to-bg/70 backdrop-blur-md">
         <nav className="max-w-[1300px] mx-auto px-4 sm:px-8 h-[78px] flex items-center justify-between">
           <Link href="/" prefetch={false}>
             <div className="flex items-center gap-2.5">
@@ -61,7 +61,7 @@ export function Header() {
           <div className="hidden lg:flex items-center gap-5">
             {loggedIn ? (
               <Link
-                href="/dashboard"
+                href="/dashboard/active-games"
                 prefetch={false}
                 className="flex items-center gap-2 text-sm font-plus text-brass-light hover:text-text-primary transition-colors duration-300"
               >
@@ -149,7 +149,7 @@ export function Header() {
           })}
           {loggedIn ? (
             <Link
-              href="/dashboard"
+              href="/dashboard/active-games"
               prefetch={false}
               onClick={() => setOpen(false)}
               className="flex items-center gap-3 rounded-lg pr-4 py-3 text-base font-plus text-text-secondary hover:bg-panel-2 hover:text-text-primary transition-colors duration-300"

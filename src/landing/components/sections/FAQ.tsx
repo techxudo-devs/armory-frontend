@@ -8,7 +8,7 @@ export function FAQ() {
   const [openId, setOpenId] = useState<string | null>(faqEntries[0]?.id ?? null);
 
   return (
-    <section id="faq" className="bg-[#100602] py-10 px-4 sm:px-6 lg:px-8">
+    <section id="faq" className="bg-gradient-to-b from-bg via-bg-raised to-bg py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
         
         {/* Left Column: Title & Subtext (Sticky on Desktop) */}
@@ -19,7 +19,7 @@ export function FAQ() {
           <h2 className="text-3xl sm:text-4xl font-plus font-bold text-white mt-3 leading-tight">
             Frequently asked
           </h2>
-          <p className="text-sm text-[#B08A6C] mt-3 font-plus leading-relaxed max-w-md">
+          <p className="text-sm text-text-secondary mt-3 font-plus leading-relaxed max-w-md">
             Everything you need to know about seat entries, live drawings, and item fulfillment.
           </p>
         </div>
@@ -33,8 +33,8 @@ export function FAQ() {
                 key={entry.id}
                 className={`border rounded-lg transition-colors duration-200 overflow-hidden ${
                   isOpen
-                    ? "bg-[#1B0F08] border-[#C78C3A]/50"
-                    : "bg-[#100602] border-[#3A2414] hover:border-[#3A2414]/80"
+                    ? "bg-card border-brass/50"
+                    : "bg-bg/40 border-border hover:border-brass/40"
                 }`}
               >
                 {/* Question Header */}
@@ -50,8 +50,8 @@ export function FAQ() {
                   <div
                     className={`w-7 h-7 rounded flex items-center justify-center shrink-0 border transition-all duration-200 ${
                       isOpen
-                        ? "bg-[#C78C3A] border-[#C78C3A] text-[#1a1408] rotate-45"
-                        : "bg-[#1B0F08] border-[#3A2414] text-[#B08A6C]"
+                        ? "bg-brass border-brass text-bg rotate-45"
+                        : "bg-card border-border text-text-secondary"
                     }`}
                   >
                     <Plus className="w-4 h-4" strokeWidth={2} />
@@ -67,7 +67,7 @@ export function FAQ() {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="text-sm text-[#B08A6C] leading-relaxed pt-3 border-t border-[#3A2414]/80 font-plus">
+                    <p className="text-sm text-text-secondary leading-relaxed pt-3 border-t border-border/80 font-plus">
                       {entry.answer}
                     </p>
                   </div>

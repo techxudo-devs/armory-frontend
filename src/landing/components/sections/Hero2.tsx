@@ -1,6 +1,7 @@
 'use client'
 
 import { CheckCircle2, Lock, Timer, Trophy } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/landing/components/ui/Button";
 import { useLiveGames } from "@/landing/hooks/useLiveGames";
 
@@ -23,7 +24,7 @@ export function Hero2() {
   ];
   return (
     <section className="relative flex items-center overflow-hidden pt-3">
-      <video
+      {/* <video
         autoPlay
         loop
         muted
@@ -32,8 +33,17 @@ export function Hero2() {
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover"
         src="/videos/heroVido.mp4"
+      /> */}
+      <Image
+        src="/images/heroBanner.png"
+        alt=""
+        fill
+        priority
+        aria-hidden="true"
+        sizes="100vw"
+        className="absolute inset-0 w-full h-full object-cover"
       />
-      <div className="absolute inset-0 bg-bg/70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-bg/55 via-bg/70 to-bg" />
       <div className="relative w-full max-w-[1200px] mx-auto px-4 sm:px-8">
         <div className="animate-fadeUp text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-plus leading-[1.05] sm:leading-[1.01] font-bold mt-6 mb-6">
@@ -41,7 +51,7 @@ export function Hero2() {
             <br />
             One <span className="text-brass-light">seat</span> away.
           </h1>
-          <p className="text-base sm:text-lg text-text-secondary max-w-3xl mb-9 leading-relaxed font-plus mx-auto">
+          <p className="text-base sm:text-lg text-white max-w-3xl mb-9 leading-relaxed font-plus mx-auto">
             Claim a seat on the gear you actually want, knives, optics, ammo,
             and kit, for a fraction of retail. Every listing draws live once
             seats sell out, no exceptions.
@@ -65,7 +75,7 @@ export function Hero2() {
             {stats.map((stat) => (
               <div key={stat.label}>
                 <div className="font-plus text-xl sm:text-2xl font-bold">{stat.value}</div>
-                <div className="text-[11px] sm:text-xs text-text-muted uppercase tracking-wide font-plus mt-1">
+                <div className="text-[11px] sm:text-xs text-white uppercase tracking-wide font-plus mt-1">
                   {stat.label}
                 </div>
               </div>
@@ -78,7 +88,7 @@ export function Hero2() {
             {trustItems.map((item) => (
               <div
                 key={item.label}
-                className="flex items-center gap-2.5 text-[12px] sm:text-[13px] font-plus text-text-muted"
+                className="flex items-center gap-2.5 text-[12px] sm:text-[13px] font-plus text-white"
               >
                 <item.icon
                   className="w-4 h-4 flex-shrink-0"

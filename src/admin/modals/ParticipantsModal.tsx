@@ -93,15 +93,15 @@ function ParticipantsContent({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
-      <div className="flex max-h-[80vh] w-full max-w-xl flex-col rounded-2xl border border-[#2E1C0E] bg-[#1B0F08] p-5 text-[#F2E8DC] shadow-2xl shadow-black/60">
+      <div className="flex max-h-[80vh] w-full max-w-xl flex-col rounded-2xl border border-[#3D2715] bg-[#24140B] p-5 text-[#F4EADD] shadow-2xl shadow-black/60">
         <div className="mb-4 flex shrink-0 items-center justify-between">
           <div>
             <h2 className="text-lg font-semibold tracking-wide">Participants</h2>
-            <p className="mt-0.5 text-xs text-[#B08A6C]">{game.title}</p>
+            <p className="mt-0.5 text-xs text-[#C09A76]">{game.title}</p>
           </div>
           <button
             onClick={onClose}
-            className="cursor-pointer rounded-lg p-1.5 text-[#B08A6C] transition-colors duration-300 hover:bg-white/5 hover:text-[#F2E8DC]"
+            className="cursor-pointer rounded-lg p-1.5 text-[#C09A76] transition-colors duration-300 hover:bg-white/5 hover:text-[#F4EADD]"
           >
             <X size={18} />
           </button>
@@ -120,13 +120,13 @@ function ParticipantsContent({
         <div className="flex-1 overflow-y-auto pr-1">
           {isLoading ? (
             <div className="flex flex-col items-center justify-center gap-3 py-16">
-              <Loader2 className="h-8 w-8 animate-spin text-[#C78C3A]" />
-              <p className="text-sm text-[#B08A6C]">Loading participants...</p>
+              <Loader2 className="h-8 w-8 animate-spin text-[#D29A45]" />
+              <p className="text-sm text-[#C09A76]">Loading participants...</p>
             </div>
           ) : participants.length === 0 ? (
             <div className="py-16 text-center">
-              <Users className="mx-auto mb-3 h-10 w-10 text-[#8A6A50]" />
-              <p className="text-sm text-[#B08A6C]">No seats reserved yet for this game.</p>
+              <Users className="mx-auto mb-3 h-10 w-10 text-[#9A7A5C]" />
+              <p className="text-sm text-[#C09A76]">No seats reserved yet for this game.</p>
             </div>
           ) : (
             <ul className="space-y-2">
@@ -141,17 +141,17 @@ function ParticipantsContent({
                     key={p._id}
                     className={`flex items-center justify-between gap-3 rounded-xl border px-4 py-3 transition-colors duration-300 ${
                       isSelected
-                        ? 'border-[#7E9C6B]/50 bg-[#7E9C6B]/10'
-                        : 'border-[#2E1C0E] bg-[#1B0F08]'
+                        ? 'border-[#8FAD7A]/50 bg-[#8FAD7A]/10'
+                        : 'border-[#3D2715] bg-[#24140B]'
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#C78C3A]/15 font-plus text-sm font-bold text-[#D0AE95]">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#D29A45]/15 font-plus text-sm font-bold text-[#E3C49A]">
                         #{p.seatNumber}
                       </span>
                       <div className="min-w-0">
-                        <p className="truncate text-sm font-medium text-[#F2E8DC]">{userName}</p>
-                        <p className="truncate text-xs text-[#B08A6C]">{userPhone}</p>
+                        <p className="truncate text-sm font-medium text-[#F4EADD]">{userName}</p>
+                        <p className="truncate text-xs text-[#C09A76]">{userPhone}</p>
                       </div>
                     </div>
                     {canSelect && (
@@ -160,8 +160,8 @@ function ParticipantsContent({
                         onClick={() => toggleSeat(p.seatNumber)}
                         className={`flex h-5 w-5 shrink-0 cursor-pointer items-center justify-center rounded-md border transition-colors duration-300 ${
                           isSelected
-                            ? 'border-[#7E9C6B] bg-[#7E9C6B] text-[#1B0F08]'
-                            : 'border-[#8A6A50] bg-transparent'
+                            ? 'border-[#8FAD7A] bg-[#8FAD7A] text-[#24140B]'
+                            : 'border-[#9A7A5C] bg-transparent'
                         }`}
                         aria-label={`Toggle seat ${p.seatNumber}`}
                       >
@@ -198,11 +198,11 @@ function ParticipantsContent({
           </div>
         )}
 
-        <div className="mt-4 flex shrink-0 gap-3 border-t border-[#2E1C0E] pt-4">
+        <div className="mt-4 flex shrink-0 gap-3 border-t border-[#3D2715] pt-4">
           <button
             type="button"
             onClick={onClose}
-            className="flex-1 cursor-pointer rounded-xl border border-[#2E1C0E] px-4 py-2.5 text-sm font-medium text-[#B08A6C] transition-colors duration-300 hover:bg-white/5 hover:text-[#F2E8DC]"
+            className="flex-1 cursor-pointer rounded-xl border border-[#3D2715] px-4 py-2.5 text-sm font-medium text-[#C09A76] transition-colors duration-300 hover:bg-white/5 hover:text-[#F4EADD]"
           >
             Close
           </button>
@@ -211,7 +211,7 @@ function ParticipantsContent({
               type="button"
               onClick={handleAnnounce}
               disabled={announcing || selectedSeats.length === 0}
-              className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#7E9C6B] to-[#7E9C6B] px-4 py-2.5 text-sm font-semibold text-[#33180A] shadow-lg shadow-[#7E9C6B]/20 transition-all duration-300 hover:brightness-110 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#8FAD7A] to-[#8FAD7A] px-4 py-2.5 text-sm font-semibold text-[#3A1D0D] shadow-lg shadow-[#8FAD7A]/20 transition-all duration-300 hover:brightness-110 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {announcing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trophy size={16} />}
               {announcing ? "Announcing..." : "Announce Winners"}

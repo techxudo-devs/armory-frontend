@@ -31,7 +31,7 @@ export default function AdminDashboard() {
         <Link
           href="/admin/create-game"
           prefetch={false}
-          className="group relative flex shrink-0 cursor-pointer items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-[#C78C3A] to-[#D0AE95] px-5 py-2.5 text-sm font-semibold text-[#1a1408] shadow-lg shadow-[#C78C3A]/25 transition-all duration-300 hover:shadow-[#C78C3A]/40 active:scale-[0.98]"
+          className="group relative flex shrink-0 cursor-pointer items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-[#D29A45] to-[#E3C49A] px-5 py-2.5 text-sm font-semibold text-[#1a1408] shadow-lg shadow-[#D29A45]/25 transition-all duration-300 hover:shadow-[#D29A45]/40 active:scale-[0.98]"
         >
           <span className="absolute inset-0 bg-gradient-to-r from-[#B4522C] to-[#B4522C] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           <span className="relative flex items-center gap-2">
@@ -87,11 +87,11 @@ interface StatCardProps {
 
 function StatCard({ title, value, icon }: StatCardProps) {
   return (
-    <div className="rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] p-5 shadow-xl shadow-black/20">
+    <div className="rounded-2xl border border-[#3D2715] bg-gradient-to-b from-[#331E10] to-[#24140B] p-5 shadow-xl shadow-black/20">
       <div className="flex items-start justify-between gap-2">
         <div>
-          <p className="text-xs font-medium text-[#B08A6C] mb-1.5">{title}</p>
-          <p className="text-2xl font-bold text-[#F2E8DC]">{value}</p>
+          <p className="text-xs font-medium text-[#C09A76] mb-1.5">{title}</p>
+          <p className="text-2xl font-bold text-[#F4EADD]">{value}</p>
         </div>
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/5">
           {icon}
@@ -104,8 +104,8 @@ function StatCard({ title, value, icon }: StatCardProps) {
 function LoadingState() {
   return (
     <div className="flex h-[60vh] flex-col items-center justify-center gap-3">
-      <div className="h-10 w-10 animate-spin rounded-full border-2 border-[#C78C3A] border-t-transparent" />
-      <p className="text-sm text-[#B08A6C]">Loading dashboard analytics...</p>
+      <div className="h-10 w-10 animate-spin rounded-full border-2 border-[#D29A45] border-t-transparent" />
+      <p className="text-sm text-[#C09A76]">Loading dashboard analytics...</p>
     </div>
   )
 }
@@ -113,7 +113,7 @@ function LoadingState() {
 function ErrorState() {
   return (
     <div className="flex h-[60vh] items-center justify-center">
-      <p className="text-sm text-[#B08A6C]">
+      <p className="text-sm text-[#C09A76]">
         Unable to load dashboard data. Please try again later.
       </p>
     </div>

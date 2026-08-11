@@ -35,8 +35,8 @@ export function FeaturedSpotlight() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] border border-border-strong bg-bg-raised">
-          <div className="relative min-h-[240px] sm:min-h-[340px] bg-gradient-to-br from-[#241409] to-[#100602] flex items-center justify-center border-b md:border-b-0 md:border-r border-border-strong">
+        <div className="grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] border border-border-strong surface-card">
+          <div className="relative min-h-[240px] sm:min-h-[340px] bg-gradient-to-br from-[#331E10] to-[#150A06] flex items-center justify-center border-b md:border-b-0 md:border-r border-border-strong">
             {raffle?.imageUrl ? (
               <Image
                 src={raffle.imageUrl}
@@ -63,7 +63,7 @@ export function FeaturedSpotlight() {
                 </p>
 
                 <div className="grid grid-cols-3 gap-px bg-border border border-border mb-7">
-                  <div className="bg-bg-raised px-2 py-3.5 sm:px-4">
+                  <div className="surface-raised px-2 py-3.5 sm:px-4">
                     <div className="text-[9px] sm:text-[10px] font-plus text-text-muted uppercase tracking-wide mb-1">
                       Category
                     </div>
@@ -71,7 +71,7 @@ export function FeaturedSpotlight() {
                       {raffle.category}
                     </div>
                   </div>
-                  <div className="bg-bg-raised px-2 py-3.5 sm:px-4">
+                  <div className="surface-raised px-2 py-3.5 sm:px-4">
                     <div className="text-[9px] sm:text-[10px] font-plus text-text-muted uppercase tracking-wide mb-1">
                       Seats filled
                     </div>
@@ -79,7 +79,7 @@ export function FeaturedSpotlight() {
                       {raffle.seatsClaimed} / {raffle.seatsTotal}
                     </div>
                   </div>
-                  <div className="bg-bg-raised px-2 py-3.5 sm:px-4">
+                  <div className="surface-raised px-2 py-3.5 sm:px-4">
                     <div className="text-[9px] sm:text-[10px] font-plus text-text-muted uppercase tracking-wide mb-1">
                       Draws in
                     </div>

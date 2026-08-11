@@ -12,14 +12,14 @@ interface GameDistributionChartProps {
   data: GameData[]
 }
 
-const COLORS = ['#C78C3A', '#D0AE95', '#7E9C6B', '#D08A5A']
+const COLORS = ['#D29A45', '#E3C49A', '#8FAD7A', '#D08A5A']
 
 export function GameDistributionChart({ data }: GameDistributionChartProps) {
   return (
-    <div className="h-80 rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] p-5 shadow-xl shadow-black/20">
+    <div className="h-80 rounded-2xl border border-[#3D2715] bg-gradient-to-b from-[#331E10] to-[#24140B] p-5 shadow-xl shadow-black/20">
       <div className="mb-2 flex items-center gap-2">
-        <span className="h-1.5 w-1.5 rounded-full bg-[#D0AE95]" />
-        <h3 className="text-sm font-semibold tracking-wide text-[#F2E8DC]">Game Distribution</h3>
+        <span className="h-1.5 w-1.5 rounded-full bg-[#E3C49A]" />
+        <h3 className="text-sm font-semibold tracking-wide text-[#F4EADD]">Game Distribution</h3>
       </div>
       <div className="h-[calc(100%-2rem)]">
         <ResponsiveContainer width="100%" height="100%">
@@ -43,7 +43,7 @@ export function GameDistributionChart({ data }: GameDistributionChartProps) {
             <Legend
               iconType="circle"
               iconSize={8}
-              wrapperStyle={{ fontSize: 11, color: '#F2E8DC', paddingTop: 4 }}
+              wrapperStyle={{ fontSize: 11, color: '#F4EADD', paddingTop: 4 }}
             />
           </PieChart>
         </ResponsiveContainer>

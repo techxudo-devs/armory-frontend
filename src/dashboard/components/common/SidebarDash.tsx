@@ -53,7 +53,8 @@ const adminLinks: SidebarLink[] = [
 ];
 
 const userLinks: SidebarLink[] = [
-  { label: "Active Games", href: "/dashboard", icon: Gamepad2 },
+  { label: "Active Games", href: "/dashboard/active-games", icon: Gamepad2 },
+  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { label: "My Seats", href: "/dashboard/my-seats", icon: Ticket },
   { label: "Notifications", href: "/dashboard/notifications", icon: Bell },
   { label: "My Profile", href: "/dashboard/my-profile", icon: User },
@@ -110,7 +111,7 @@ function SidebarContent({
       <div>
         {/* Top-Left Logo & Project Name */}
         <div
-          className={`h-16 border-b border-[#2E1C0E] flex items-center gap-3 ${
+          className={`h-16 border-b border-[#3D2715] flex items-center gap-3 ${
             onClose ? "px-5 justify-between" : headerWrap
           }`}
         >
@@ -126,7 +127,7 @@ function SidebarContent({
               <span className="font-bold text-base text-white tracking-wide leading-tight">
                 Metal Tubes
               </span>
-              <span className="text-[10px] text-[#B08A6C] font-medium tracking-widest uppercase">
+              <span className="text-[10px] text-[#C09A76] font-medium tracking-widest uppercase">
                 Game Platform
               </span>
             </div>
@@ -135,7 +136,7 @@ function SidebarContent({
             <button
               onClick={onClose}
               title="Close menu"
-              className="w-8 h-8 shrink-0 rounded-lg flex items-center justify-center text-[#B08A6C] hover:text-white hover:bg-[#2E1C0E] transition-colors duration-300 cursor-pointer"
+              className="w-8 h-8 shrink-0 rounded-lg flex items-center justify-center text-[#C09A76] hover:text-white hover:bg-[#3D2715] transition-colors duration-300 cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -144,9 +145,9 @@ function SidebarContent({
 
         {/* Panel Context Indicator */}
         <div
-          className={`${panel} px-5 py-2.5 border-b border-[#2E1C0E] bg-[#100602]/40`}
+          className={`${panel} px-5 py-2.5 border-b border-[#3D2715] bg-[#150A06]/40`}
         >
-          <span className="text-[10px] font-bold text-[#B08A6C] uppercase tracking-wider">
+          <span className="text-[10px] font-bold text-[#C09A76] uppercase tracking-wider">
             {user.role === "admin" ? "ADMIN CONTROL PANEL" : "PLAYER DASHBOARD"}
           </span>
         </div>
@@ -165,8 +166,8 @@ function SidebarContent({
                 onClick={() => onNavigate?.()}
                 className={`flex items-center gap-3 py-2.5 rounded-lg text-sm font-medium transition-colors duration-300 ${linkWrap} ${
                   isActive
-                    ? "bg-[#C78C3A] text-[#1a1408] font-semibold"
-                    : "text-[#B08A6C] hover:bg-[#2E1C0E] hover:text-white"
+                    ? "bg-[#D29A45] text-[#1a1408] font-semibold"
+                    : "text-[#C09A76] hover:bg-[#3D2715] hover:text-white"
                 }`}
               >
                 <Icon className="w-4 h-4 shrink-0" />
@@ -184,18 +185,18 @@ function SidebarContent({
 
       {/* Bottom Sidebar: User Details & Sign Out Button */}
       <div
-        className={`border-t border-[#2E1C0E] bg-[#160B05] ${bottomPad}`}
+        className={`border-t border-[#3D2715] bg-[#1D0F08] ${bottomPad}`}
       >
         <div className={`flex items-center gap-2 mb-3 px-1 ${userRow}`}>
           <div className={`flex-col min-w-0 ${userName}`}>
             <span className="text-xs font-semibold text-white truncate">
               {user.name}
             </span>
-            <span className="text-[11px] text-[#B08A6C] truncate">
+            <span className="text-[11px] text-[#C09A76] truncate">
               {user.email}
             </span>
           </div>
-          <span className="text-[9px] px-2 py-0.5 rounded font-bold uppercase tracking-wider bg-[#100602] border border-[#2E1C0E] text-[#C78C3A]">
+          <span className="text-[9px] px-2 py-0.5 rounded font-bold uppercase tracking-wider bg-[#150A06] border border-[#3D2715] text-[#D29A45]">
             {user.role}
           </span>
         </div>
@@ -215,7 +216,7 @@ function SidebarContent({
 
 export function SidebarDash({ user }: { user: SidebarUser }) {
   return (
-    <aside className="hidden md:flex w-[15%] md:w-[10%] lg:w-1/5 h-screen sticky top-0 bg-[#1B0F08] border-r border-[#2E1C0E] flex-col shrink-0 overflow-y-auto">
+    <aside className="hidden md:flex w-[15%] md:w-[10%] lg:w-1/5 h-screen sticky top-0 bg-[#24140B] border-r border-[#3D2715] flex-col shrink-0 overflow-y-auto">
       <SidebarContent user={user} compact />
     </aside>
   );
@@ -239,7 +240,7 @@ export function MobileSidebar({
         onClick={onClose}
       />
       <aside
-        className={`md:hidden fixed top-0 left-0 bottom-0 w-4/5 max-w-[320px] z-50 bg-[#1B0F08] border-r border-[#2E1C0E] overflow-y-auto transition-transform duration-300 ease-in-out ${
+        className={`md:hidden fixed top-0 left-0 bottom-0 w-4/5 max-w-[320px] z-50 bg-[#24140B] border-r border-[#3D2715] overflow-y-auto transition-transform duration-300 ease-in-out ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >

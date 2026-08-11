@@ -29,16 +29,16 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (!isLoading && user && pathname.startsWith('/admin') && user.role !== 'admin') {
-      router.replace('/dashboard')
+      router.replace('/dashboard/active-games')
     }
   }, [isLoading, user, pathname, router])
 
   if (isLoading || !user) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#100602]">
+      <div className="flex min-h-screen items-center justify-center bg-[#150A06]">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-10 w-10 animate-spin rounded-full border-2 border-[#C78C3A] border-t-transparent" />
-          <p className="text-sm text-[#B08A6C]">Loading your workspace...</p>
+          <div className="h-10 w-10 animate-spin rounded-full border-2 border-[#D29A45] border-t-transparent" />
+          <p className="text-sm text-[#C09A76]">Loading your workspace...</p>
         </div>
       </div>
     )
@@ -51,14 +51,14 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="flex min-h-screen bg-[#100602] text-white selection:bg-[#C78C3A] selection:text-[#1a1408]">
+    <div className="flex min-h-screen bg-[#150A06] text-white selection:bg-[#D29A45] selection:text-[#1a1408]">
       <SidebarDash user={sessionUser} />
       <div className="w-full md:w-[90%] lg:w-4/5 flex flex-col min-w-0 min-h-screen">
         <HeaderDash
           user={sessionUser}
           onMenuClick={() => setMobileOpen(true)}
         />
-        <main className="p-6 flex-1 bg-[#100602]">{children}</main>
+        <main className="p-6 flex-1 bg-[#150A06]">{children}</main>
       </div>
       <MobileSidebar
         user={sessionUser}

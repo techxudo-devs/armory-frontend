@@ -22,15 +22,15 @@ interface TopGamesChartProps {
   data: TopGameData[]
 }
 
-const BLUE = '#C78C3A'
-const PURPLE = '#D0AE95'
+const BLUE = '#D29A45'
+const PURPLE = '#E3C49A'
 
 export function TopGamesChart({ data }: TopGamesChartProps) {
   return (
-    <div className="h-80 rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] p-5 shadow-xl shadow-black/20">
+    <div className="h-80 rounded-2xl border border-[#3D2715] bg-gradient-to-b from-[#331E10] to-[#24140B] p-5 shadow-xl shadow-black/20">
       <div className="mb-2 flex items-center gap-2">
         <span className="h-1.5 w-1.5 rounded-full bg-[#D08A5A]" />
-        <h3 className="text-sm font-semibold tracking-wide text-[#F2E8DC]">Top Games</h3>
+        <h3 className="text-sm font-semibold tracking-wide text-[#F4EADD]">Top Games</h3>
       </div>
       <div className="h-[calc(100%-2rem)]">
         <ResponsiveContainer width="100%" height="100%">
@@ -54,13 +54,13 @@ export function TopGamesChart({ data }: TopGamesChartProps) {
               dataKey="name"
               tickLine={false}
               axisLine={{ stroke: 'rgba(255,255,255,0.08)' }}
-              tick={{ fill: '#B08A6C', fontSize: 11 }}
+              tick={{ fill: '#C09A76', fontSize: 11 }}
               dy={8}
             />
             <YAxis
               tickLine={false}
               axisLine={false}
-              tick={{ fill: '#B08A6C', fontSize: 11 }}
+              tick={{ fill: '#C09A76', fontSize: 11 }}
               width={38}
             />
             <Tooltip
@@ -70,7 +70,7 @@ export function TopGamesChart({ data }: TopGamesChartProps) {
             <Legend
               iconType="circle"
               iconSize={8}
-              wrapperStyle={{ fontSize: 12, color: '#F2E8DC', paddingTop: 6 }}
+              wrapperStyle={{ fontSize: 12, color: '#F4EADD', paddingTop: 6 }}
             />
             <Bar dataKey="seats" name="Seats Reserved" fill="url(#barPlays)" radius={[6, 6, 0, 0]} maxBarSize={26} />
             <Bar dataKey="fillRate" name="Fill Rate" fill="url(#barWin)" radius={[6, 6, 0, 0]} maxBarSize={26} />
