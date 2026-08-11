@@ -11,7 +11,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Ironline — Premium Gear Raffles",
+  title: "Metal Tubes & Seeds — Premium Gear Raffles",
   description: "Seat-based raffles for knives, optics, ammo, and accessories. Claim a seat, watch the draw live."
 };
 

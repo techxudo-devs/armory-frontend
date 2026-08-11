@@ -22,8 +22,8 @@ interface GameForm {
 }
 
 const inputClass =
-  'w-full rounded-xl border border-[#23272D] bg-[#14171B] px-3.5 py-2.5 text-sm text-[#F2F3F5] placeholder-[#5C636D] outline-none transition-colors focus:border-[#E53535] focus:ring-2 focus:ring-[#E53535]/20'
-const labelClass = 'mb-1.5 block text-sm font-medium text-[#9AA0AA]'
+  'w-full rounded-xl border border-[#2E1C0E] bg-[#1B0F08] px-3.5 py-2.5 text-sm text-[#F2E8DC] placeholder-[#8A6A50] outline-none transition-colors duration-300 focus:border-[#C78C3A] focus:ring-2 focus:ring-[#C78C3A]/20'
+const labelClass = 'mb-1.5 block text-sm font-medium text-[#B08A6C]'
 
 export default function CreateGamePage() {
   const router = useRouter()
@@ -84,7 +84,7 @@ export default function CreateGamePage() {
         <Link
           href="/admin/manage-games"
           prefetch={false}
-          className="mb-4 flex w-fit cursor-pointer items-center gap-2 text-sm font-medium text-[#9AA0AA] transition-colors hover:text-[#E68078]"
+          className="mb-4 flex w-fit cursor-pointer items-center gap-2 text-sm font-medium text-[#B08A6C] transition-colors duration-300 hover:text-[#D0AE95]"
         >
           <ArrowLeft size={18} />
           Back to Games
@@ -96,12 +96,12 @@ export default function CreateGamePage() {
       <div className="w-full">
         <form
           onSubmit={handleSubmit}
-          className="space-y-8 rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] p-6 shadow-xl shadow-black/20"
+          className="space-y-8 rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] p-6 shadow-xl shadow-black/20"
         >
           {/* Basic Info */}
           <div>
-            <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[#9AA0AA]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#E53535]" />
+            <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[#B08A6C]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#C78C3A]" />
               Basic Information
             </h2>
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
@@ -141,7 +141,7 @@ export default function CreateGamePage() {
                 </label>
                 <label
                   htmlFor="prizeImage"
-                  className="flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-[#23272D] bg-[#14171B] px-3.5 py-3 text-sm text-[#9AA0AA] transition-colors hover:border-[#E53535] hover:text-[#E68078]"
+                  className="flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-[#2E1C0E] bg-[#1B0F08] px-3.5 py-3 text-sm text-[#B08A6C] transition-colors duration-300 hover:border-[#C78C3A] hover:text-[#D0AE95]"
                 >
                   <ImageIcon size={18} className="shrink-0" />
                   <span className="truncate">
@@ -190,8 +190,8 @@ export default function CreateGamePage() {
 
           {/* Game Settings */}
           <div>
-            <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[#9AA0AA]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#E68078]" />
+            <h2 className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[#B08A6C]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#D0AE95]" />
               Game Settings
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -268,17 +268,20 @@ export default function CreateGamePage() {
             <Link
               href="/admin/manage-games"
               prefetch={false}
-              className="flex-1 cursor-pointer rounded-xl border border-[#23272D] px-4 py-2.5 text-center text-sm font-medium text-[#9AA0AA] transition-colors hover:bg-white/5 hover:text-[#F2F3F5]"
+              className="flex-1 cursor-pointer rounded-xl border border-[#2E1C0E] px-4 py-2.5 text-center text-sm font-medium text-[#B08A6C] transition-colors duration-300 hover:bg-white/5 hover:text-[#F2E8DC]"
             >
               Cancel
             </Link>
             <button
               type="submit"
               disabled={isLoading}
-              className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#E53535] to-[#E68078] px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#E53535]/25 transition-all hover:from-[#C62E2E] hover:to-[#C94F47] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+              className="group relative flex flex-1 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-[#C78C3A] to-[#D0AE95] px-4 py-2.5 text-sm font-semibold text-[#1a1408] shadow-lg shadow-[#C78C3A]/25 transition-all duration-300 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {isLoading ? <Loader2 size={18} className="animate-spin" /> : <Plus size={18} />}
-              {isLoading ? 'Creating...' : 'Create Game'}
+              <span className="absolute inset-0 bg-gradient-to-r from-[#B4522C] to-[#B4522C] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <span className="relative flex items-center justify-center gap-2">
+                {isLoading ? <Loader2 size={18} className="animate-spin" /> : <Plus size={18} />}
+                {isLoading ? 'Creating...' : 'Create Game'}
+              </span>
             </button>
           </div>
         </form>

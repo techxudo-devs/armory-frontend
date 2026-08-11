@@ -12,7 +12,7 @@ export function SubmitButton({
     <button
       type="submit"
       disabled={loading}
-      className="w-full bg-gradient-to-r from-brass via-brass-light to-brass border border-brass text-[#fff] font-plus font-medium text-xs tracking-wide uppercase px-6 py-3 rounded-lg hover:brightness-110 active:scale-[0.99] transition-all cursor-pointer shadow-md shadow-brass/10 disabled:cursor-not-allowed disabled:opacity-60"
+      className="w-full bg-gradient-to-r from-brass via-brass-light to-brass border border-brass text-[#111] font-plus font-medium text-xs tracking-wide uppercase px-6 py-3 rounded-lg hover:brightness-110 active:scale-[0.99] transition-all duration-300 cursor-pointer shadow-md shadow-brass/10 disabled:cursor-not-allowed disabled:opacity-60"
     >
       {loading ? (
         <span className="flex items-center justify-center gap-2">

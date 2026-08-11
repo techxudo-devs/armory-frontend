@@ -8,7 +8,7 @@ export function Pill({ label, active = false, onClick }: PillProps) {
   return (
     <button
       onClick={onClick}
-      className={`text-sm font-plus cursor-pointer font-medium px-5 py-2.5 border transition-colors ${
+      className={`text-sm font-plus cursor-pointer font-medium px-5 py-2.5 border transition-colors duration-300 ${
         active
           ? "bg-brass-dim border-brass text-brass-light"
           : "border-border-strong text-text-secondary hover:border-text-secondary"

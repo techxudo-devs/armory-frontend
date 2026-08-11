@@ -16,9 +16,8 @@ import {
   UserPlus,
   LayoutDashboard,
   CreditCard,
-  Copy,
-  Check,
   ImagePlus,
+  ExternalLink,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useDispatch } from "react-redux";
@@ -27,11 +26,10 @@ import { useGetMeQuery } from "@/lib/api/authApi";
 import { useReserveSeatsMutation } from "@/lib/api/userApi";
 import { getErrorMessage, baseApi } from "@/lib/api/baseApi";
 import { usePusherEvents } from "@/lib/pusher/usePusher";
-import { PAYMENT_ACCOUNT } from "@/lib/paymentConfig";
 import type { SeatInfo } from "@/lib/api/types";
 
 const seatBase =
-  "flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-lg text-sm font-bold transition-all cursor-pointer border-2";
+  "flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-lg text-sm font-bold transition-all duration-300 cursor-pointer border-2";
 
 function seatClasses(seat: SeatInfo, selected: boolean) {
   if (seat.isMine && seat.status === "pending")
@@ -59,7 +57,6 @@ export default function PublicGamePage({
   const [paymentReference, setPaymentReference] = useState("");
   const [paymentProofFile, setPaymentProofFile] = useState<File | null>(null);
   const [paymentProofPreview, setPaymentProofPreview] = useState<string | null>(null);
-  const [copiedPayment, setCopiedPayment] = useState(false);
   const [copied, setCopied] = useState(false);
   const paymentProofRef = useRef<HTMLInputElement>(null);
 
@@ -75,18 +72,6 @@ export default function PublicGamePage({
 
   const canSubmitPayment =
     paymentReference.trim().length > 0 || paymentProofFile !== null;
-
-  const copyPaymentAccount = async () => {
-    try {
-      await navigator.clipboard.writeText(
-        `${PAYMENT_ACCOUNT.holder}: ${PAYMENT_ACCOUNT.number} (PSID ${PAYMENT_ACCOUNT.psid})`,
-      );
-      setCopiedPayment(true);
-      setTimeout(() => setCopiedPayment(false), 2000);
-    } catch {
-      toast.error("Could not copy account details");
-    }
-  };
 
   const handlePaymentProofChange = (file: File | undefined) => {
     setPaymentProofFile(file ?? null);
@@ -173,7 +158,7 @@ export default function PublicGamePage({
           <Link
             href="/"
             prefetch={false}
-            className="mt-5 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+            className="mt-5 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-blue-700"
           >
             <ArrowLeft size={16} />
             Back to Home
@@ -191,7 +176,7 @@ export default function PublicGamePage({
           <Link
             href="/"
             prefetch={false}
-            className="flex items-center gap-1.5 text-sm font-medium text-slate-500 transition-colors hover:text-slate-800"
+            className="flex items-center gap-1.5 text-sm font-medium text-slate-500 transition-colors duration-300 hover:text-slate-800"
           >
             <ArrowLeft size={16} />
             Home
@@ -200,14 +185,14 @@ export default function PublicGamePage({
             <Link
               href={notLoggedIn ? "/login?next=/dashboard" : "/dashboard"}
               prefetch={false}
-              className="flex cursor-pointer items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:border-blue-600 hover:text-blue-600"
+              className="flex cursor-pointer items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-colors duration-300 hover:border-blue-600 hover:text-blue-600"
             >
               <LayoutDashboard size={16} />
               Go to your dashboard
             </Link>
             <button
               onClick={handleShare}
-              className="flex cursor-pointer items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:border-blue-600 hover:text-blue-600"
+              className="flex cursor-pointer items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-colors duration-300 hover:border-blue-600 hover:text-blue-600"
             >
               {copied ? <CheckCircle2 size={16} className="text-emerald-500" /> : <Share2 size={16} />}
               {copied ? "Link Copied!" : "Share"}
@@ -342,7 +327,7 @@ export default function PublicGamePage({
                 <button
                   onClick={() => setConfirming(true)}
                   disabled={selected.length === 0}
-                  className="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/25 transition-all hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/25 transition-all duration-300 hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {selected.length > 0
                     ? `Reserve ${selected.length} Seat${selected.length > 1 ? "s" : ""}`
@@ -365,7 +350,7 @@ export default function PublicGamePage({
                   <Link
                     href={`/login?next=/game/${gameCode}`}
                     prefetch={false}
-                    className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 sm:flex-none"
+                    className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-blue-700 sm:flex-none"
                   >
                     <LogIn size={16} />
                     Log in
@@ -373,7 +358,7 @@ export default function PublicGamePage({
                   <Link
                     href={`/register?next=/game/${gameCode}`}
                     prefetch={false}
-                    className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl border border-blue-600 bg-white px-5 py-2.5 text-sm font-semibold text-blue-600 transition-colors hover:bg-blue-50 sm:flex-none"
+                    className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl border border-blue-600 bg-white px-5 py-2.5 text-sm font-semibold text-blue-600 transition-colors duration-300 hover:bg-blue-50 sm:flex-none"
                   >
                     <UserPlus size={16} />
                     Create account
@@ -396,7 +381,7 @@ export default function PublicGamePage({
             <Link
               href="/"
               prefetch={false}
-              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-indigo-700"
+              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-indigo-700"
             >
               <ArrowLeft size={16} />
               Browse other raffles
@@ -428,27 +413,20 @@ export default function PublicGamePage({
               {selected.map((n) => `#${n}`).join(", ")}
             </p>
 
-            {/* Payment account */}
-            <div className="mt-5 rounded-xl border border-blue-200 bg-blue-50 p-4 text-left">
-              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-blue-500">
-                Pay to this account
+            {/* Send donations */}
+            <div className="mt-5 rounded-xl border border-amber-200 bg-amber-50 p-4 text-left">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-amber-600">
+                Pay Here to reserve your seat
               </p>
-              <div className="flex items-center justify-between gap-3">
-                <div>
-                  <p className="text-sm font-bold text-slate-900">{PAYMENT_ACCOUNT.number}</p>
-                  <p className="mt-0.5 text-xs text-slate-500">
-                    {PAYMENT_ACCOUNT.holder} · PSID {PAYMENT_ACCOUNT.psid}
-                  </p>
-                </div>
-                <button
-                  onClick={copyPaymentAccount}
-                  title="Copy account details"
-                  className="flex shrink-0 cursor-pointer items-center gap-1.5 rounded-lg bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-blue-700"
-                >
-                  {copiedPayment ? <Check size={13} /> : <Copy size={13} />}
-                  {copiedPayment ? "Copied" : "Copy"}
-                </button>
-              </div>
+              <a
+                href="https://linktr.ee/metaltubesandseeds"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex w-fit items-center gap-1.5 text-sm font-semibold text-blue-600 underline-offset-2 hover:underline"
+              >
+                https://linktr.ee/metaltubesandseeds
+                <ExternalLink size={13} />
+              </a>
             </div>
 
             {/* Payment reference */}
@@ -464,8 +442,8 @@ export default function PublicGamePage({
                 type="text"
                 value={paymentReference}
                 onChange={(e) => setPaymentReference(e.target.value)}
-                placeholder="e.g. JazzCash TID or bank receipt ID"
-                className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-800 outline-none transition-colors placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                placeholder="e.g. PayPal TID or bank receipt ID"
+                className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-800 outline-none transition-colors duration-300 placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
               />
             </div>
 
@@ -498,7 +476,7 @@ export default function PublicGamePage({
                         handlePaymentProofChange(undefined);
                         if (paymentProofRef.current) paymentProofRef.current.value = "";
                       }}
-                      className="w-fit cursor-pointer rounded-lg bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-600 transition-colors hover:bg-red-100"
+                      className="w-fit cursor-pointer rounded-lg bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-600 transition-colors duration-300 hover:bg-red-100"
                     >
                       Remove
                     </button>
@@ -507,7 +485,7 @@ export default function PublicGamePage({
               ) : (
                 <button
                   onClick={() => paymentProofRef.current?.click()}
-                  className="flex w-full cursor-pointer flex-col items-center justify-center gap-1.5 rounded-xl border-2 border-dashed border-slate-300 bg-white px-4 py-5 text-slate-500 transition-colors hover:border-blue-400 hover:text-blue-600"
+                  className="flex w-full cursor-pointer flex-col items-center justify-center gap-1.5 rounded-xl border-2 border-dashed border-slate-300 bg-white px-4 py-5 text-slate-500 transition-colors duration-300 hover:border-blue-400 hover:text-blue-600"
                 >
                   <ImagePlus size={20} />
                   <span className="text-xs font-semibold">Upload payment screenshot</span>
@@ -526,14 +504,14 @@ export default function PublicGamePage({
                   setConfirming(false);
                   setSelected([]);
                 }}
-                className="flex-1 cursor-pointer rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-50"
+                className="flex-1 cursor-pointer rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-600 transition-colors duration-300 hover:bg-slate-50"
               >
                 Cancel
               </button>
               <button
                 onClick={handleConfirmReserve}
                 disabled={isReserving || !canSubmitPayment}
-                className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {isReserving && <Loader2 size={15} className="animate-spin" />}
                 {isReserving ? "Submitting..." : "Pay & Submit"}

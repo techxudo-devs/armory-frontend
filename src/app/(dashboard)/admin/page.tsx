@@ -31,10 +31,13 @@ export default function AdminDashboard() {
         <Link
           href="/admin/create-game"
           prefetch={false}
-          className="flex shrink-0 cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-r from-[#E53535] to-[#E68078] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#E53535]/25 transition-all hover:from-[#C62E2E] hover:to-[#C94F47] hover:shadow-[#E53535]/40 active:scale-[0.98]"
+          className="group relative flex shrink-0 cursor-pointer items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-[#C78C3A] to-[#D0AE95] px-5 py-2.5 text-sm font-semibold text-[#1a1408] shadow-lg shadow-[#C78C3A]/25 transition-all duration-300 hover:shadow-[#C78C3A]/40 active:scale-[0.98]"
         >
-          <Plus className="h-4 w-4" />
-          Create Game
+          <span className="absolute inset-0 bg-gradient-to-r from-[#B4522C] to-[#B4522C] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+          <span className="relative flex items-center gap-2">
+            <Plus className="h-4 w-4" />
+            Create Game
+          </span>
         </Link>
       </div>
 
@@ -43,12 +46,12 @@ export default function AdminDashboard() {
         <StatCard
           title="Total Games"
           value={stats.totalGames}
-          icon={<Gamepad2 className="text-blue-500" size={24} />}
+          icon={<Gamepad2 className="text-amber-500" size={24} />}
         />
         <StatCard
           title="Active Users"
           value={stats.registeredUsers}
-          icon={<Users className="text-purple-500" size={24} />}
+          icon={<Users className="text-amber-500" size={24} />}
         />
         <StatCard
           title="Seats Reserved"
@@ -58,7 +61,7 @@ export default function AdminDashboard() {
         <StatCard
           title="Completed Games"
           value={stats.completedGames}
-          icon={<Trophy className="text-orange-500" size={24} />}
+          icon={<Trophy className="text-amber-500" size={24} />}
         />
       </div>
 
@@ -84,11 +87,11 @@ interface StatCardProps {
 
 function StatCard({ title, value, icon }: StatCardProps) {
   return (
-    <div className="rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] p-5 shadow-xl shadow-black/20">
+    <div className="rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] p-5 shadow-xl shadow-black/20">
       <div className="flex items-start justify-between gap-2">
         <div>
-          <p className="text-xs font-medium text-[#9AA0AA] mb-1.5">{title}</p>
-          <p className="text-2xl font-bold text-[#F2F3F5]">{value}</p>
+          <p className="text-xs font-medium text-[#B08A6C] mb-1.5">{title}</p>
+          <p className="text-2xl font-bold text-[#F2E8DC]">{value}</p>
         </div>
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/5">
           {icon}
@@ -101,8 +104,8 @@ function StatCard({ title, value, icon }: StatCardProps) {
 function LoadingState() {
   return (
     <div className="flex h-[60vh] flex-col items-center justify-center gap-3">
-      <div className="h-10 w-10 animate-spin rounded-full border-2 border-[#E53535] border-t-transparent" />
-      <p className="text-sm text-[#9AA0AA]">Loading dashboard analytics...</p>
+      <div className="h-10 w-10 animate-spin rounded-full border-2 border-[#C78C3A] border-t-transparent" />
+      <p className="text-sm text-[#B08A6C]">Loading dashboard analytics...</p>
     </div>
   )
 }
@@ -110,7 +113,7 @@ function LoadingState() {
 function ErrorState() {
   return (
     <div className="flex h-[60vh] items-center justify-center">
-      <p className="text-sm text-[#9AA0AA]">
+      <p className="text-sm text-[#B08A6C]">
         Unable to load dashboard data. Please try again later.
       </p>
     </div>

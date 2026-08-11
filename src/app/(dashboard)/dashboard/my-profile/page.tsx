@@ -9,12 +9,12 @@ import { useGetMeQuery } from '@/lib/api/authApi'
 import { useUpdateAvatarMutation } from '@/lib/api/userApi'
 
 const inputClass =
-  'w-full rounded-xl border border-[#23272D] bg-[#14171B] px-3.5 py-2.5 text-sm text-[#F2F3F5] placeholder-[#5C636D] outline-none transition-colors focus:border-[#E53535] focus:ring-2 focus:ring-[#E53535]/20 disabled:cursor-not-allowed disabled:opacity-50'
-const labelClass = 'mb-1.5 block text-sm font-medium text-[#9AA0AA]'
+  'w-full rounded-xl border border-[#2E1C0E] bg-[#1B0F08] px-3.5 py-2.5 text-sm text-[#F2E8DC] placeholder-[#8A6A50] outline-none transition-colors duration-300 focus:border-[#C78C3A] focus:ring-2 focus:ring-[#C78C3A]/20 disabled:cursor-not-allowed disabled:opacity-50'
+const labelClass = 'mb-1.5 block text-sm font-medium text-[#B08A6C]'
 const primaryBtn =
-  'flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#E53535] to-[#E68078] px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#E53535]/25 transition-all hover:from-[#C62E2E] hover:to-[#C94F47] active:scale-[0.98]'
+  'flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#C78C3A] to-[#D0AE95] px-4 py-2.5 text-sm font-semibold text-[#1a1408] shadow-lg shadow-[#C78C3A]/25 transition-all duration-300 hover:from-[#B4522C] hover:to-[#B4522C] active:scale-[0.98]'
 const outlineBtn =
-  'flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-[#23272D] px-4 py-2.5 text-sm font-medium text-[#9AA0AA] transition-colors hover:bg-white/5 hover:text-[#F2F3F5]'
+  'flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-[#2E1C0E] px-4 py-2.5 text-sm font-medium text-[#B08A6C] transition-colors duration-300 hover:bg-white/5 hover:text-[#F2E8DC]'
 
 export default function MyProfilePage() {
   const { data: user } = useGetMeQuery()
@@ -76,9 +76,9 @@ export default function MyProfilePage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Profile Avatar Section */}
-        <div className="flex flex-col items-center justify-center rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] p-6 text-center shadow-xl shadow-black/20">
+        <div className="flex flex-col items-center justify-center rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] p-6 text-center shadow-xl shadow-black/20">
           <div className="relative">
-            <div className="flex h-28 w-28 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-[#E53535] to-[#E68078] text-white shadow-lg shadow-[#E53535]/25">
+            <div className="flex h-28 w-28 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-[#C78C3A] to-[#D0AE95] text-[#1a1408] shadow-lg shadow-[#C78C3A]/25">
               {user?.avatarUrl ? (
                 <Image
                   src={user.avatarUrl}
@@ -94,7 +94,7 @@ export default function MyProfilePage() {
             <button
               onClick={() => fileInputRef.current?.click()}
               disabled={isUploading}
-              className="absolute -bottom-2 -right-2 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-[#23272D] bg-[#14171B] text-[#E68078] transition-colors hover:bg-[#E53535] hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+              className="absolute -bottom-2 -right-2 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-[#2E1C0E] bg-[#1B0F08] text-[#D0AE95] transition-colors duration-300 hover:bg-[#C78C3A] hover:text-[#1a1408] disabled:cursor-not-allowed disabled:opacity-50"
               title="Change Avatar"
             >
               {isUploading ? <Loader2 size={15} className="animate-spin" /> : <Camera size={15} />}
@@ -108,11 +108,11 @@ export default function MyProfilePage() {
             />
           </div>
           <div className="mt-5 min-w-0">
-            <h2 className="text-2xl font-bold text-[#F2F3F5]">
+            <h2 className="text-2xl font-bold text-[#F2E8DC]">
               {user?.fullName ?? 'Loading...'}
             </h2>
-            <p className="mt-1 text-sm text-[#9AA0AA]">{user?.email ?? ''}</p>
-            <span className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[#E53535]/10 px-3 py-1 text-xs font-semibold text-[#E68078]">
+            <p className="mt-1 text-sm text-[#B08A6C]">{user?.email ?? ''}</p>
+            <span className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[#C78C3A]/10 px-3 py-1 text-xs font-semibold text-[#D0AE95]">
               <span className="h-1.5 w-1.5 rounded-full bg-current" />
               Player
             </span>
@@ -122,10 +122,10 @@ export default function MyProfilePage() {
         {/* Profile Form */}
         <form
           onSubmit={handleSave}
-          className="space-y-6 rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] p-6 shadow-xl shadow-black/20 lg:col-span-2"
+          className="space-y-6 rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] p-6 shadow-xl shadow-black/20 lg:col-span-2"
         >
           <div className="flex items-center justify-between gap-4">
-            <h3 className="text-lg font-bold text-[#F2F3F5]">Personal Information</h3>
+            <h3 className="text-lg font-bold text-[#F2E8DC]">Personal Information</h3>
             <button
               type="button"
               onClick={() => {
@@ -182,7 +182,7 @@ export default function MyProfilePage() {
           </div>
 
           {isEditing && (
-            <div className="flex gap-3 border-t border-[#23272D]/60 pt-5">
+            <div className="flex gap-3 border-t border-[#2E1C0E]/60 pt-5">
               <button
                 type="button"
                 onClick={() => {
@@ -204,15 +204,15 @@ export default function MyProfilePage() {
         </form>
 
         {/* Security Section */}
-        <div className="rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] p-6 shadow-xl shadow-black/20 lg:col-span-3">
+        <div className="rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] p-6 shadow-xl shadow-black/20 lg:col-span-3">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-start gap-4">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/5">
-                <Lock size={18} className="text-[#E68078]" />
+                <Lock size={18} className="text-[#D0AE95]" />
               </span>
               <div>
-                <h3 className="text-lg font-bold text-[#F2F3F5]">Password &amp; Security</h3>
-                <p className="mt-0.5 text-sm text-[#9AA0AA]">
+                <h3 className="text-lg font-bold text-[#F2E8DC]">Password &amp; Security</h3>
+                <p className="mt-0.5 text-sm text-[#B08A6C]">
                   To change your password we&apos;ll email you a secure reset link.
                 </p>
               </div>
@@ -220,7 +220,7 @@ export default function MyProfilePage() {
             <Link
               href="/forgot-password"
               prefetch={false}
-              className="flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#E53535] to-[#E68078] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#E53535]/25 transition-all hover:from-[#C62E2E] hover:to-[#C94F47] active:scale-[0.98]"
+              className="flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#C78C3A] to-[#D0AE95] px-5 py-2.5 text-sm font-semibold text-[#1a1408] shadow-lg shadow-[#C78C3A]/25 transition-all duration-300 hover:from-[#B4522C] hover:to-[#B4522C] active:scale-[0.98]"
             >
               <ShieldCheck size={16} />
               Change Password

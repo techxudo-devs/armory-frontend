@@ -31,25 +31,25 @@ export default function UserDashboard() {
       title: 'Active Games',
       value: gamesLoading ? '—' : activeGamesCount,
       icon: Gamepad2,
-      tint: 'text-[#E68078]',
+      tint: 'text-[#D0AE95]',
     },
     {
       title: 'My Games',
       value: joinedLoading ? '—' : joinedGames.length,
       icon: Users,
-      tint: 'text-[#6EE7B7]',
+      tint: 'text-[#7E9C6B]',
     },
     {
       title: 'Total Wins',
       value: joinedLoading ? '—' : wonGames.length,
       icon: Trophy,
-      tint: 'text-[#FDBA74]',
+      tint: 'text-[#D0AE95]',
     },
     {
       title: 'Total Loses',
       value: joinedLoading ? '—' : lostGames.length,
       icon: TrendingDown,
-      tint: 'text-[#F87171]',
+      tint: 'text-[#B4522C]',
     },
   ]
 
@@ -59,24 +59,24 @@ export default function UserDashboard() {
       title: 'Active Games',
       subtitle: 'Play and join games',
       icon: Gamepad2,
-      tint: 'text-[#E68078]',
-      ring: 'hover:border-[#E68078]/40',
+      tint: 'text-[#D0AE95]',
+      ring: 'hover:border-[#D0AE95]/40',
     },
     {
       href: '/dashboard/my-seats',
       title: 'My Seats',
       subtitle: 'Your reserved seats',
       icon: Trophy,
-      tint: 'text-[#C4B5FD]',
-      ring: 'hover:border-[#C4B5FD]/40',
+      tint: 'text-[#966D51]',
+      ring: 'hover:border-[#966D51]/40',
     },
     {
       href: '/dashboard/notifications',
       title: 'Notifications',
       subtitle: 'View all updates',
       icon: Users,
-      tint: 'text-[#6EE7B7]',
-      ring: 'hover:border-[#6EE7B7]/40',
+      tint: 'text-[#7E9C6B]',
+      ring: 'hover:border-[#7E9C6B]/40',
     },
   ]
 
@@ -102,11 +102,11 @@ export default function UserDashboard() {
       {/* Featured Games */}
       <div className="mb-8">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-bold text-[#F2F3F5]">Featured Games</h2>
+          <h2 className="text-xl font-bold text-[#F2E8DC]">Featured Games</h2>
           <Link
             href="/dashboard/active-games"
             prefetch={false}
-            className="flex items-center gap-1 text-sm font-semibold text-[#E53535] transition-colors hover:text-[#E68078]"
+            className="flex items-center gap-1 text-sm font-semibold text-[#C78C3A] transition-colors duration-300 hover:text-[#D0AE95]"
           >
             View all <ArrowRight size={14} />
           </Link>
@@ -123,10 +123,10 @@ export default function UserDashboard() {
               />
             ))
           ) : (
-            <div className="col-span-full rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] py-14 text-center shadow-xl shadow-black/20">
-              <Gamepad2 className="mx-auto mb-3 text-[#9AA0AA] opacity-50" size={28} />
-              <p className="font-semibold text-[#F2F3F5]">No active games right now</p>
-              <p className="mt-1 text-sm text-[#9AA0AA]">Check back soon for new games</p>
+            <div className="col-span-full rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] py-14 text-center shadow-xl shadow-black/20">
+              <Gamepad2 className="mx-auto mb-3 text-[#B08A6C] opacity-50" size={28} />
+              <p className="font-semibold text-[#F2E8DC]">No active games right now</p>
+              <p className="mt-1 text-sm text-[#B08A6C]">Check back soon for new games</p>
             </div>
           )}
         </div>
@@ -134,21 +134,21 @@ export default function UserDashboard() {
 
       {/* Quick Actions */}
       <div>
-        <h2 className="text-xl font-bold text-[#F2F3F5] mb-4">Quick Actions</h2>
+        <h2 className="text-xl font-bold text-[#F2E8DC] mb-4">Quick Actions</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {quickActions.map((action) => (
             <Link
               key={action.href}
               href={action.href}
               prefetch={false}
-              className={`group rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] p-6 text-center shadow-xl shadow-black/20 transition-all hover:-translate-y-0.5 hover:shadow-lg ${action.ring}`}
+              className={`group rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] p-6 text-center shadow-xl shadow-black/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg ${action.ring}`}
             >
-              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 transition-colors group-hover:bg-white/10">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 transition-colors duration-300 group-hover:bg-white/10">
                 <action.icon size={24} className={action.tint} />
               </div>
-              <h3 className="font-semibold text-[#F2F3F5]">{action.title}</h3>
-              <p className="mt-1 text-sm text-[#9AA0AA]">{action.subtitle}</p>
-              <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[#E53535] opacity-0 transition-opacity group-hover:opacity-100">
+              <h3 className="font-semibold text-[#F2E8DC]">{action.title}</h3>
+              <p className="mt-1 text-sm text-[#B08A6C]">{action.subtitle}</p>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[#C78C3A] opacity-0 transition-opacity group-hover:opacity-100">
                 Open <ArrowRight size={12} />
               </span>
             </Link>
@@ -168,11 +168,11 @@ interface StatCardProps {
 
 function StatCard({ title, value, icon: Icon, tint }: StatCardProps) {
   return (
-    <div className="rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] p-5 shadow-xl shadow-black/20">
+    <div className="rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] p-5 shadow-xl shadow-black/20">
       <div className="flex items-start justify-between">
         <div>
-          <p className="mb-1.5 text-xs font-medium text-[#9AA0AA]">{title}</p>
-          <p className="text-2xl font-bold text-[#F2F3F5]">{value}</p>
+          <p className="mb-1.5 text-xs font-medium text-[#B08A6C]">{title}</p>
+          <p className="text-2xl font-bold text-[#F2E8DC]">{value}</p>
         </div>
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5">
           <Icon size={18} className={tint} />
@@ -184,7 +184,7 @@ function StatCard({ title, value, icon: Icon, tint }: StatCardProps) {
 
 function GameCardSkeleton() {
   return (
-    <div className="animate-pulse rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] p-5 shadow-xl shadow-black/20">
+    <div className="animate-pulse rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] p-5 shadow-xl shadow-black/20">
       <div className="mb-3 h-5 w-2/3 rounded bg-white/5" />
       <div className="mb-5 h-4 w-full rounded bg-white/5" />
       <div className="mb-5 space-y-2.5">
@@ -203,23 +203,23 @@ interface GameCardProps {
 
 function GameCard({ game, isJoined }: GameCardProps) {
   return (
-    <div className="group rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] p-5 shadow-xl shadow-black/20 transition-all hover:border-[#E53535]/60">
+    <div className="group rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] p-5 shadow-xl shadow-black/20 transition-all duration-300 hover:border-[#C78C3A]/60">
       <div className="mb-3 flex items-start justify-between gap-3">
-        <h3 className="font-semibold text-[#F2F3F5]">{game.title}</h3>
+        <h3 className="font-semibold text-[#F2E8DC]">{game.title}</h3>
         <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-400">
           <span className="h-1.5 w-1.5 rounded-full bg-current" />
           Live
         </span>
       </div>
 
-      <div className="mb-5 mt-4 space-y-2.5 border-t border-[#23272D]/60 pt-4">
+      <div className="mb-5 mt-4 space-y-2.5 border-t border-[#2E1C0E]/60 pt-4">
         <div className="flex items-center justify-between text-sm">
-          <span className="text-[#9AA0AA]">Prize</span>
-          <span className="font-semibold text-[#F2F3F5]">{game.prize}</span>
+          <span className="text-[#B08A6C]">Prize</span>
+          <span className="font-semibold text-[#F2E8DC]">{game.prize}</span>
         </div>
         <div className="flex items-center justify-between text-sm">
-          <span className="text-[#9AA0AA]">Seats Filled</span>
-          <span className="font-medium text-[#F2F3F5]">
+          <span className="text-[#B08A6C]">Seats Filled</span>
+          <span className="font-medium text-[#F2E8DC]">
             {game.reservedSeatsCount}/{game.totalSeats}
           </span>
         </div>
@@ -234,7 +234,7 @@ function GameCard({ game, isJoined }: GameCardProps) {
         <Link
           href="/dashboard/active-games"
           prefetch={false}
-          className="block w-full cursor-pointer rounded-xl bg-gradient-to-r from-[#E53535] to-[#E68078] py-2.5 text-center text-sm font-semibold text-white shadow-lg shadow-[#E53535]/25 transition-all hover:from-[#C62E2E] hover:to-[#C94F47] active:scale-[0.98]"
+          className="block w-full cursor-pointer rounded-xl bg-gradient-to-r from-[#C78C3A] to-[#D0AE95] py-2.5 text-center text-sm font-semibold text-[#1a1408] shadow-lg shadow-[#C78C3A]/25 transition-all duration-300 hover:from-[#B4522C] hover:to-[#B4522C] active:scale-[0.98]"
         >
           Join Game
         </Link>

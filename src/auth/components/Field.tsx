@@ -25,7 +25,7 @@ export function Field({ label, type = "text", icon, ...props }: FieldProps) {
         )}
         <input
           type={inputType}
-          className={`w-full bg-bg-raised border border-border-strong/80 rounded-lg text-sm text-text-primary placeholder:text-text-muted/60 focus:outline-none focus:border-brass focus:ring-1 focus:ring-brass/30 transition-all ${
+          className={`w-full bg-bg-raised border border-border-strong/80 rounded-lg text-sm text-text-primary placeholder:text-text-muted/60 focus:outline-none focus:border-brass focus:ring-1 focus:ring-brass/30 transition-all duration-300 ${
             isPassword ? "pr-9" : "pr-3"
           } ${Icon ? "pl-9" : "pl-3"} py-2.5`}
           {...props}
@@ -35,7 +35,7 @@ export function Field({ label, type = "text", icon, ...props }: FieldProps) {
             type="button"
             onClick={() => setShow((s) => !s)}
             aria-label={show ? "Hide password" : "Show password"}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-primary transition-colors cursor-pointer"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-primary transition-colors duration-300 cursor-pointer"
           >
             {show ? (
               <EyeOff className="w-4 h-4" />

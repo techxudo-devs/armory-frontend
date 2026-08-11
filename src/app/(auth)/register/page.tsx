@@ -46,7 +46,7 @@ function RegisterForm() {
 
   return (
     <AuthCard
-      badge="Join the armory"
+      badge="Join Metal Tubes & Seeds"
       title="Create your account"
       subtitle="Register in under a minute for verified raffles & secure checkout."
     >

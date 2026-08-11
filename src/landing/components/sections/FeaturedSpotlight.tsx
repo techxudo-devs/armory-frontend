@@ -12,7 +12,7 @@ const specs = [
 
 export function FeaturedSpotlight() {
   return (
-    <section className="bg-primary pb-10 pt-14">
+    <section className="bg-bg pb-10 pt-14">
       <div className="max-w-[1200px] mx-auto px-8">
         <div className="max-w-[560px] mx-auto text-center mb-14">
           <p className="bg-gradient-to-r from-amber-500/20 to-amber-500/40 text-white w-fit mx-auto px-6 py-1.5 rounded-full font-plus">
@@ -24,7 +24,7 @@ export function FeaturedSpotlight() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] border border-border-strong bg-bg-raised">
-          <div className="relative min-h-[340px] bg-gradient-to-br from-[#1E2227] to-[#0E1114] flex items-center justify-center border-b md:border-b-0 md:border-r border-border-strong">
+          <div className="relative min-h-[340px] bg-gradient-to-br from-[#241409] to-[#100602] flex items-center justify-center border-b md:border-b-0 md:border-r border-border-strong">
             <Image
               src={
                 "https://images.unsplash.com/photo-1580865767741-37cd59206d74?w=2000&auto=format&fit=crop&q=100&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZpcmVhcm18ZW58MHx8MHx8fDA%3D"
@@ -63,7 +63,7 @@ export function FeaturedSpotlight() {
               </div>
               <Button
                 href="#"
-                className="whitespace-nowrap text-white rounded-lg hover:scale-97 transition-transform duration-300"
+                className="whitespace-nowrap rounded-lg hover:scale-97 transition-transform duration-300"
               >
                 Claim your seat
               </Button>

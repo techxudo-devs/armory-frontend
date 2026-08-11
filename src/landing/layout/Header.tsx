@@ -1,4 +1,5 @@
 import { Button } from "@/landing/components/ui/Button";
+import Image from "next/image";
 import Link from "next/link";
 
 const navLinks = [
@@ -14,18 +15,22 @@ export function Header() {
       <nav className="max-w-[1300px] mx-auto px-8 h-[78px] flex items-center justify-between">
         <Link href="/" prefetch={false}>
         <div className="flex items-center gap-2.5">
-          <div className="w-[30px] h-[30px] bg-brass relative">
-            <span className="absolute inset-1.5 bg-bg" />
-          </div>
-          <div className="font-plus font-bold text-[19px] tracking-wide">
-            IGY6<span className="text-brass-light">ARMORY</span>
+          <Image
+            src="/images/logo.jpeg"
+            alt="Metal Tubes & Seeds"
+            width={1600}
+            height={936}
+            className="h-10 w-auto object-contain"
+          />
+          <div className="font-plus font-bold text-[19px]">
+            Metal Tubes <span className="text-brass-light">&amp; Seeds</span>
           </div>
         </div>
         </Link>
 
         <div className="hidden md:flex gap-9">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className="text-sm text-text-secondary font-plus hover:text-text-primary transition-colors">
+            <a key={link.href} href={link.href} className="text-sm text-text-secondary font-plus hover:text-text-primary transition-colors duration-300">
               {link.label}
             </a>
           ))}
@@ -35,7 +40,7 @@ export function Header() {
           <Link
             href="/login"
             prefetch={false}
-            className="text-sm font-plus text-text-secondary hover:text-text-primary transition-colors"
+            className="text-sm font-plus text-text-secondary hover:text-text-primary transition-colors duration-300"
           >
             Log in
           </Link>

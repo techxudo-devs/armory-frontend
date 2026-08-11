@@ -17,7 +17,7 @@ export function CategoryGrid() {
         {categories.map((category) => (
           <div
             key={category.id}
-            className="bg-panel px-6 py-8 hover:bg-panel-2 transition-colors"
+            className="bg-panel px-6 py-8 hover:bg-panel-2 transition-colors duration-300"
           >
             <CategoryIcon
               category={category.name}

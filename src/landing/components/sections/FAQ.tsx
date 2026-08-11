@@ -8,7 +8,7 @@ export function FAQ() {
   const [openId, setOpenId] = useState<string | null>(faqEntries[0]?.id ?? null);
 
   return (
-    <section id="faq" className="bg-[#0B101D] py-10 px-4 sm:px-6 lg:px-8">
+    <section id="faq" className="bg-[#100602] py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
         
         {/* Left Column: Title & Subtext (Sticky on Desktop) */}
@@ -19,7 +19,7 @@ export function FAQ() {
           <h2 className="text-3xl sm:text-4xl font-plus font-bold text-white mt-3 leading-tight">
             Frequently asked
           </h2>
-          <p className="text-sm text-[#94A3B8] mt-3 font-plus leading-relaxed max-w-md">
+          <p className="text-sm text-[#B08A6C] mt-3 font-plus leading-relaxed max-w-md">
             Everything you need to know about seat entries, live drawings, and item fulfillment.
           </p>
         </div>
@@ -33,14 +33,14 @@ export function FAQ() {
                 key={entry.id}
                 className={`border rounded-lg transition-colors duration-200 overflow-hidden ${
                   isOpen
-                    ? "bg-[#131B2E] border-[#E53535]/50"
-                    : "bg-[#0B101D] border-[#1F293D] hover:border-[#1F293D]/80"
+                    ? "bg-[#1B0F08] border-[#C78C3A]/50"
+                    : "bg-[#100602] border-[#3A2414] hover:border-[#3A2414]/80"
                 }`}
               >
                 {/* Question Header */}
                 <button
                   onClick={() => setOpenId(isOpen ? null : entry.id)}
-                  className="w-full flex items-center justify-between p-5 text-left text-base font-semibold text-white gap-4 transition-colors cursor-pointer"
+                  className="w-full flex items-center justify-between p-5 text-left text-base font-semibold text-white gap-4 transition-colors duration-300 cursor-pointer"
                 >
                   <span className={isOpen ? "text-white font-plus" : "text-white/90 font-plus"}>
                     {entry.question}
@@ -50,8 +50,8 @@ export function FAQ() {
                   <div
                     className={`w-7 h-7 rounded flex items-center justify-center shrink-0 border transition-all duration-200 ${
                       isOpen
-                        ? "bg-[#E53535] border-[#E53535] text-white rotate-45"
-                        : "bg-[#131B2E] border-[#1F293D] text-[#94A3B8]"
+                        ? "bg-[#C78C3A] border-[#C78C3A] text-[#1a1408] rotate-45"
+                        : "bg-[#1B0F08] border-[#3A2414] text-[#B08A6C]"
                     }`}
                   >
                     <Plus className="w-4 h-4" strokeWidth={2} />
@@ -67,7 +67,7 @@ export function FAQ() {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="text-sm text-[#94A3B8] leading-relaxed pt-3 border-t border-[#1F293D]/80 font-plus">
+                    <p className="text-sm text-[#B08A6C] leading-relaxed pt-3 border-t border-[#3A2414]/80 font-plus">
                       {entry.answer}
                     </p>
                   </div>

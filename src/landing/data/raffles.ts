@@ -5,7 +5,7 @@ export const featuredRaffle: FeaturedRaffle = {
   category: "Firearms",
   title: "Competition-Grade Rifle Build, Full Cerakote Finish",
   description:
-    "Hand-built by our in-house armorer, this is the single most-claimed listing on Ironline this quarter, retail value verified at $3,200, yours for the price of a seat.",
+    "Hand-built by our in-house armorer, this is the single most-claimed listing on Metal Tubes & Seeds this quarter, retail value verified at $3,200, yours for the price of a seat.",
   seatPrice: 15,
   seatsTotal: 320,
   seatsClaimed: 312,

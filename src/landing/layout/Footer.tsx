@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const footerColumns = [
   {
     title: "Browse",
@@ -16,15 +18,19 @@ const footerColumns = [
 export function Footer() {
   return (
     <footer className="pt-10 pb-8 border-t border-border/50">
-      <div className="max-w-[1200px] mx-auto px-8">
+      <div className="max-w-[1300px] mx-auto px-8">
         <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-10 mb-14">
           <div>
             <div className="flex items-center gap-2.5">
-              <div className="w-[30px] h-[30px] bg-brass relative">
-                <span className="absolute inset-1.5 bg-bg" />
-              </div>
-              <div className="font-plus font-bold text-[19px] tracking-wide">
-                IGY6<span className="text-brass-light">ARMONY</span>
+              <Image
+                src="/images/logo.jpeg"
+                alt="Metal Tubes & Seeds"
+                width={1600}
+                height={936}
+                className="h-10 w-auto object-contain"
+              />
+              <div className="font-plus font-bold text-[19px]">
+                Metal Tubes <span className="text-brass-light">&amp; Seeds</span>
               </div>
             </div>
             <p className="text-xs text-text-muted font-plus mt-3.5 max-w-[280px] leading-relaxed">
@@ -38,7 +44,7 @@ export function Footer() {
               <ul className="space-y-2.5">
                 {column.links.map((link) => (
                   <li key={link}>
-                    <a href="#" className="text-[13.5px] font-plus text-text-secondary hover:text-text-primary transition-colors">
+                    <a href="#" className="text-[13.5px] font-plus text-text-secondary hover:text-text-primary transition-colors duration-300">
                       {link}
                     </a>
                   </li>
@@ -50,7 +56,7 @@ export function Footer() {
 
         <div className="flex flex-wrap font-plus justify-between items-center gap-3.5 pt-7 border-t border-border">
           <div className="text-xs text-text-muted">
-            © 2026 IGY6ARMONY. Void where prohibited. 18+ only. Firearms transfer via licensed FFL.
+            © 2026 Metal Tubes &amp; Seeds. Void where prohibited. 18+ only. Firearms transfer via licensed FFL.
           </div>
           <div className="text-xs text-text-muted">Licensed & bonded raffle operator</div>
         </div>

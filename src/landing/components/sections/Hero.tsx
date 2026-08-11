@@ -35,7 +35,7 @@ export function Hero() {
             <div className="flex items-center gap-3.5 mb-10">
               <Button
                 href="#raffles"
-                className="text-white rounded-lg font-plus hover:scale-97 transition-transform duration-300"
+                className="rounded-lg font-plus hover:scale-97 transition-transform duration-300"
               >
                 Browse live raffles
               </Button>

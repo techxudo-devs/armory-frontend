@@ -31,7 +31,7 @@ const typeStyles: Record<'success' | 'alert' | 'info', { chip: string; icon: Rea
     icon: <AlertCircle size={18} />,
   },
   info: {
-    chip: 'bg-sky-500/10 text-sky-400',
+    chip: 'bg-[#C78C3A]/10 text-[#D0AE95]',
     icon: <Info size={18} />,
   },
 }
@@ -122,7 +122,7 @@ export default function NotificationsPage() {
             <p className="text-muted-foreground">Stay updated with the latest game activities.</p>
           </div>
           {unreadCount > 0 && (
-            <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-[#E53535]/30 bg-[#E53535]/10 px-4 py-2 text-sm font-semibold text-[#E68078]">
+            <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-[#C78C3A]/30 bg-[#C78C3A]/10 px-4 py-2 text-sm font-semibold text-[#D0AE95]">
               <BellRing size={16} />
               {unreadCount} Unread
             </span>
@@ -133,8 +133,8 @@ export default function NotificationsPage() {
       {!isLoading && notifications.length > 0 && (
         <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-2">
-            <Bell size={16} className="text-[#E53535]" />
-            <span className="text-sm font-medium text-[#9AA0AA]">
+            <Bell size={16} className="text-[#C78C3A]" />
+            <span className="text-sm font-medium text-[#B08A6C]">
               {notifications.length} notification{notifications.length === 1 ? '' : 's'}
             </span>
           </div>
@@ -142,7 +142,7 @@ export default function NotificationsPage() {
             <button
               onClick={handleMarkAllRead}
               disabled={unreadCount === 0 || isMarkingAll}
-              className="flex cursor-pointer items-center gap-2 rounded-lg border border-[#23272D] bg-[#14171B] px-4 py-2 text-sm font-medium text-[#9AA0AA] transition-colors hover:bg-white/5 hover:text-[#F2F3F5] disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex cursor-pointer items-center gap-2 rounded-lg border border-[#2E1C0E] bg-[#1B0F08] px-4 py-2 text-sm font-medium text-[#B08A6C] transition-colors duration-300 hover:bg-white/5 hover:text-[#F2E8DC] disabled:cursor-not-allowed disabled:opacity-40"
             >
               {isMarkingAll && <Loader2 size={14} className="animate-spin" />}
               Mark all read
@@ -150,7 +150,7 @@ export default function NotificationsPage() {
             <button
               onClick={handleDeleteAllRead}
               disabled={readCount === 0 || isDeletingAll}
-              className="flex cursor-pointer items-center gap-2 rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-2 text-sm font-medium text-red-400 transition-colors hover:bg-red-500/20 hover:text-red-300 disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex cursor-pointer items-center gap-2 rounded-lg border border-orange-600/20 bg-orange-600/10 px-4 py-2 text-sm font-medium text-amber-500 transition-colors duration-300 hover:bg-orange-600/20 hover:text-orange-400 disabled:cursor-not-allowed disabled:opacity-40"
             >
               {isDeletingAll && <Loader2 size={14} className="animate-spin" />}
               Delete read
@@ -164,16 +164,16 @@ export default function NotificationsPage() {
           Array.from({ length: 3 }).map((_, i) => (
             <div
               key={i}
-              className="h-[100px] animate-pulse rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B]"
+              className="h-[100px] animate-pulse rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08]"
             />
           ))
         ) : notifications.length === 0 ? (
-          <div className="rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] py-16 text-center shadow-xl shadow-black/20">
+          <div className="rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] py-16 text-center shadow-xl shadow-black/20">
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/5">
-              <Bell className="text-[#9AA0AA] opacity-60" size={28} />
+              <Bell className="text-[#B08A6C] opacity-60" size={28} />
             </div>
-            <p className="text-lg font-semibold text-[#F2F3F5]">No notifications yet</p>
-            <p className="mt-2 text-sm text-[#9AA0AA]">You&apos;ll see updates here</p>
+            <p className="text-lg font-semibold text-[#F2E8DC]">No notifications yet</p>
+            <p className="mt-2 text-sm text-[#B08A6C]">You&apos;ll see updates here</p>
           </div>
         ) : (
           pagedNotifications.map((notification) => {
@@ -181,8 +181,8 @@ export default function NotificationsPage() {
             return (
               <div
                 key={notification._id}
-                className={`rounded-2xl border bg-gradient-to-b from-[#191D22] to-[#14171B] p-5 shadow-xl shadow-black/20 transition-colors ${
-                  notification.isRead ? 'border-[#23272D]' : 'border-[#E53535]/40'
+                className={`rounded-2xl border bg-gradient-to-b from-[#241409] to-[#1B0F08] p-5 shadow-xl shadow-black/20 transition-colors duration-300 ${
+                  notification.isRead ? 'border-[#2E1C0E]' : 'border-[#C78C3A]/40'
                 }`}
               >
                 <div className="flex items-start gap-4">
@@ -195,20 +195,20 @@ export default function NotificationsPage() {
                     <div className="flex items-start justify-between gap-4">
                       <div className="min-w-0">
                         <div className="flex items-center gap-2.5">
-                          <h3 className="font-semibold text-[#F2F3F5]">{notification.title}</h3>
+                          <h3 className="font-semibold text-[#F2E8DC]">{notification.title}</h3>
                           {!notification.isRead && (
-                            <span className="h-2 w-2 shrink-0 rounded-full bg-[#E53535]" />
+                            <span className="h-2 w-2 shrink-0 rounded-full bg-[#C78C3A]" />
                           )}
                         </div>
-                        <p className="mt-1 text-sm text-[#9AA0AA]">{notification.message}</p>
-                        <p className="mt-2 text-xs font-medium text-[#5C636D]">
+                        <p className="mt-1 text-sm text-[#B08A6C]">{notification.message}</p>
+                        <p className="mt-2 text-xs font-medium text-[#8A6A50]">
                           {getTimestamp(notification.createdAt)}
                         </p>
                       </div>
                       {!notification.isRead ? (
                         <button
                           onClick={() => handleMarkAsRead(notification._id)}
-                          className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-[#23272D] bg-[#14171B] text-[#E68078] transition-colors hover:bg-[#E53535]/10 hover:text-[#E68078]"
+                          className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-[#2E1C0E] bg-[#1B0F08] text-[#D0AE95] transition-colors duration-300 hover:bg-[#C78C3A]/10 hover:text-[#D0AE95]"
                           title="Mark as read"
                         >
                           <CheckCircle size={16} />
@@ -217,7 +217,7 @@ export default function NotificationsPage() {
                         <button
                           onClick={() => handleDelete(notification._id)}
                           disabled={isDeleting}
-                          className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-[#23272D] bg-[#14171B] text-[#5C636D] transition-colors hover:border-red-500/30 hover:bg-red-500/10 hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-40"
+                          className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-[#2E1C0E] bg-[#1B0F08] text-[#8A6A50] transition-colors duration-300 hover:border-orange-600/30 hover:bg-orange-600/10 hover:text-amber-500 disabled:cursor-not-allowed disabled:opacity-40"
                           title="Delete notification"
                         >
                           <Trash2 size={16} />

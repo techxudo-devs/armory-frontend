@@ -9,8 +9,8 @@ interface RaffleCardProps {
 
 export function RaffleCard({ raffle }: RaffleCardProps) {
   return (
-    <div className="bg-panel border border-border rounded-xl flex flex-col transition-all hover:border-border-strong hover:-translate-y-1">
-      <div className="relative h-60 flex items-center justify-center bg-gradient-to-br from-[#1C2024] to-[#12151A] border-b border-border rounded-xl overflow-hidden">
+    <div className="bg-panel border border-border rounded-xl flex flex-col transition-all duration-300 hover:border-border-strong hover:-translate-y-1">
+      <div className="relative h-60 flex items-center justify-center bg-gradient-to-br from-[#241409] to-[#100602] border-b border-border rounded-xl overflow-hidden">
         <CategoryImage category={raffle.category} className="w-full h-full" />
         <span
           className={`absolute top-3 left-3 z-10 text-[10.5px] font-plus font-medium rounded-full tracking-wide uppercase px-2.5 py-1 border ${

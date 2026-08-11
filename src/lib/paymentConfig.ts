@@ -1,5 +1,5 @@
 export const PAYMENT_ACCOUNT = {
-  holder: "LuckySeat (JazzCash)",
+  holder: "Metal Tubes & Seeds (PayPal)",
   number: "0300 1234567",
   psid: "000000",
 }

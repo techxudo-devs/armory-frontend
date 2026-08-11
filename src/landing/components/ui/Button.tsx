@@ -18,7 +18,7 @@ const variantClasses: Record<ButtonVariant, string> = {
 export function Button({ variant = "primary", className = "", children, ...props }: ButtonProps) {
   return (
     <a
-      className={`inline-block font-semibold text-xs font-plus tracking-wide uppercase px-6 py-4 transition-colors ${variantClasses[variant]} ${className}`}
+      className={`inline-block font-semibold text-xs font-plus tracking-wide uppercase px-6 py-4 transition-colors duration-300 ${variantClasses[variant]} ${className}`}
       {...props}
     >
       {children}

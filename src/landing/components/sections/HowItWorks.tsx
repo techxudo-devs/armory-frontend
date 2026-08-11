@@ -26,7 +26,7 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section id="how" className="bg-[#0B101D] border-y border-[#121721] py-10 px-4 sm:px-6 lg:px-8">
+    <section id="how" className="bg-[#100602] border-y border-[#2E1C0E] py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         
         {/* Header */}
@@ -37,7 +37,7 @@ export function HowItWorks() {
           <h2 className="text-4xl font-plus font-bold text-white mt-2">
             Three steps, no catch
           </h2>
-          <p className="text-base font-plus text-[#94A3B8] mt-2 leading-relaxed">
+          <p className="text-base font-plus text-[#B08A6C] mt-2 leading-relaxed">
             Simple and transparent process for entering live seat-based webinars.
           </p>
         </div>
@@ -49,14 +49,14 @@ export function HowItWorks() {
             return (
               <div
                 key={step.number}
-                className="bg-[#131B2E] border border-[#1F293D] rounded-xl p-6"
+                className="bg-[#1B0F08] border border-[#3A2414] rounded-xl p-6"
               >
                 {/* Icon & Step Badge */}
                 <div className="flex items-center justify-between mb-5">
-                  <div className="w-10 h-10 rounded-lg bg-[#0B101D] border border-[#1F293D] flex items-center justify-center text-[#E53535]">
+                  <div className="w-10 h-10 rounded-lg bg-[#100602] border border-[#3A2414] flex items-center justify-center text-[#C78C3A]">
                     <Icon className="w-5 h-5" strokeWidth={1.75} />
                   </div>
-                  <span className="font-plus text-xs font-medium text-[#94A3B8] bg-[#0B101D] px-2.5 py-1 rounded border border-[#1F293D]">
+                  <span className="font-plus text-xs font-medium text-[#B08A6C] bg-[#100602] px-2.5 py-1 rounded border border-[#3A2414]">
                     {step.number}
                   </span>
                 </div>
@@ -65,7 +65,7 @@ export function HowItWorks() {
                 <h3 className="text-base font-semibold font-plus text-white mb-2">
                   {step.title}
                 </h3>
-                <p className="text-sm font-plus text-[#94A3B8] leading-relaxed">
+                <p className="text-sm font-plus text-[#B08A6C] leading-relaxed">
                   {step.description}
                 </p>
               </div>

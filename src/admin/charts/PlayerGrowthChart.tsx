@@ -22,15 +22,15 @@ interface PlayerGrowthChartProps {
   data: GrowthData[]
 }
 
-const GREEN = '#34D399'
-const ORANGE = '#FB923C'
+const GREEN = '#7E9C6B'
+const ORANGE = '#D08A5A'
 
 export function PlayerGrowthChart({ data }: PlayerGrowthChartProps) {
   return (
-    <div className="h-80 rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] p-5 shadow-xl shadow-black/20">
+    <div className="h-80 rounded-2xl border border-[#2E1C0E] bg-gradient-to-b from-[#241409] to-[#1B0F08] p-5 shadow-xl shadow-black/20">
       <div className="mb-2 flex items-center gap-2">
-        <span className="h-1.5 w-1.5 rounded-full bg-[#34D399]" />
-        <h3 className="text-sm font-semibold tracking-wide text-[#F2F3F5]">Player Growth</h3>
+        <span className="h-1.5 w-1.5 rounded-full bg-[#7E9C6B]" />
+        <h3 className="text-sm font-semibold tracking-wide text-[#F2E8DC]">Player Growth</h3>
       </div>
       <div className="h-[calc(100%-2rem)]">
         <ResponsiveContainer width="100%" height="100%">
@@ -50,13 +50,13 @@ export function PlayerGrowthChart({ data }: PlayerGrowthChartProps) {
               dataKey="month"
               tickLine={false}
               axisLine={{ stroke: 'rgba(255,255,255,0.08)' }}
-              tick={{ fill: '#9AA0AA', fontSize: 11 }}
+              tick={{ fill: '#B08A6C', fontSize: 11 }}
               dy={8}
             />
             <YAxis
               tickLine={false}
               axisLine={false}
-              tick={{ fill: '#9AA0AA', fontSize: 11 }}
+              tick={{ fill: '#B08A6C', fontSize: 11 }}
               width={38}
             />
             <Tooltip
@@ -66,7 +66,7 @@ export function PlayerGrowthChart({ data }: PlayerGrowthChartProps) {
             <Legend
               iconType="circle"
               iconSize={8}
-              wrapperStyle={{ fontSize: 12, color: '#F2F3F5', paddingTop: 6 }}
+              wrapperStyle={{ fontSize: 12, color: '#F2E8DC', paddingTop: 6 }}
             />
             <Area
               type="monotone"
