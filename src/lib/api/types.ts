@@ -49,6 +49,7 @@ export interface SeatInfo {
   seatNumber: number
   isReserved: boolean
   isMine: boolean
+  status?: 'pending' | 'confirmed'
 }
 
 export interface JoinedGame {
@@ -58,7 +59,8 @@ export interface JoinedGame {
   prizeImageUrl?: string
   gameCode: string
   status: Game['status']
-  mySeatNumber: number | null
+  mySeatNumbers: number[]
+  pendingSeatNumbers: number[]
   isWinner: boolean
   winners: Array<{
     seatNumber: number
@@ -86,7 +88,8 @@ export interface NotificationsResult {
 export interface GameDetailsResult {
   game: Game
   seatMap: SeatInfo[]
-  userReservedSeat: number | null
+  userReservedSeats: number[]
+  pendingSeats: number[]
 }
 
 export interface Participant {
@@ -130,4 +133,31 @@ export interface AdminHistoryEntry {
   userEmail: string
   isWinner: boolean
   createdAt: string
+}
+
+export interface PendingApproval {
+  gameId: string
+  game: {
+    title: string
+    gameCode: string
+    prize: string
+    totalSeats: number
+  }
+  userId: string
+  user: {
+    fullName: string
+    phone: string
+    email: string
+  }
+  seatNumbers: number[]
+  seats: Array<{
+    seatId: string
+    seatNumber: number
+    paymentReference: string
+    paymentProof: string
+    reservedAt: string
+  }>
+  total: number
+  reservedAt: string
+  expiresAt: string | null
 }

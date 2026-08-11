@@ -70,19 +70,19 @@ export default function ManageUsersPage() {
       {/* Filters */}
       <div className="mb-6 flex flex-col md:flex-row gap-4">
         <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8B93A7]" size={18} />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9AA0AA]" size={18} />
           <input
             type="text"
             placeholder="Search by name, email or phone..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full rounded-xl border border-[#1F293D] bg-[#0F1422] py-2.5 pl-11 pr-4 text-sm text-[#F2F3F5] placeholder-[#5C636D] outline-none transition-colors focus:border-[#6667DD] focus:ring-2 focus:ring-[#6667DD]/20"
+            className="w-full rounded-xl border border-[#23272D] bg-[#14171B] py-2.5 pl-11 pr-4 text-sm text-[#F2F3F5] placeholder-[#5C636D] outline-none transition-colors focus:border-[#E53535] focus:ring-2 focus:ring-[#E53535]/20"
           />
         </div>
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="cursor-pointer rounded-xl border border-[#1F293D] bg-[#0F1422] px-4 py-2.5 text-sm text-[#F2F3F5] outline-none transition-colors focus:border-[#6667DD] focus:ring-2 focus:ring-[#6667DD]/20"
+          className="cursor-pointer rounded-xl border border-[#23272D] bg-[#14171B] px-4 py-2.5 text-sm text-[#F2F3F5] outline-none transition-colors focus:border-[#E53535] focus:ring-2 focus:ring-[#E53535]/20"
         >
           <option value="all">All Users</option>
           <option value="active">Active</option>
@@ -91,18 +91,18 @@ export default function ManageUsersPage() {
       </div>
 
       {/* Users Table */}
-      <div className="overflow-hidden rounded-2xl border border-[#1F293D] bg-gradient-to-b from-[#151A2A] to-[#0F1422] shadow-xl shadow-black/20">
+      <div className="overflow-hidden rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] shadow-xl shadow-black/20">
         <div className="overflow-x-auto">
           <table className="w-full border-collapse">
             <thead>
-              <tr className="border-b border-[#1F293D] bg-white/[0.02]">
-                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[180px]">Name</th>
-                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[300px]">Email</th>
-                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[160px]">Phone</th>
-                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[130px]">Role</th>
-                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[150px]">Status</th>
-                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[120px]">Joined</th>
-                <th className="px-5 py-4 text-right text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[140px]">Action</th>
+              <tr className="border-b border-[#23272D] bg-white/[0.02]">
+                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[180px]">Name</th>
+                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[300px]">Email</th>
+                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[160px]">Phone</th>
+                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[130px]">Role</th>
+                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[150px]">Status</th>
+                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[120px]">Joined</th>
+                <th className="px-5 py-4 text-right text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[140px]">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -110,8 +110,8 @@ export default function ManageUsersPage() {
                 <tr>
                   <td colSpan={7}>
                     <div className="flex flex-col items-center justify-center gap-3 py-16">
-                      <Loader2 className="h-8 w-8 animate-spin text-[#6667DD]" />
-                      <p className="text-sm text-[#8B93A7]">Loading users...</p>
+                      <Loader2 className="h-8 w-8 animate-spin text-[#E53535]" />
+                      <p className="text-sm text-[#9AA0AA]">Loading users...</p>
                     </div>
                   </td>
                 </tr>
@@ -119,18 +119,18 @@ export default function ManageUsersPage() {
                 <tr>
                   <td colSpan={7}>
                     <div className="py-16 text-center">
-                      <p className="text-sm text-[#8B93A7]">Failed to load users.</p>
+                      <p className="text-sm text-[#9AA0AA]">Failed to load users.</p>
                     </div>
                   </td>
                 </tr>
               ) : (
                 filteredUsers.map((user) => (
-                  <tr key={user._id} className="border-b border-[#1F293D]/60 transition-colors last:border-0 hover:bg-white/[0.03]">
+                  <tr key={user._id} className="border-b border-[#23272D]/60 transition-colors last:border-0 hover:bg-white/[0.03]">
                     <td className="px-5 py-4 text-sm font-medium text-[#F2F3F5]">{user.fullName}</td>
                     <td className="px-5 py-4 text-sm text-[#9AA0AA]">{user.email}</td>
                     <td className="px-5 py-4 text-sm text-[#9AA0AA]">{user.phone}</td>
                     <td className="px-5 py-4">
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1 text-xs font-semibold text-[#A5B4FC]">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1 text-xs font-semibold text-[#E68078]">
                         <span className="h-1.5 w-1.5 rounded-full bg-current" />
                         {user.role}
                       </span>
@@ -185,7 +185,7 @@ export default function ManageUsersPage() {
 
         {!isLoading && !isError && filteredUsers.length === 0 && (
           <div className="py-16 text-center">
-            <p className="text-sm text-[#8B93A7]">No users found. Try adjusting your filters.</p>
+            <p className="text-sm text-[#9AA0AA]">No users found. Try adjusting your filters.</p>
           </div>
         )}
 
@@ -225,12 +225,12 @@ interface SummaryCardProps {
 
 function SummaryCard({ label, value }: SummaryCardProps) {
   return (
-    <div className="flex items-center gap-4 rounded-2xl border border-[#1F293D] bg-gradient-to-b from-[#151A2A] to-[#0F1422] p-5 shadow-xl shadow-black/20">
+    <div className="flex items-center gap-4 rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] p-5 shadow-xl shadow-black/20">
       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/5">
-        <Users size={18} className="text-[#A5B4FC]" />
+        <Users size={18} className="text-[#E68078]" />
       </div>
       <div>
-        <p className="text-xs font-medium text-[#8B93A7]">{label}</p>
+        <p className="text-xs font-medium text-[#9AA0AA]">{label}</p>
         <p className="mt-0.5 text-2xl font-bold text-[#F2F3F5]">{value}</p>
       </div>
     </div>

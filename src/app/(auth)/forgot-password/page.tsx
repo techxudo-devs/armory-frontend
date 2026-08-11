@@ -47,7 +47,6 @@ export default function ForgotPasswordPage() {
           icon={Mail}
           placeholder="you@example.com"
           autoComplete="email"
-          required
         />
 
         <SubmitButton loading={isLoading}>Send reset link</SubmitButton>

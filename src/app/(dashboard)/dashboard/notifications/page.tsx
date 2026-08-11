@@ -10,7 +10,7 @@ import {
   useDeleteNotificationMutation,
   useDeleteAllReadNotificationsMutation,
 } from '@/lib/api/userApi'
-import { useAutoRefetch } from '@/lib/tanstack/useAutoRefetch'
+// import { useAutoRefetch } from '@/lib/tanstack/useAutoRefetch'
 import type { NotificationItem } from '@/lib/api/types'
 import { Pagination } from '@/components/Pagination'
 
@@ -51,11 +51,14 @@ const getTimestamp = (date: string) => {
 }
 
 export default function NotificationsPage() {
-  const { data, isLoading, refetch } = useGetNotificationsQuery(
+  const { data, isLoading } = useGetNotificationsQuery(
     { page: 1, limit: 100 },
-    { refetchOnFocus: false, refetchOnReconnect: false }
+    {
+      refetchOnFocus: false,
+      refetchOnReconnect: false,
+    }
   )
-  useAutoRefetch({ queryKey: ['notifications', 'page'], refetch })
+  // useAutoRefetch({ queryKey: ['notifications', 'page'], refetch })
   const [markNotificationRead] = useMarkNotificationReadMutation()
   const [markAllNotificationsRead, { isLoading: isMarkingAll }] =
     useMarkAllNotificationsReadMutation()
@@ -119,7 +122,7 @@ export default function NotificationsPage() {
             <p className="text-muted-foreground">Stay updated with the latest game activities.</p>
           </div>
           {unreadCount > 0 && (
-            <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-[#6667DD]/30 bg-[#6667DD]/10 px-4 py-2 text-sm font-semibold text-[#A5B4FC]">
+            <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-[#E53535]/30 bg-[#E53535]/10 px-4 py-2 text-sm font-semibold text-[#E68078]">
               <BellRing size={16} />
               {unreadCount} Unread
             </span>
@@ -128,18 +131,18 @@ export default function NotificationsPage() {
       </div>
 
       {!isLoading && notifications.length > 0 && (
-        <div className="mb-5 flex items-center justify-between gap-3">
+        <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-2">
-            <Bell size={16} className="text-[#6667DD]" />
-            <span className="text-sm font-medium text-[#8B93A7]">
+            <Bell size={16} className="text-[#E53535]" />
+            <span className="text-sm font-medium text-[#9AA0AA]">
               {notifications.length} notification{notifications.length === 1 ? '' : 's'}
             </span>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
             <button
               onClick={handleMarkAllRead}
               disabled={unreadCount === 0 || isMarkingAll}
-              className="flex cursor-pointer items-center gap-2 rounded-lg border border-[#1F293D] bg-[#0F1422] px-4 py-2 text-sm font-medium text-[#9AA0AA] transition-colors hover:bg-white/5 hover:text-[#F2F3F5] disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex cursor-pointer items-center gap-2 rounded-lg border border-[#23272D] bg-[#14171B] px-4 py-2 text-sm font-medium text-[#9AA0AA] transition-colors hover:bg-white/5 hover:text-[#F2F3F5] disabled:cursor-not-allowed disabled:opacity-40"
             >
               {isMarkingAll && <Loader2 size={14} className="animate-spin" />}
               Mark all read
@@ -161,16 +164,16 @@ export default function NotificationsPage() {
           Array.from({ length: 3 }).map((_, i) => (
             <div
               key={i}
-              className="h-[100px] animate-pulse rounded-2xl border border-[#1F293D] bg-gradient-to-b from-[#151A2A] to-[#0F1422]"
+              className="h-[100px] animate-pulse rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B]"
             />
           ))
         ) : notifications.length === 0 ? (
-          <div className="rounded-2xl border border-[#1F293D] bg-gradient-to-b from-[#151A2A] to-[#0F1422] py-16 text-center shadow-xl shadow-black/20">
+          <div className="rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] py-16 text-center shadow-xl shadow-black/20">
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/5">
-              <Bell className="text-[#8B93A7] opacity-60" size={28} />
+              <Bell className="text-[#9AA0AA] opacity-60" size={28} />
             </div>
             <p className="text-lg font-semibold text-[#F2F3F5]">No notifications yet</p>
-            <p className="mt-2 text-sm text-[#8B93A7]">You&apos;ll see updates here</p>
+            <p className="mt-2 text-sm text-[#9AA0AA]">You&apos;ll see updates here</p>
           </div>
         ) : (
           pagedNotifications.map((notification) => {
@@ -178,8 +181,8 @@ export default function NotificationsPage() {
             return (
               <div
                 key={notification._id}
-                className={`rounded-2xl border bg-gradient-to-b from-[#151A2A] to-[#0F1422] p-5 shadow-xl shadow-black/20 transition-colors ${
-                  notification.isRead ? 'border-[#1F293D]' : 'border-[#6667DD]/40'
+                className={`rounded-2xl border bg-gradient-to-b from-[#191D22] to-[#14171B] p-5 shadow-xl shadow-black/20 transition-colors ${
+                  notification.isRead ? 'border-[#23272D]' : 'border-[#E53535]/40'
                 }`}
               >
                 <div className="flex items-start gap-4">
@@ -194,7 +197,7 @@ export default function NotificationsPage() {
                         <div className="flex items-center gap-2.5">
                           <h3 className="font-semibold text-[#F2F3F5]">{notification.title}</h3>
                           {!notification.isRead && (
-                            <span className="h-2 w-2 shrink-0 rounded-full bg-[#6667DD]" />
+                            <span className="h-2 w-2 shrink-0 rounded-full bg-[#E53535]" />
                           )}
                         </div>
                         <p className="mt-1 text-sm text-[#9AA0AA]">{notification.message}</p>
@@ -205,7 +208,7 @@ export default function NotificationsPage() {
                       {!notification.isRead ? (
                         <button
                           onClick={() => handleMarkAsRead(notification._id)}
-                          className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-[#1F293D] bg-[#0F1422] text-[#A5B4FC] transition-colors hover:bg-[#6667DD]/10 hover:text-[#A5B4FC]"
+                          className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-[#23272D] bg-[#14171B] text-[#E68078] transition-colors hover:bg-[#E53535]/10 hover:text-[#E68078]"
                           title="Mark as read"
                         >
                           <CheckCircle size={16} />
@@ -214,7 +217,7 @@ export default function NotificationsPage() {
                         <button
                           onClick={() => handleDelete(notification._id)}
                           disabled={isDeleting}
-                          className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-[#1F293D] bg-[#0F1422] text-[#5C636D] transition-colors hover:border-red-500/30 hover:bg-red-500/10 hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-40"
+                          className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-[#23272D] bg-[#14171B] text-[#5C636D] transition-colors hover:border-red-500/30 hover:bg-red-500/10 hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-40"
                           title="Delete notification"
                         >
                           <Trash2 size={16} />

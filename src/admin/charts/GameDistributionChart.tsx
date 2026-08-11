@@ -12,13 +12,13 @@ interface GameDistributionChartProps {
   data: GameData[]
 }
 
-const COLORS = ['#6667DD', '#A78BFA', '#34D399', '#FB923C']
+const COLORS = ['#E53535', '#E68078', '#34D399', '#FB923C']
 
 export function GameDistributionChart({ data }: GameDistributionChartProps) {
   return (
-    <div className="h-80 rounded-2xl border border-[#1F293D] bg-gradient-to-b from-[#151A2A] to-[#0F1422] p-5 shadow-xl shadow-black/20">
+    <div className="h-80 rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] p-5 shadow-xl shadow-black/20">
       <div className="mb-2 flex items-center gap-2">
-        <span className="h-1.5 w-1.5 rounded-full bg-[#A78BFA]" />
+        <span className="h-1.5 w-1.5 rounded-full bg-[#E68078]" />
         <h3 className="text-sm font-semibold tracking-wide text-[#F2F3F5]">Game Distribution</h3>
       </div>
       <div className="h-[calc(100%-2rem)]">

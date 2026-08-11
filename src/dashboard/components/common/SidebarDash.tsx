@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useLogoutMutation } from "@/lib/api/authApi";
+import { useGetPendingApprovalsQuery } from "@/lib/api/gamesApi";
 import {
   Gamepad2,
   Trophy,
@@ -15,6 +16,7 @@ import {
   PlusCircle,
   History,
   Archive,
+  BadgeCheck,
   X,
 } from "lucide-react";
 
@@ -24,9 +26,22 @@ interface SidebarUser {
   role: "user" | "admin";
 }
 
-const adminLinks = [
+interface SidebarLink {
+  label: string;
+  href: string;
+  icon: typeof Gamepad2;
+  showCount?: boolean;
+}
+
+const adminLinks: SidebarLink[] = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { label: "Manage Games", href: "/admin/manage-games", icon: Gamepad2 },
+  {
+    label: "Seat Approvals",
+    href: "/admin/approvals",
+    icon: BadgeCheck,
+    showCount: true,
+  },
   { label: "Ended Games", href: "/admin/ended-games", icon: Archive },
   {
     label: "Create Game",
@@ -37,7 +52,7 @@ const adminLinks = [
   { label: "Manage Users", href: "/admin/manage-users", icon: Users },
 ];
 
-const userLinks = [
+const userLinks: SidebarLink[] = [
   { label: "Active Games", href: "/dashboard", icon: Gamepad2 },
   { label: "My Seats", href: "/dashboard/my-seats", icon: Ticket },
   { label: "Notifications", href: "/dashboard/notifications", icon: Bell },
@@ -58,6 +73,11 @@ function SidebarContent({
   const pathname = usePathname();
   const router = useRouter();
   const [logout] = useLogoutMutation();
+
+  const { data: pendingApprovals } = useGetPendingApprovalsQuery(undefined, {
+    skip: user.role !== "admin",
+  });
+  const pendingCount = pendingApprovals?.length ?? 0;
 
   const handleSignOut = async () => {
     try {
@@ -90,19 +110,19 @@ function SidebarContent({
       <div>
         {/* Top-Left Logo & Project Name */}
         <div
-          className={`h-16 border-b border-[#1F293D] flex items-center gap-3 ${
+          className={`h-16 border-b border-[#23272D] flex items-center gap-3 ${
             onClose ? "px-5 justify-between" : headerWrap
           }`}
         >
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-8 h-8 lg:w-9 lg:h-9 rounded-lg bg-[#6667DD] flex items-center justify-center text-white shrink-0">
+            <div className="w-8 h-8 lg:w-9 lg:h-9 rounded-lg bg-[#E53535] flex items-center justify-center text-white shrink-0">
               <Trophy className="w-5 h-5" />
             </div>
             <div className={`flex-col ${brandText}`}>
               <span className="font-bold text-base text-white tracking-wide leading-tight">
                 LuckySeat
               </span>
-              <span className="text-[10px] text-[#94A3B8] font-medium tracking-widest uppercase">
+              <span className="text-[10px] text-[#9AA0AA] font-medium tracking-widest uppercase">
                 Game Platform
               </span>
             </div>
@@ -111,7 +131,7 @@ function SidebarContent({
             <button
               onClick={onClose}
               title="Close menu"
-              className="w-8 h-8 shrink-0 rounded-lg flex items-center justify-center text-[#94A3B8] hover:text-white hover:bg-[#1F293D] transition-colors cursor-pointer"
+              className="w-8 h-8 shrink-0 rounded-lg flex items-center justify-center text-[#9AA0AA] hover:text-white hover:bg-[#23272D] transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -120,9 +140,9 @@ function SidebarContent({
 
         {/* Panel Context Indicator */}
         <div
-          className={`${panel} px-5 py-2.5 border-b border-[#1F293D] bg-[#0B101D]/40`}
+          className={`${panel} px-5 py-2.5 border-b border-[#23272D] bg-[#0B101D]/40`}
         >
-          <span className="text-[10px] font-bold text-[#94A3B8] uppercase tracking-wider">
+          <span className="text-[10px] font-bold text-[#9AA0AA] uppercase tracking-wider">
             {user.role === "admin" ? "ADMIN CONTROL PANEL" : "PLAYER DASHBOARD"}
           </span>
         </div>
@@ -141,12 +161,17 @@ function SidebarContent({
                 onClick={() => onNavigate?.()}
                 className={`flex items-center gap-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${linkWrap} ${
                   isActive
-                    ? "bg-[#6667DD] text-white font-semibold"
-                    : "text-[#94A3B8] hover:bg-[#1F293D] hover:text-white"
+                    ? "bg-[#E53535] text-white font-semibold"
+                    : "text-[#9AA0AA] hover:bg-[#23272D] hover:text-white"
                 }`}
               >
                 <Icon className="w-4 h-4 shrink-0" />
                 <span className={`truncate ${linkLabel}`}>{link.label}</span>
+                {link.showCount && pendingCount > 0 && (
+                  <span className="ml-auto inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-amber-500/20 px-1.5 text-[10px] font-bold text-amber-400">
+                    {pendingCount}
+                  </span>
+                )}
               </Link>
             );
           })}
@@ -155,18 +180,18 @@ function SidebarContent({
 
       {/* Bottom Sidebar: User Details & Sign Out Button */}
       <div
-        className={`border-t border-[#1F293D] bg-[#0E1525] ${bottomPad}`}
+        className={`border-t border-[#23272D] bg-[#0F1215] ${bottomPad}`}
       >
         <div className={`flex items-center gap-2 mb-3 px-1 ${userRow}`}>
           <div className={`flex-col min-w-0 ${userName}`}>
             <span className="text-xs font-semibold text-white truncate">
               {user.name}
             </span>
-            <span className="text-[11px] text-[#94A3B8] truncate">
+            <span className="text-[11px] text-[#9AA0AA] truncate">
               {user.email}
             </span>
           </div>
-          <span className="text-[9px] px-2 py-0.5 rounded font-bold uppercase tracking-wider bg-[#0B101D] border border-[#1F293D] text-[#6667DD]">
+          <span className="text-[9px] px-2 py-0.5 rounded font-bold uppercase tracking-wider bg-[#0B101D] border border-[#23272D] text-[#E53535]">
             {user.role}
           </span>
         </div>
@@ -186,7 +211,7 @@ function SidebarContent({
 
 export function SidebarDash({ user }: { user: SidebarUser }) {
   return (
-    <aside className="hidden md:flex w-[15%] md:w-[10%] lg:w-1/5 h-screen sticky top-0 bg-[#131B2E] border-r border-[#1F293D] flex-col shrink-0 overflow-hidden">
+    <aside className="hidden md:flex w-[15%] md:w-[10%] lg:w-1/5 h-screen sticky top-0 bg-[#14171B] border-r border-[#23272D] flex-col shrink-0 overflow-y-auto">
       <SidebarContent user={user} compact />
     </aside>
   );
@@ -210,7 +235,7 @@ export function MobileSidebar({
         onClick={onClose}
       />
       <aside
-        className={`md:hidden fixed top-0 left-0 bottom-0 w-4/5 max-w-[320px] z-50 bg-[#131B2E] border-r border-[#1F293D] overflow-y-auto transition-transform duration-300 ease-in-out ${
+        className={`md:hidden fixed top-0 left-0 bottom-0 w-4/5 max-w-[320px] z-50 bg-[#14171B] border-r border-[#23272D] overflow-y-auto transition-transform duration-300 ease-in-out ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >

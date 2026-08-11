@@ -78,30 +78,30 @@ export default function GameHistoryPage() {
       {/* Filters */}
       <div className="mb-6">
         <div className="relative">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8B93A7]" size={18} />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9AA0AA]" size={18} />
           <input
             type="text"
             placeholder="Search by game, winner or code..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full rounded-xl border border-[#1F293D] bg-[#0F1422] py-2.5 pl-11 pr-4 text-sm text-[#F2F3F5] placeholder-[#5C636D] outline-none transition-colors focus:border-[#6667DD] focus:ring-2 focus:ring-[#6667DD]/20"
+            className="w-full rounded-xl border border-[#23272D] bg-[#14171B] py-2.5 pl-11 pr-4 text-sm text-[#F2F3F5] placeholder-[#5C636D] outline-none transition-colors focus:border-[#E53535] focus:ring-2 focus:ring-[#E53535]/20"
           />
         </div>
       </div>
 
       {/* History Table */}
-      <div className="overflow-hidden rounded-2xl border border-[#1F293D] bg-gradient-to-b from-[#151A2A] to-[#0F1422] shadow-xl shadow-black/20">
+      <div className="overflow-hidden rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] shadow-xl shadow-black/20">
         <div className="overflow-x-auto">
           <table className="w-full border-collapse">
             <thead>
-              <tr className="border-b border-[#1F293D] bg-white/[0.02]">
-                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[240px]">Game Name</th>
-                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[180px]">Player</th>
-                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[120px]">Seat</th>
-                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[140px]">Result</th>
-                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[200px]">Prize Won</th>
-                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[150px]">Date</th>
-                <th className="px-5 py-4 text-right text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[130px]">Actions</th>
+              <tr className="border-b border-[#23272D] bg-white/[0.02]">
+                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[240px]">Game Name</th>
+                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[180px]">Player</th>
+                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[120px]">Seat</th>
+                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[140px]">Result</th>
+                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[200px]">Prize Won</th>
+                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[150px]">Date</th>
+                <th className="px-5 py-4 text-right text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[130px]">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -109,8 +109,8 @@ export default function GameHistoryPage() {
                 <tr>
                   <td colSpan={7}>
                     <div className="flex flex-col items-center justify-center gap-3 py-16">
-                      <Loader2 className="h-8 w-8 animate-spin text-[#6667DD]" />
-                      <p className="text-sm text-[#8B93A7]">Loading history...</p>
+                      <Loader2 className="h-8 w-8 animate-spin text-[#E53535]" />
+                      <p className="text-sm text-[#9AA0AA]">Loading history...</p>
                     </div>
                   </td>
                 </tr>
@@ -118,7 +118,7 @@ export default function GameHistoryPage() {
                 <tr>
                   <td colSpan={7}>
                     <div className="py-16 text-center">
-                      <p className="text-sm text-[#8B93A7]">Failed to load game history.</p>
+                      <p className="text-sm text-[#9AA0AA]">Failed to load game history.</p>
                     </div>
                   </td>
                 </tr>
@@ -126,7 +126,7 @@ export default function GameHistoryPage() {
                 filteredHistory.map((entry) => {
                   const result = resultOf(entry)
                   return (
-                    <tr key={entry._id} className="border-b border-[#1F293D]/60 transition-colors last:border-0 hover:bg-white/[0.03]">
+                    <tr key={entry._id} className="border-b border-[#23272D]/60 transition-colors last:border-0 hover:bg-white/[0.03]">
                       <td className="px-5 py-4">
                         <p className="text-sm font-medium text-[#F2F3F5]">{entry.gameTitle}</p>
                         <p className="mt-0.5 font-plus text-xs text-[#5C636D]">{entry.gameCode}</p>
@@ -159,7 +159,7 @@ export default function GameHistoryPage() {
                         <button
                           onClick={() => setEntryToDelete(entry)}
                           disabled={isDeleting}
-                          className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-[#1F293D] bg-[#0F1422] text-[#5C636D] transition-colors hover:border-red-500/30 hover:bg-red-500/10 hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-40"
+                          className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-[#23272D] bg-[#14171B] text-[#5C636D] transition-colors hover:border-red-500/30 hover:bg-red-500/10 hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-40"
                           title="Delete history entry"
                         >
                           <Trash2 size={14} />
@@ -175,7 +175,7 @@ export default function GameHistoryPage() {
 
         {!isLoading && !isError && filteredHistory.length === 0 && (
           <div className="py-16 text-center">
-            <p className="text-sm text-[#8B93A7]">No winners found.</p>
+            <p className="text-sm text-[#9AA0AA]">No winners found.</p>
           </div>
         )}
 
@@ -212,8 +212,8 @@ interface StatItemProps {
 
 function StatItem({ label, value, accent = '' }: StatItemProps) {
   return (
-    <div className="rounded-2xl border border-[#1F293D] bg-gradient-to-b from-[#151A2A] to-[#0F1422] p-5 shadow-xl shadow-black/20">
-      <p className="mb-1.5 text-xs font-medium text-[#8B93A7]">{label}</p>
+    <div className="rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] p-5 shadow-xl shadow-black/20">
+      <p className="mb-1.5 text-xs font-medium text-[#9AA0AA]">{label}</p>
       <p className={`text-2xl font-bold ${accent || 'text-[#F2F3F5]'}`}>{value}</p>
     </div>
   )

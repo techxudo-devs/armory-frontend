@@ -6,3 +6,10 @@ out
 .DS_Store
 next-env.d.ts
 combined_project_code_frontend.txt
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

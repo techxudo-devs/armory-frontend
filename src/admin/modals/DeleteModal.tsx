@@ -23,7 +23,7 @@ export function DeleteModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-md rounded-2xl border border-[#1F293D] bg-[#14171B] p-6 text-[#F2F3F5] shadow-2xl shadow-black/60">
+      <div className="w-full max-w-md rounded-2xl border border-[#23272D] bg-[#14171B] p-6 text-[#F2F3F5] shadow-2xl shadow-black/60">
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-500/10">
@@ -33,7 +33,7 @@ export function DeleteModal({
           </div>
           <button
             onClick={onCancel}
-            className="cursor-pointer rounded-lg p-1.5 text-[#8B93A7] transition-colors hover:bg-white/5 hover:text-[#F2F3F5]"
+            className="cursor-pointer rounded-lg p-1.5 text-[#9AA0AA] transition-colors hover:bg-white/5 hover:text-[#F2F3F5]"
           >
             <X size={18} />
           </button>

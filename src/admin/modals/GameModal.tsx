@@ -29,7 +29,7 @@ const initialGameState: Partial<Game> = {
 }
 
 const inputClass =
-  'w-full rounded-xl border border-[#23272D] bg-[#0F1422] px-3.5 py-2.5 text-sm text-[#F2F3F5] placeholder-[#5C636D] outline-none transition-colors focus:border-[#6667DD] focus:ring-2 focus:ring-[#6667DD]/20 disabled:opacity-50 disabled:cursor-not-allowed'
+  'w-full rounded-xl border border-[#23272D] bg-[#14171B] px-3.5 py-2.5 text-sm text-[#F2F3F5] placeholder-[#5C636D] outline-none transition-colors focus:border-[#E53535] focus:ring-2 focus:ring-[#E53535]/20 disabled:opacity-50 disabled:cursor-not-allowed'
 const labelClass = 'mb-1.5 block text-sm font-medium text-[#9AA0AA]'
 
 const toDateTimeLocal = (iso: string) => {
@@ -69,7 +69,7 @@ export function GameModal({ isOpen, type, game, onClose, onSubmit, isLoading = f
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
-      <div className="flex max-h-[80vh] w-full max-w-lg flex-col rounded-2xl border border-[#1F293D] bg-[#14171B] p-5 text-[#F2F3F5] shadow-2xl shadow-black/60">
+      <div className="flex max-h-[80vh] w-full max-w-lg flex-col rounded-2xl border border-[#23272D] bg-[#14171B] p-5 text-[#F2F3F5] shadow-2xl shadow-black/60">
         <div className="mb-6 flex shrink-0 items-center justify-between">
           <h2 className="text-lg font-semibold tracking-wide">
             {type === 'create' && 'Create New Game'}
@@ -78,7 +78,7 @@ export function GameModal({ isOpen, type, game, onClose, onSubmit, isLoading = f
           </h2>
           <button
             onClick={handleClose}
-            className="cursor-pointer rounded-lg p-1.5 text-[#8B93A7] transition-colors hover:bg-white/5 hover:text-[#F2F3F5]"
+            className="cursor-pointer rounded-lg p-1.5 text-[#9AA0AA] transition-colors hover:bg-white/5 hover:text-[#F2F3F5]"
           >
             <X size={18} />
           </button>
@@ -144,7 +144,7 @@ export function GameModal({ isOpen, type, game, onClose, onSubmit, isLoading = f
               {!isViewOnly && (
                 <label
                   htmlFor="prizeImage"
-                  className="flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-[#23272D] bg-[#0F1422] px-3.5 py-2.5 text-sm text-[#9AA0AA] transition-colors hover:border-[#6667DD] hover:text-[#A5B4FC]"
+                  className="flex cursor-pointer items-center gap-3 rounded-xl border border-dashed border-[#23272D] bg-[#14171B] px-3.5 py-2.5 text-sm text-[#9AA0AA] transition-colors hover:border-[#E53535] hover:text-[#E68078]"
                 >
                   <ImageIcon size={18} className="shrink-0" />
                   <span className="truncate">
@@ -316,7 +316,7 @@ export function GameModal({ isOpen, type, game, onClose, onSubmit, isLoading = f
               <button
                 type="submit"
                 disabled={isLoading}
-                className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#6667DD] to-[#8B5CF6] px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#6667DD]/25 transition-all hover:from-[#5A5BD1] hover:to-[#7C3AED] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+                className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#E53535] to-[#E68078] px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#E53535]/25 transition-all hover:from-[#C62E2E] hover:to-[#C94F47] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
                 {isLoading
@@ -334,7 +334,7 @@ export function GameModal({ isOpen, type, game, onClose, onSubmit, isLoading = f
             <button
               type="button"
               onClick={handleClose}
-              className="w-full cursor-pointer rounded-xl bg-gradient-to-r from-[#6667DD] to-[#8B5CF6] px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#6667DD]/25 transition-all hover:from-[#5A5BD1] hover:to-[#7C3AED] active:scale-[0.98]"
+              className="w-full cursor-pointer rounded-xl bg-gradient-to-r from-[#E53535] to-[#E68078] px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#E53535]/25 transition-all hover:from-[#C62E2E] hover:to-[#C94F47] active:scale-[0.98]"
             >
               Close
             </button>

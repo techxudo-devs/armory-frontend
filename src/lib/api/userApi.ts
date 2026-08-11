@@ -15,15 +15,26 @@ export const userApi = baseApi.injectEndpoints({
       providesTags: ['JoinedGames'],
     }),
 
-    reserveSeat: builder.mutation<
-      { seatNumber: number },
-      { gameId: string; seatNumber: number }
+    reserveSeats: builder.mutation<
+      { seatNumbers: number[]; status: 'pending' },
+      {
+        gameId: string
+        seatNumbers: number[]
+        paymentReference: string
+        paymentProof?: File
+      }
     >({
-      query: ({ gameId, seatNumber }) => ({
-        url: `/seats/${gameId}/reserve`,
-        method: 'POST',
-        body: { seatNumber },
-      }),
+      query: ({ gameId, seatNumbers, paymentReference, paymentProof }) => {
+        const formData = new FormData()
+        formData.append('seatNumbers', JSON.stringify(seatNumbers))
+        formData.append('paymentReference', paymentReference)
+        if (paymentProof) formData.append('paymentProof', paymentProof)
+        return {
+          url: `/seats/${gameId}/reserve`,
+          method: 'POST',
+          body: formData,
+        }
+      },
       invalidatesTags: ['JoinedGames', 'Game'],
     }),
 
@@ -74,7 +85,7 @@ export const userApi = baseApi.injectEndpoints({
 
 export const {
   useGetMyJoinedGamesQuery,
-  useReserveSeatMutation,
+  useReserveSeatsMutation,
   useGetNotificationsQuery,
   useMarkNotificationReadMutation,
   useMarkAllNotificationsReadMutation,

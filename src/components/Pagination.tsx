@@ -27,8 +27,8 @@ export function Pagination({
   const end = Math.min(page * pageSize, totalDocs);
 
   return (
-    <div className="flex flex-col gap-3 border-t border-[#1F293D] px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-      <p className="text-xs text-[#8B93A7]">
+    <div className="flex flex-col gap-3 border-t border-[#23272D] px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+      <p className="text-xs text-[#9AA0AA]">
         Showing{" "}
         <span className="font-semibold text-[#F2F3F5]">
           {start}–{end}
@@ -36,7 +36,7 @@ export function Pagination({
         of <span className="font-semibold text-[#F2F3F5]">{totalDocs}</span> {label}
       </p>
       <div className="flex items-center justify-end gap-2">
-        <span className="mr-1 text-xs text-[#8B93A7]">
+        <span className="mr-1 text-xs text-[#9AA0AA]">
           Page{" "}
           <span className="font-semibold text-[#F2F3F5]">
             {page} of {totalPages}
@@ -45,7 +45,7 @@ export function Pagination({
         <button
           onClick={() => onPageChange(Math.max(1, page - 1))}
           disabled={page <= 1 || isFetching}
-          className="flex cursor-pointer items-center gap-1 rounded-lg border border-[#1F293D] bg-[#0F1422] px-3 py-2 text-sm font-medium text-[#9AA0AA] transition-colors hover:bg-white/5 hover:text-[#F2F3F5] disabled:cursor-not-allowed disabled:opacity-40"
+          className="flex cursor-pointer items-center gap-1 rounded-lg border border-[#23272D] bg-[#14171B] px-3 py-2 text-sm font-medium text-[#9AA0AA] transition-colors hover:bg-white/5 hover:text-[#F2F3F5] disabled:cursor-not-allowed disabled:opacity-40"
         >
           <ChevronLeft size={15} />
           Previous
@@ -53,7 +53,7 @@ export function Pagination({
         <button
           onClick={() => onPageChange(Math.min(totalPages, page + 1))}
           disabled={page >= totalPages || isFetching}
-          className="flex cursor-pointer items-center gap-1 rounded-lg border border-[#1F293D] bg-[#0F1422] px-3 py-2 text-sm font-medium text-[#9AA0AA] transition-colors hover:bg-white/5 hover:text-[#F2F3F5] disabled:cursor-not-allowed disabled:opacity-40"
+          className="flex cursor-pointer items-center gap-1 rounded-lg border border-[#23272D] bg-[#14171B] px-3 py-2 text-sm font-medium text-[#9AA0AA] transition-colors hover:bg-white/5 hover:text-[#F2F3F5] disabled:cursor-not-allowed disabled:opacity-40"
         >
           Next
           <ChevronRight size={15} />

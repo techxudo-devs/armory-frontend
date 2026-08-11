@@ -66,13 +66,10 @@ export default function ManageGamesPage() {
   const [gameToDelete, setGameToDelete] = useState<string | null>(null);
   const [participantsGame, setParticipantsGame] = useState<Game | null>(null);
 
-  const { data, isLoading, isError, isFetching } = useGetAdminGamesQuery(
-    {
-      page,
-      status: statusFilter === "all" ? undefined : statusFilter,
-    },
-    { pollingInterval: 15000 }
-  );
+  const { data, isLoading, isError, isFetching } = useGetAdminGamesQuery({
+    page,
+    status: statusFilter === "all" ? undefined : statusFilter,
+  });
 
   const [createGame, { isLoading: isCreating }] = useCreateGameMutation();
   const [updateGame, { isLoading: isUpdating }] = useUpdateGameMutation();
@@ -165,7 +162,7 @@ export default function ManageGamesPage() {
           <Link
             href="/admin/create-game"
             prefetch={false}
-            className="flex cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-r from-[#6667DD] to-[#8B5CF6] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#6667DD]/25 transition-all hover:from-[#5A5BD1] hover:to-[#7C3AED] hover:shadow-[#6667DD]/40 active:scale-[0.98]"
+            className="flex cursor-pointer items-center gap-2 rounded-xl bg-gradient-to-r from-[#E53535] to-[#E68078] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#E53535]/25 transition-all hover:from-[#C62E2E] hover:to-[#C94F47] hover:shadow-[#E53535]/40 active:scale-[0.98]"
           >
             <Plus size={18} />
             Create Game
@@ -177,7 +174,7 @@ export default function ManageGamesPage() {
       <div className="mb-6 flex flex-col md:flex-row gap-4">
         <div className="relative flex-1">
           <Search
-            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8B93A7]"
+            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9AA0AA]"
             size={18}
           />
           <input
@@ -185,7 +182,7 @@ export default function ManageGamesPage() {
             placeholder="Search by title or game code..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full rounded-xl border border-[#1F293D] bg-[#0F1422] py-2.5 pl-11 pr-4 text-sm text-[#F2F3F5] placeholder-[#5C636D] outline-none transition-colors focus:border-[#6667DD] focus:ring-2 focus:ring-[#6667DD]/20"
+            className="w-full rounded-xl border border-[#23272D] bg-[#14171B] py-2.5 pl-11 pr-4 text-sm text-[#F2F3F5] placeholder-[#5C636D] outline-none transition-colors focus:border-[#E53535] focus:ring-2 focus:ring-[#E53535]/20"
           />
         </div>
         <select
@@ -194,7 +191,7 @@ export default function ManageGamesPage() {
             setStatusFilter(e.target.value);
             setPage(1);
           }}
-          className="cursor-pointer rounded-xl border border-[#1F293D] bg-[#0F1422] px-4 py-2.5 text-sm text-[#F2F3F5] outline-none transition-colors focus:border-[#6667DD] focus:ring-2 focus:ring-[#6667DD]/20"
+          className="cursor-pointer rounded-xl border border-[#23272D] bg-[#14171B] px-4 py-2.5 text-sm text-[#F2F3F5] outline-none transition-colors focus:border-[#E53535] focus:ring-2 focus:ring-[#E53535]/20"
         >
           <option value="all">All Status</option>
           <option value="active">Active</option>
@@ -204,30 +201,30 @@ export default function ManageGamesPage() {
       </div>
 
       {/* Games Table */}
-      <div className="overflow-hidden rounded-2xl border border-[#1F293D] bg-gradient-to-b from-[#151A2A] to-[#0F1422] shadow-xl shadow-black/20">
+      <div className="overflow-hidden rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] shadow-xl shadow-black/20">
         <div className="overflow-x-auto">
           <table className="w-full border-collapse">
             <thead>
-              <tr className="border-b border-[#1F293D] bg-white/[0.02]">
-                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[280px]">
+              <tr className="border-b border-[#23272D] bg-white/[0.02]">
+                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[280px]">
                   Game
                 </th>
-                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[150px]">
+                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[150px]">
                   Status
                 </th>
-                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[200px]">
+                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[200px]">
                   Prize
                 </th>
-                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[120px]">
+                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[120px]">
                   Seats
                 </th>
-                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[120px]">
+                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[120px]">
                   Winners
                 </th>
-                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[120px]">
+                <th className="px-5 py-4 text-left text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[120px]">
                   Created
                 </th>
-                <th className="px-5 py-4 text-right text-xs font-semibold uppercase tracking-wider text-[#8B93A7] max-lg:min-w-[290px]">
+                <th className="px-5 py-4 text-right text-xs font-semibold uppercase tracking-wider text-[#9AA0AA] max-lg:min-w-[290px]">
                   Actions
                 </th>
               </tr>
@@ -237,8 +234,8 @@ export default function ManageGamesPage() {
                 <tr>
                   <td colSpan={7}>
                     <div className="flex flex-col items-center justify-center gap-3 py-16">
-                      <Loader2 className="h-8 w-8 animate-spin text-[#6667DD]" />
-                      <p className="text-sm text-[#8B93A7]">Loading games...</p>
+                      <Loader2 className="h-8 w-8 animate-spin text-[#E53535]" />
+                      <p className="text-sm text-[#9AA0AA]">Loading games...</p>
                     </div>
                   </td>
                 </tr>
@@ -246,7 +243,7 @@ export default function ManageGamesPage() {
                 <tr>
                   <td colSpan={7}>
                     <div className="py-16 text-center">
-                      <p className="text-sm text-[#8B93A7]">
+                      <p className="text-sm text-[#9AA0AA]">
                         Failed to load games.
                       </p>
                     </div>
@@ -256,7 +253,7 @@ export default function ManageGamesPage() {
                 filteredGames.map((game) => (
                   <tr
                     key={game._id}
-                    className="border-b border-[#1F293D]/60 transition-colors last:border-0 hover:bg-white/[0.03]"
+                    className="border-b border-[#23272D]/60 transition-colors last:border-0 hover:bg-white/[0.03]"
                   >
                     <td className="px-5 py-4">
                       <p className="text-sm font-medium text-[#F2F3F5]">
@@ -298,21 +295,21 @@ export default function ManageGamesPage() {
                       <div className="flex justify-end gap-1.5">
                         <button
                           onClick={() => handleCopyLink(game)}
-                          className="cursor-pointer rounded-lg p-2 text-[#8B93A7] transition-colors hover:bg-sky-500/15 hover:text-sky-400"
+                          className="cursor-pointer rounded-lg p-2 text-[#9AA0AA] transition-colors hover:bg-sky-500/15 hover:text-sky-400"
                           title="Copy Game Link"
                         >
                           <Link2 size={18} />
                         </button>
                         <button
                           onClick={() => setParticipantsGame(game)}
-                          className="cursor-pointer rounded-lg p-2 text-[#8B93A7] transition-colors hover:bg-[#34D399]/15 hover:text-[#34D399]"
+                          className="cursor-pointer rounded-lg p-2 text-[#9AA0AA] transition-colors hover:bg-[#34D399]/15 hover:text-[#34D399]"
                           title="Participants"
                         >
                           <Users size={18} />
                         </button>
                         <button
                           onClick={() => gameModal.open("view", game._id)}
-                          className="cursor-pointer rounded-lg p-2 text-[#8B93A7] transition-colors hover:bg-[#6667DD]/15 hover:text-[#A5B4FC]"
+                          className="cursor-pointer rounded-lg p-2 text-[#9AA0AA] transition-colors hover:bg-[#E53535]/15 hover:text-[#E68078]"
                           title="View"
                         >
                           <Eye size={18} />
@@ -320,7 +317,7 @@ export default function ManageGamesPage() {
                         <button
                           onClick={() => gameModal.open("edit", game._id)}
                           disabled={game.status !== "active"}
-                          className="cursor-pointer rounded-lg p-2 text-[#8B93A7] transition-colors hover:bg-[#A78BFA]/15 hover:text-[#A78BFA] disabled:cursor-not-allowed disabled:opacity-40"
+                          className="cursor-pointer rounded-lg p-2 text-[#9AA0AA] transition-colors hover:bg-[#E68078]/15 hover:text-[#E68078] disabled:cursor-not-allowed disabled:opacity-40"
                           title="Edit"
                         >
                           <Edit size={18} />
@@ -329,7 +326,7 @@ export default function ManageGamesPage() {
                           <button
                             onClick={() => handleEndGame(game)}
                             disabled={isEnding}
-                            className="flex cursor-pointer items-center gap-1 rounded-lg p-2 text-[#8B93A7] transition-colors hover:bg-amber-500/15 hover:text-amber-400 disabled:cursor-not-allowed disabled:opacity-40"
+                            className="flex cursor-pointer items-center gap-1 rounded-lg p-2 text-[#9AA0AA] transition-colors hover:bg-amber-500/15 hover:text-amber-400 disabled:cursor-not-allowed disabled:opacity-40"
                             title="End Game"
                           >
                             {isEnding ? (
@@ -342,7 +339,7 @@ export default function ManageGamesPage() {
                         )}
                         <button
                           onClick={() => openDeleteModal(game._id)}
-                          className="cursor-pointer rounded-lg p-2 text-[#8B93A7] transition-colors hover:bg-red-500/15 hover:text-red-400"
+                          className="cursor-pointer rounded-lg p-2 text-[#9AA0AA] transition-colors hover:bg-red-500/15 hover:text-red-400"
                           title="Delete"
                         >
                           <Trash2 size={18} />
@@ -358,7 +355,7 @@ export default function ManageGamesPage() {
 
         {!isLoading && !isError && filteredGames.length === 0 && (
           <div className="py-16 text-center">
-            <p className="text-sm text-[#8B93A7]">
+            <p className="text-sm text-[#9AA0AA]">
               No games found. Try adjusting your filters.
             </p>
           </div>

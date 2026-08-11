@@ -27,7 +27,7 @@ const ORANGE = '#FB923C'
 
 export function PlayerGrowthChart({ data }: PlayerGrowthChartProps) {
   return (
-    <div className="h-80 rounded-2xl border border-[#1F293D] bg-gradient-to-b from-[#151A2A] to-[#0F1422] p-5 shadow-xl shadow-black/20">
+    <div className="h-80 rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] p-5 shadow-xl shadow-black/20">
       <div className="mb-2 flex items-center gap-2">
         <span className="h-1.5 w-1.5 rounded-full bg-[#34D399]" />
         <h3 className="text-sm font-semibold tracking-wide text-[#F2F3F5]">Player Growth</h3>
@@ -50,13 +50,13 @@ export function PlayerGrowthChart({ data }: PlayerGrowthChartProps) {
               dataKey="month"
               tickLine={false}
               axisLine={{ stroke: 'rgba(255,255,255,0.08)' }}
-              tick={{ fill: '#8B93A7', fontSize: 11 }}
+              tick={{ fill: '#9AA0AA', fontSize: 11 }}
               dy={8}
             />
             <YAxis
               tickLine={false}
               axisLine={false}
-              tick={{ fill: '#8B93A7', fontSize: 11 }}
+              tick={{ fill: '#9AA0AA', fontSize: 11 }}
               width={38}
             />
             <Tooltip

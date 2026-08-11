@@ -93,15 +93,15 @@ function ParticipantsContent({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
-      <div className="flex max-h-[80vh] w-full max-w-xl flex-col rounded-2xl border border-[#1F293D] bg-[#14171B] p-5 text-[#F2F3F5] shadow-2xl shadow-black/60">
+      <div className="flex max-h-[80vh] w-full max-w-xl flex-col rounded-2xl border border-[#23272D] bg-[#14171B] p-5 text-[#F2F3F5] shadow-2xl shadow-black/60">
         <div className="mb-4 flex shrink-0 items-center justify-between">
           <div>
             <h2 className="text-lg font-semibold tracking-wide">Participants</h2>
-            <p className="mt-0.5 text-xs text-[#8B93A7]">{game.title}</p>
+            <p className="mt-0.5 text-xs text-[#9AA0AA]">{game.title}</p>
           </div>
           <button
             onClick={onClose}
-            className="cursor-pointer rounded-lg p-1.5 text-[#8B93A7] transition-colors hover:bg-white/5 hover:text-[#F2F3F5]"
+            className="cursor-pointer rounded-lg p-1.5 text-[#9AA0AA] transition-colors hover:bg-white/5 hover:text-[#F2F3F5]"
           >
             <X size={18} />
           </button>
@@ -120,13 +120,13 @@ function ParticipantsContent({
         <div className="flex-1 overflow-y-auto pr-1">
           {isLoading ? (
             <div className="flex flex-col items-center justify-center gap-3 py-16">
-              <Loader2 className="h-8 w-8 animate-spin text-[#6667DD]" />
-              <p className="text-sm text-[#8B93A7]">Loading participants...</p>
+              <Loader2 className="h-8 w-8 animate-spin text-[#E53535]" />
+              <p className="text-sm text-[#9AA0AA]">Loading participants...</p>
             </div>
           ) : participants.length === 0 ? (
             <div className="py-16 text-center">
               <Users className="mx-auto mb-3 h-10 w-10 text-[#5C636D]" />
-              <p className="text-sm text-[#8B93A7]">No seats reserved yet for this game.</p>
+              <p className="text-sm text-[#9AA0AA]">No seats reserved yet for this game.</p>
             </div>
           ) : (
             <ul className="space-y-2">
@@ -142,16 +142,16 @@ function ParticipantsContent({
                     className={`flex items-center justify-between gap-3 rounded-xl border px-4 py-3 transition-colors ${
                       isSelected
                         ? 'border-[#34D399]/50 bg-[#34D399]/10'
-                        : 'border-[#23272D] bg-[#0F1422]'
+                        : 'border-[#23272D] bg-[#14171B]'
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#6667DD]/15 font-plus text-sm font-bold text-[#A5B4FC]">
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#E53535]/15 font-plus text-sm font-bold text-[#E68078]">
                         #{p.seatNumber}
                       </span>
                       <div className="min-w-0">
                         <p className="truncate text-sm font-medium text-[#F2F3F5]">{userName}</p>
-                        <p className="truncate text-xs text-[#8B93A7]">{userPhone}</p>
+                        <p className="truncate text-xs text-[#9AA0AA]">{userPhone}</p>
                       </div>
                     </div>
                     {canSelect && (
@@ -160,7 +160,7 @@ function ParticipantsContent({
                         onClick={() => toggleSeat(p.seatNumber)}
                         className={`flex h-5 w-5 shrink-0 cursor-pointer items-center justify-center rounded-md border transition-colors ${
                           isSelected
-                            ? 'border-[#34D399] bg-[#34D399] text-[#0F1422]'
+                            ? 'border-[#34D399] bg-[#34D399] text-[#14171B]'
                             : 'border-[#5C636D] bg-transparent'
                         }`}
                         aria-label={`Toggle seat ${p.seatNumber}`}
@@ -198,7 +198,7 @@ function ParticipantsContent({
           </div>
         )}
 
-        <div className="mt-4 flex shrink-0 gap-3 border-t border-[#1F293D] pt-4">
+        <div className="mt-4 flex shrink-0 gap-3 border-t border-[#23272D] pt-4">
           <button
             type="button"
             onClick={onClose}

@@ -5,6 +5,7 @@ import type {
   Game,
   GameDetailsResult,
   Participant,
+  PendingApproval,
   User,
 } from './types'
 
@@ -23,6 +24,7 @@ export const gamesApi = baseApi.injectEndpoints({
     }),
     getGameByCode: builder.query<GameDetailsResult, string>({
       query: (gameCode) => ({ url: `/games/code/${gameCode}` }),
+      providesTags: ['Game'],
     }),
 
     // Admin games
@@ -119,6 +121,28 @@ export const gamesApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['User'],
     }),
+
+    // Admin pending seat approvals
+    getPendingApprovals: builder.query<PendingApproval[], void>({
+      query: () => ({ url: '/admin/pending-approvals' }),
+      providesTags: ['PendingApprovals'],
+    }),
+    approvePendingSeats: builder.mutation<{ approved: number }, string[]>({
+      query: (seatIds) => ({
+        url: '/admin/pending-approvals/approve',
+        method: 'POST',
+        body: { seatIds },
+      }),
+      invalidatesTags: ['PendingApprovals', 'Game', 'JoinedGames', 'Analytics'],
+    }),
+    rejectPendingSeats: builder.mutation<{ rejected: number }, string[]>({
+      query: (seatIds) => ({
+        url: '/admin/pending-approvals/reject',
+        method: 'POST',
+        body: { seatIds },
+      }),
+      invalidatesTags: ['PendingApprovals', 'Game', 'JoinedGames'],
+    }),
   }),
 })
 
@@ -137,4 +161,7 @@ export const {
   useDeleteAdminHistoryEntryMutation,
   useGetAdminUsersQuery,
   useUpdateUserStatusMutation,
+  useGetPendingApprovalsQuery,
+  useApprovePendingSeatsMutation,
+  useRejectPendingSeatsMutation,
 } = gamesApi

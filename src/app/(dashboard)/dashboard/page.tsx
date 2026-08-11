@@ -31,7 +31,7 @@ export default function UserDashboard() {
       title: 'Active Games',
       value: gamesLoading ? '—' : activeGamesCount,
       icon: Gamepad2,
-      tint: 'text-[#A5B4FC]',
+      tint: 'text-[#E68078]',
     },
     {
       title: 'My Games',
@@ -59,8 +59,8 @@ export default function UserDashboard() {
       title: 'Active Games',
       subtitle: 'Play and join games',
       icon: Gamepad2,
-      tint: 'text-[#A5B4FC]',
-      ring: 'hover:border-[#A5B4FC]/40',
+      tint: 'text-[#E68078]',
+      ring: 'hover:border-[#E68078]/40',
     },
     {
       href: '/dashboard/my-seats',
@@ -99,38 +99,14 @@ export default function UserDashboard() {
         ))}
       </div>
 
-      {/* Quick Actions */}
-      <div className="mb-8">
-        <h2 className="text-xl font-bold text-[#F2F3F5] mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {quickActions.map((action) => (
-            <Link
-              key={action.href}
-              href={action.href}
-              prefetch={false}
-              className={`group rounded-2xl border border-[#1F293D] bg-gradient-to-b from-[#151A2A] to-[#0F1422] p-6 text-center shadow-xl shadow-black/20 transition-all hover:-translate-y-0.5 hover:shadow-lg ${action.ring}`}
-            >
-              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 transition-colors group-hover:bg-white/10">
-                <action.icon size={24} className={action.tint} />
-              </div>
-              <h3 className="font-semibold text-[#F2F3F5]">{action.title}</h3>
-              <p className="mt-1 text-sm text-[#8B93A7]">{action.subtitle}</p>
-              <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[#6667DD] opacity-0 transition-opacity group-hover:opacity-100">
-                Open <ArrowRight size={12} />
-              </span>
-            </Link>
-          ))}
-        </div>
-      </div>
-
       {/* Featured Games */}
-      <div>
+      <div className="mb-8">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-xl font-bold text-[#F2F3F5]">Featured Games</h2>
           <Link
             href="/dashboard/active-games"
             prefetch={false}
-            className="flex items-center gap-1 text-sm font-semibold text-[#6667DD] transition-colors hover:text-[#A5B4FC]"
+            className="flex items-center gap-1 text-sm font-semibold text-[#E53535] transition-colors hover:text-[#E68078]"
           >
             View all <ArrowRight size={14} />
           </Link>
@@ -147,12 +123,36 @@ export default function UserDashboard() {
               />
             ))
           ) : (
-            <div className="col-span-full rounded-2xl border border-[#1F293D] bg-gradient-to-b from-[#151A2A] to-[#0F1422] py-14 text-center shadow-xl shadow-black/20">
-              <Gamepad2 className="mx-auto mb-3 text-[#8B93A7] opacity-50" size={28} />
+            <div className="col-span-full rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] py-14 text-center shadow-xl shadow-black/20">
+              <Gamepad2 className="mx-auto mb-3 text-[#9AA0AA] opacity-50" size={28} />
               <p className="font-semibold text-[#F2F3F5]">No active games right now</p>
-              <p className="mt-1 text-sm text-[#8B93A7]">Check back soon for new games</p>
+              <p className="mt-1 text-sm text-[#9AA0AA]">Check back soon for new games</p>
             </div>
           )}
+        </div>
+      </div>
+
+      {/* Quick Actions */}
+      <div>
+        <h2 className="text-xl font-bold text-[#F2F3F5] mb-4">Quick Actions</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {quickActions.map((action) => (
+            <Link
+              key={action.href}
+              href={action.href}
+              prefetch={false}
+              className={`group rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] p-6 text-center shadow-xl shadow-black/20 transition-all hover:-translate-y-0.5 hover:shadow-lg ${action.ring}`}
+            >
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 transition-colors group-hover:bg-white/10">
+                <action.icon size={24} className={action.tint} />
+              </div>
+              <h3 className="font-semibold text-[#F2F3F5]">{action.title}</h3>
+              <p className="mt-1 text-sm text-[#9AA0AA]">{action.subtitle}</p>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[#E53535] opacity-0 transition-opacity group-hover:opacity-100">
+                Open <ArrowRight size={12} />
+              </span>
+            </Link>
+          ))}
         </div>
       </div>
     </div>
@@ -168,10 +168,10 @@ interface StatCardProps {
 
 function StatCard({ title, value, icon: Icon, tint }: StatCardProps) {
   return (
-    <div className="rounded-2xl border border-[#1F293D] bg-gradient-to-b from-[#151A2A] to-[#0F1422] p-5 shadow-xl shadow-black/20">
+    <div className="rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] p-5 shadow-xl shadow-black/20">
       <div className="flex items-start justify-between">
         <div>
-          <p className="mb-1.5 text-xs font-medium text-[#8B93A7]">{title}</p>
+          <p className="mb-1.5 text-xs font-medium text-[#9AA0AA]">{title}</p>
           <p className="text-2xl font-bold text-[#F2F3F5]">{value}</p>
         </div>
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5">
@@ -184,7 +184,7 @@ function StatCard({ title, value, icon: Icon, tint }: StatCardProps) {
 
 function GameCardSkeleton() {
   return (
-    <div className="animate-pulse rounded-2xl border border-[#1F293D] bg-gradient-to-b from-[#151A2A] to-[#0F1422] p-5 shadow-xl shadow-black/20">
+    <div className="animate-pulse rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] p-5 shadow-xl shadow-black/20">
       <div className="mb-3 h-5 w-2/3 rounded bg-white/5" />
       <div className="mb-5 h-4 w-full rounded bg-white/5" />
       <div className="mb-5 space-y-2.5">
@@ -203,7 +203,7 @@ interface GameCardProps {
 
 function GameCard({ game, isJoined }: GameCardProps) {
   return (
-    <div className="group rounded-2xl border border-[#1F293D] bg-gradient-to-b from-[#151A2A] to-[#0F1422] p-5 shadow-xl shadow-black/20 transition-all hover:border-[#6667DD]/60">
+    <div className="group rounded-2xl border border-[#23272D] bg-gradient-to-b from-[#191D22] to-[#14171B] p-5 shadow-xl shadow-black/20 transition-all hover:border-[#E53535]/60">
       <div className="mb-3 flex items-start justify-between gap-3">
         <h3 className="font-semibold text-[#F2F3F5]">{game.title}</h3>
         <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-400">
@@ -212,13 +212,13 @@ function GameCard({ game, isJoined }: GameCardProps) {
         </span>
       </div>
 
-      <div className="mb-5 mt-4 space-y-2.5 border-t border-[#1F293D]/60 pt-4">
+      <div className="mb-5 mt-4 space-y-2.5 border-t border-[#23272D]/60 pt-4">
         <div className="flex items-center justify-between text-sm">
-          <span className="text-[#8B93A7]">Prize</span>
+          <span className="text-[#9AA0AA]">Prize</span>
           <span className="font-semibold text-[#F2F3F5]">{game.prize}</span>
         </div>
         <div className="flex items-center justify-between text-sm">
-          <span className="text-[#8B93A7]">Seats Filled</span>
+          <span className="text-[#9AA0AA]">Seats Filled</span>
           <span className="font-medium text-[#F2F3F5]">
             {game.reservedSeatsCount}/{game.totalSeats}
           </span>
@@ -234,7 +234,7 @@ function GameCard({ game, isJoined }: GameCardProps) {
         <Link
           href="/dashboard/active-games"
           prefetch={false}
-          className="block w-full cursor-pointer rounded-xl bg-gradient-to-r from-[#6667DD] to-[#8B5CF6] py-2.5 text-center text-sm font-semibold text-white shadow-lg shadow-[#6667DD]/25 transition-all hover:from-[#5A5BD1] hover:to-[#7C3AED] active:scale-[0.98]"
+          className="block w-full cursor-pointer rounded-xl bg-gradient-to-r from-[#E53535] to-[#E68078] py-2.5 text-center text-sm font-semibold text-white shadow-lg shadow-[#E53535]/25 transition-all hover:from-[#C62E2E] hover:to-[#C94F47] active:scale-[0.98]"
         >
           Join Game
         </Link>
