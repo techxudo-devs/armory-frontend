@@ -17,6 +17,7 @@ interface GameForm {
   rules: string
   totalSeats: string
   numberOfWinners: string
+  category: string
   endType: 'manual' | 'automatic'
   endDate: string
 }
@@ -39,6 +40,7 @@ export default function CreateGamePage() {
       rules: '',
       totalSeats: '100',
       numberOfWinners: '1',
+      category: 'Accessories',
       endType: 'manual',
       endDate: '',
     },
@@ -48,6 +50,7 @@ export default function CreateGamePage() {
       formData.append('prize', data.prize)
       formData.append('totalSeats', data.totalSeats)
       formData.append('numberOfWinners', data.numberOfWinners)
+      formData.append('category', data.category)
       formData.append('endType', data.endType)
       if (data.description) formData.append('description', data.description)
       if (data.rules) formData.append('rules', data.rules)
@@ -227,6 +230,24 @@ export default function CreateGamePage() {
                   max={Math.max(1, Number(values.totalSeats) || 1)}
                   required
                 />
+              </div>
+              <div>
+                <label htmlFor="category" className={labelClass}>
+                  Category *
+                </label>
+                <select
+                  id="category"
+                  name="category"
+                  value={values.category}
+                  onChange={handleChange}
+                  className={`${inputClass} cursor-pointer`}
+                >
+                  <option value="Knives">Knives</option>
+                  <option value="Optics">Optics</option>
+                  <option value="Ammo">Ammo</option>
+                  <option value="Accessories">Accessories</option>
+                  <option value="Firearms">Firearms</option>
+                </select>
               </div>
               <div>
                 <label htmlFor="endType" className={labelClass}>

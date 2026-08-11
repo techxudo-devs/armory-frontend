@@ -1,19 +1,27 @@
 export type RaffleCategory = "Knives" | "Optics" | "Ammo" | "Accessories" | "Firearms";
 
+export const RAFFLE_CATEGORIES: RaffleCategory[] = [
+  "Knives",
+  "Optics",
+  "Ammo",
+  "Accessories",
+  "Firearms",
+];
+
 export interface Raffle {
   id: string;
+  gameCode?: string;
   category: RaffleCategory;
   title: string;
-  seatPrice: number;
   seatsTotal: number;
   seatsClaimed: number;
   urgent: boolean;
+  imageUrl?: string;
+  endDate?: string | null;
 }
 
 export interface FeaturedRaffle extends Raffle {
-  retailValue: number;
-  drawsInLabel: string;
-  description: string;
+  description?: string;
 }
 
 export interface Winner {

@@ -1,11 +1,8 @@
+'use client'
+
 import { CheckCircle2, Lock, Timer, Trophy } from "lucide-react";
 import { Button } from "@/landing/components/ui/Button";
-
-const stats = [
-  { value: "38", label: "Raffles live" },
-  { value: "$412K", label: "Gear given away" },
-  { value: "2,140", label: "Seats this week" },
-];
+import { useLiveGames } from "@/landing/hooks/useLiveGames";
 
 const trustItems = [
   { icon: Lock, label: "Secure checkout, PCI-compliant" },
@@ -15,6 +12,15 @@ const trustItems = [
 ];
 
 export function Hero2() {
+  const { games, isLoading } = useLiveGames(12);
+
+  const seatsTotal = games.reduce((sum, g) => sum + (g.totalSeats || 0), 0);
+
+  const stats = [
+    { value: isLoading ? "…" : String(games.length), label: "Raffles live" },
+    { value: "$412K", label: "Gear given away" },
+    { value: isLoading ? "…" : seatsTotal.toLocaleString(), label: "Seats live" },
+  ];
   return (
     <section className="relative flex items-center overflow-hidden pt-3">
       <video
@@ -31,7 +37,7 @@ export function Hero2() {
       <div className="relative w-full max-w-[1200px] mx-auto px-4 sm:px-8">
         <div className="animate-fadeUp text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-plus leading-[1.05] sm:leading-[1.01] font-bold mt-6 mb-6">
-            Premium gear armony
+            Premium gear,
             <br />
             One <span className="text-brass-light">seat</span> away.
           </h1>

@@ -1,35 +1,53 @@
-"use client";
+'use client'
 
 import { useMemo, useState } from "react";
 import { Pill } from "@/landing/components/ui/Pill";
 import { Button } from "@/landing/components/ui/Button";
 import { RaffleCard } from "@/landing/components/ui/RaffleCard";
-import { raffles } from "@/landing/data/raffles";
+import { useLiveGames } from "@/landing/hooks/useLiveGames";
+import { mapGameToRaffle, gameCategory } from "@/landing/data/games";
+import { useGetMeQuery } from "@/lib/api/authApi";
 import type { RaffleCategory } from "@/types";
 
-const filterOptions: (RaffleCategory | "All raffles")[] = [
-  "All raffles",
-  "Knives",
-  "Optics",
-  "Ammo",
-  "Accessories",
-  "Firearms",
-];
+const allLabel = "All raffles";
 
 export function RaffleGrid() {
-  const [activeFilter, setActiveFilter] =
-    useState<(typeof filterOptions)[number]>("All raffles");
+  const { games, isLoading } = useLiveGames(12);
+  const { isError: notLoggedIn } = useGetMeQuery();
 
-  const filteredRaffles = useMemo(() => {
-    if (activeFilter === "All raffles") return raffles;
-    return raffles.filter((raffle) => raffle.category === activeFilter);
-  }, [activeFilter]);
+  const categories = useMemo(() => {
+    const set = new Set<RaffleCategory>();
+    games.forEach((g) => set.add(gameCategory(g)));
+    return [...set];
+  }, [games]);
+
+  const filterOptions = useMemo(
+    () => [allLabel, ...categories] as (RaffleCategory | typeof allLabel)[],
+    [categories],
+  );
+
+  const [activeFilter, setActiveFilter] =
+    useState<RaffleCategory | typeof allLabel>(allLabel);
+
+  const raffles = useMemo(
+    () =>
+      games
+        .map(mapGameToRaffle)
+        .filter(
+          (r) => activeFilter === allLabel || r.category === activeFilter,
+        ),
+    [games, activeFilter],
+  );
+
+  const viewAllHref = notLoggedIn
+    ? "/login?next=/dashboard/active-games"
+    : "/dashboard/active-games";
 
   return (
     <section id="raffles" className="max-w-[1200px] mx-auto px-4 sm:px-8 py-10">
       <div className="flex justify-center text-center w-full mx-auto gap-4 mb-9">
         <div>
-                  <p className="bg-gradient-to-r from-amber-500/20 to-amber-500/40 text-white w-fit mx-auto px-6 py-1.5 rounded-full font-plus">
+          <p className="bg-gradient-to-r from-amber-500/20 to-amber-500/40 text-white w-fit mx-auto px-6 py-1.5 rounded-full font-plus">
             Get your seat now
           </p>
           <h2 className="text-3xl sm:text-4xl font-plus font-bold leading-tight mt-4">
@@ -38,28 +56,65 @@ export function RaffleGrid() {
         </div>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-2.5 mb-9">
-        {filterOptions.map((option) => (
-          <Pill
-            key={option}
-            label={option}
-            active={activeFilter === option}
-            onClick={() => setActiveFilter(option)}
-          />
-        ))}
-      </div>
+      {categories.length > 1 && (
+        <div className="flex flex-wrap justify-center gap-2.5 mb-9">
+          {filterOptions.map((option) => (
+            <Pill
+              key={option}
+              label={option}
+              active={activeFilter === option}
+              onClick={() => setActiveFilter(option)}
+            />
+          ))}
+        </div>
+      )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredRaffles.map((raffle) => (
-          <RaffleCard key={raffle.id} raffle={raffle} />
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <RaffleCardSkeleton key={i} />
+          ))}
+        </div>
+      ) : raffles.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {raffles.map((raffle) => (
+            <RaffleCard key={raffle.id} raffle={raffle} />
+          ))}
+        </div>
+      ) : (
+        <div className="rounded-xl border border-border-strong bg-panel py-16 text-center">
+          <p className="text-lg font-plus font-semibold text-text-primary">
+            No live raffles right now
+          </p>
+          <p className="mt-1 text-sm font-plus text-text-muted">
+            New raffles drop soon — check back in a little while.
+          </p>
+        </div>
+      )}
 
       <div className="text-center mt-10">
-        <Button href="#" variant="outline" className="rounded-lg">
-          View all 38 raffles
+        <Button
+          href={viewAllHref}
+          variant="outline"
+          className="rounded-lg"
+        >
+          View all raffles
         </Button>
       </div>
     </section>
+  );
+}
+
+function RaffleCardSkeleton() {
+  return (
+    <div className="animate-pulse bg-panel border border-border rounded-xl">
+      <div className="h-60 bg-gradient-to-br from-[#241409] to-[#100602] border-b border-border rounded-t-xl" />
+      <div className="p-5 flex flex-col gap-3">
+        <div className="h-6 w-24 rounded bg-border-strong/60" />
+        <div className="h-5 w-full rounded bg-border-strong/60" />
+        <div className="h-2.5 w-full rounded bg-border-strong/40" />
+        <div className="mt-2 h-11 w-full rounded bg-border-strong/50" />
+      </div>
+    </div>
   );
 }

@@ -23,6 +23,7 @@ const initialGameState: Partial<Game> = {
   rules: '',
   totalSeats: 100,
   numberOfWinners: 1,
+  category: 'Accessories',
   status: 'active',
   endType: 'manual',
   endDate: null,
@@ -212,6 +213,28 @@ export function GameModal({ isOpen, type, game, onClose, onSubmit, isLoading = f
                 max={Math.max(1, Number(values.totalSeats) || 1)}
                 required
               />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="category" className={labelClass}>
+                Category *
+              </label>
+              <select
+                id="category"
+                name="category"
+                value={values.category || 'Accessories'}
+                onChange={handleChange}
+                disabled={isViewOnly || isLoading}
+                className={`${inputClass} cursor-pointer`}
+              >
+                <option value="Knives">Knives</option>
+                <option value="Optics">Optics</option>
+                <option value="Ammo">Ammo</option>
+                <option value="Accessories">Accessories</option>
+                <option value="Firearms">Firearms</option>
+              </select>
             </div>
           </div>
 

@@ -88,7 +88,6 @@ export function Hero() {
                   id: "hero-preview",
                   category: "Knives",
                   title: "",
-                  seatPrice: 10,
                   seatsTotal: 30,
                   seatsClaimed: 28,
                   urgent: true,

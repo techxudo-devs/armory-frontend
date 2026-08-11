@@ -1,10 +1,11 @@
 "use client";
 
 import { Button } from "@/landing/components/ui/Button";
-import { HelpCircle, LayoutGrid, LogIn, Menu, PlayCircle, Ticket, X } from "lucide-react";
+import { HelpCircle, LayoutGrid, LayoutDashboard, LogIn, Menu, PlayCircle, Ticket, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useGetMeQuery } from "@/lib/api/authApi";
 
 const navLinks = [
   { href: "#raffles", label: "Live raffles", icon: Ticket },
@@ -15,6 +16,9 @@ const navLinks = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const { data: user, isSuccess } = useGetMeQuery();
+
+  const loggedIn = isSuccess && !!user;
 
   useEffect(() => {
     if (open) {
@@ -55,16 +59,29 @@ export function Header() {
           </div>
 
           <div className="hidden lg:flex items-center gap-5">
-            <Link
-              href="/login"
-              prefetch={false}
-              className="text-sm font-plus text-text-secondary hover:text-text-primary transition-colors duration-300"
-            >
-              Log in
-            </Link>
-            <Button href="/register" className="!px-5 !py-3 rounded-lg text-white font-plus hover:scale-97 transition-transform duration-300">
-              Register Now
-            </Button>
+            {loggedIn ? (
+              <Link
+                href="/dashboard"
+                prefetch={false}
+                className="flex items-center gap-2 text-sm font-plus text-brass-light hover:text-text-primary transition-colors duration-300"
+              >
+                <LayoutDashboard size={16} />
+                Dashboard
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                prefetch={false}
+                className="text-sm font-plus text-text-secondary hover:text-text-primary transition-colors duration-300"
+              >
+                Log in
+              </Link>
+            )}
+            {!loggedIn && (
+              <Button href="/register" className="!px-5 !py-3 rounded-lg text-white font-plus hover:scale-97 transition-transform duration-300">
+                Register Now
+              </Button>
+            )}
           </div>
 
           <button
@@ -130,26 +147,40 @@ export function Header() {
               </a>
             );
           })}
-          <Link
-            href="/login"
-            prefetch={false}
-            onClick={() => setOpen(false)}
-            className="flex items-center gap-3 rounded-lg pr-4 py-3 text-base font-plus text-text-secondary hover:bg-panel-2 hover:text-text-primary transition-colors duration-300"
-          >
-            <LogIn className="h-5 w-5 flex-shrink-0 text-brass-light" strokeWidth={1.75} />
-            Log in
-          </Link>
+          {loggedIn ? (
+            <Link
+              href="/dashboard"
+              prefetch={false}
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-3 rounded-lg pr-4 py-3 text-base font-plus text-text-secondary hover:bg-panel-2 hover:text-text-primary transition-colors duration-300"
+            >
+              <LayoutDashboard className="h-5 w-5 flex-shrink-0 text-brass-light" strokeWidth={1.75} />
+              Dashboard
+            </Link>
+          ) : (
+            <Link
+              href="/login"
+              prefetch={false}
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-3 rounded-lg pr-4 py-3 text-base font-plus text-text-secondary hover:bg-panel-2 hover:text-text-primary transition-colors duration-300"
+            >
+              <LogIn className="h-5 w-5 flex-shrink-0 text-brass-light" strokeWidth={1.75} />
+              Log in
+            </Link>
+          )}
         </nav>
 
-        <div className="border-t border-border px-5 py-5">
-          <Button
-            href="/register"
-            onClick={() => setOpen(false)}
-            className="w-full !px-5 !py-3 rounded-lg text-white font-plus"
-          >
-            Register Now
-          </Button>
-        </div>
+        {!loggedIn && (
+          <div className="border-t border-border px-5 py-5">
+            <Button
+              href="/register"
+              onClick={() => setOpen(false)}
+              className="w-full !px-5 !py-3 rounded-lg text-white font-plus"
+            >
+              Register Now
+            </Button>
+          </div>
+        )}
       </aside>
     </>
   );

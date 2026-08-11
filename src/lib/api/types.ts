@@ -9,6 +9,7 @@ export interface Game {
   totalSeats: number
   reservedSeatsCount: number
   numberOfWinners: number
+  category?: string
   status: 'active' | 'ended' | 'completed'
   endType: 'manual' | 'automatic'
   endDate: string | null
