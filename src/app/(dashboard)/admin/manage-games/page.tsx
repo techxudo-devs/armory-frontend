@@ -52,7 +52,8 @@ const toFormData = (data: Partial<Game> & { prizeImage?: File | null }) => {
   append("totalSeats", data.totalSeats);
   append("numberOfWinners", data.numberOfWinners);
   append("endType", data.endType);
-  if (data.endType === "automatic") append("endDate", data.endDate);
+  if (data.endType === "automatic" && data.endDate)
+    append("endDate", new Date(data.endDate).toISOString());
   append("prizeImage", data.prizeImage);
   return formData;
 };

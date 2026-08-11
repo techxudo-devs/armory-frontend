@@ -1,9 +1,13 @@
 'use client'
 
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Play, Clock, Users, Trophy, Sparkles } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useGetPublicGamesQuery } from '@/lib/api/gamesApi'
 import { useGetMyJoinedGamesQuery } from '@/lib/api/userApi'
+import { getPusherClient } from '@/lib/pusher/client'
+import { baseApi } from '@/lib/api/baseApi'
 import type { Game } from '@/lib/api/gamesApi'
 
 export default function ActiveGamesPage() {
@@ -17,8 +21,29 @@ export default function ActiveGamesPage() {
     page: 1,
     limit: 100,
   })
+  const dispatch = useDispatch()
 
   const availableGames = publicData?.items ?? []
+  const availableGameChannels = availableGames.map((g) => g._id).join('|')
+
+  useEffect(() => {
+    if (!availableGames.length) return
+    const pusher = getPusherClient()
+    if (!pusher) return
+
+    const invalidate = () => dispatch(baseApi.util.invalidateTags(['Game']))
+    const channels = availableGames.map((g) => pusher.subscribe(`game-${g._id}`))
+    channels.forEach((ch) => ch.bind('seat-map:updated', invalidate))
+
+    return () => {
+      channels.forEach((ch) => {
+        ch.unbind('seat-map:updated', invalidate)
+        pusher.unsubscribe(ch.name)
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [availableGameChannels, dispatch])
+
   const joinedGames = joinedData?.items ?? []
   const joinedIds = new Set(joinedGames.map((g) => g.gameId))
   const activeParticipations = joinedGames.filter((g) => g.status === 'active')

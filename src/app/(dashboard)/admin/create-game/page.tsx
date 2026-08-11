@@ -52,7 +52,7 @@ export default function CreateGamePage() {
       if (data.description) formData.append('description', data.description)
       if (data.rules) formData.append('rules', data.rules)
       if (data.endType === 'automatic' && data.endDate) {
-        formData.append('endDate', data.endDate)
+        formData.append('endDate', new Date(data.endDate).toISOString())
       }
       if (prizeImage) formData.append('prizeImage', prizeImage)
 

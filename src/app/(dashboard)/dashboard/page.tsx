@@ -1,10 +1,14 @@
 'use client'
 
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Gamepad2, Trophy, Users, TrendingDown, ArrowRight, CheckCircle2 } from 'lucide-react'
 import Link from 'next/link'
 import { useGetMeQuery } from '@/lib/api/authApi'
 import { useGetPublicGamesQuery } from '@/lib/api/gamesApi'
 import { useGetMyJoinedGamesQuery } from '@/lib/api/userApi'
+import { getPusherClient } from '@/lib/pusher/client'
+import { baseApi } from '@/lib/api/baseApi'
 import type { Game } from '@/lib/api/gamesApi'
 
 export default function UserDashboard() {
@@ -17,6 +21,28 @@ export default function UserDashboard() {
     page: 1,
     limit: 100,
   })
+  const dispatch = useDispatch()
+
+  const activeGames = publicGames?.items ?? []
+  const activeGameChannels = activeGames.map((g) => g._id).join('|')
+
+  useEffect(() => {
+    if (!activeGames.length) return
+    const pusher = getPusherClient()
+    if (!pusher) return
+
+    const invalidate = () => dispatch(baseApi.util.invalidateTags(['Game']))
+    const channels = activeGames.map((g) => pusher.subscribe(`game-${g._id}`))
+    channels.forEach((ch) => ch.bind('seat-map:updated', invalidate))
+
+    return () => {
+      channels.forEach((ch) => {
+        ch.unbind('seat-map:updated', invalidate)
+        pusher.unsubscribe(ch.name)
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeGameChannels, dispatch])
 
   const activeGamesCount = publicGames?.pagination.totalDocs ?? 0
   const joinedGames = joinedData?.items ?? []

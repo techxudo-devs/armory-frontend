@@ -74,18 +74,20 @@ export function usePusherNotifications({
     const pusher = getPusherClient()
     if (!pusher) return
 
-    const invalidate = () =>
+    const invalidateNotifications = () =>
       dispatch(baseApi.util.invalidateTags(['Notifications']))
+    const invalidateUserData = () =>
+      dispatch(baseApi.util.invalidateTags(['Notifications', 'JoinedGames']))
 
     const globalChannel = pusher.subscribe('global-notifications')
-    globalChannel.bind('notification:new', invalidate)
+    globalChannel.bind('notification:new', invalidateNotifications)
     globalChannel.bind('game:created', () => {
       dispatch(baseApi.util.invalidateTags(['Game']))
     })
 
     const userChannel = pusher.subscribe(`user-${userId}`)
     userChannel.bind('notification:new', (payload: NotificationPayload) => {
-      invalidate()
+      invalidateUserData()
       if (payload?.title) {
         addRealtimeToast({
           title: payload.title,
@@ -126,6 +128,16 @@ export function usePusherAdminNotifications({ enabled = true }: { enabled?: bool
         tone: 'warning',
         link: '/admin/approvals',
       })
+    })
+    channel.bind('approval:updated', () => {
+      dispatch(
+        baseApi.util.invalidateTags(['PendingApprovals', 'Game', 'Analytics']),
+      )
+    })
+    channel.bind('game:updated', () => {
+      dispatch(
+        baseApi.util.invalidateTags(['Game', 'Analytics', 'History', 'PendingApprovals']),
+      )
     })
 
     return () => {

@@ -18,6 +18,7 @@ import {
   CreditCard,
   ImagePlus,
   ExternalLink,
+  X,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useDispatch } from "react-redux";
@@ -64,6 +65,7 @@ export default function PublicGamePage({
   const seatMap = data?.seatMap ?? [];
   const mySeats = data?.userReservedSeats ?? [];
   const pendingSeats = data?.pendingSeats ?? [];
+  const hasSeats = mySeats.length + pendingSeats.length > 0;
 
   const dispatch = useDispatch();
   usePusherEvents(game?._id ? `game-${game._id}` : null, ["seat-map:updated"], () => {
@@ -79,6 +81,7 @@ export default function PublicGamePage({
   };
 
   const toggleSeat = (seatNumber: number) => {
+    if (hasSeats) return;
     setSelected((prev) =>
       prev.includes(seatNumber)
         ? prev.filter((n) => n !== seatNumber)
@@ -259,7 +262,7 @@ export default function PublicGamePage({
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
               <h2 className="text-lg font-bold text-slate-900">
-                {(mySeats.length + pendingSeats.length) > 0 ? "Reserve More Seats" : "Choose Your Seats"}
+                {hasSeats ? "Your Seats" : "Choose Your Seats"}
               </h2>
               <div className="flex items-center gap-4 text-xs text-slate-600">
                 <span className="flex items-center gap-1.5">
@@ -285,7 +288,7 @@ export default function PublicGamePage({
                   {mySeats.map((n) => `#${n}`).join(", ")}
                 </p>
                 <p className="text-xs text-emerald-600">
-                  You can reserve additional seats while they are available.
+                  You have already reserved your seats in this game.
                 </p>
               </div>
             )}
@@ -307,7 +310,7 @@ export default function PublicGamePage({
               {seatMap.map((seat) => (
                 <button
                   key={seat.seatNumber}
-                  disabled={notLoggedIn || seat.isReserved}
+                  disabled={notLoggedIn || seat.isReserved || hasSeats}
                   onClick={() => toggleSeat(seat.seatNumber)}
                   className={seatClasses(seat, selected.includes(seat.seatNumber))}
                 >
@@ -316,8 +319,20 @@ export default function PublicGamePage({
               ))}
             </div>
 
+            {hasSeats && !notLoggedIn && (
+              <div className="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-4 text-center">
+                <p className="text-sm font-semibold text-slate-700">
+                  You already hold seat{mySeats.length > 1 ? "s" : ""}{" "}
+                  {[...mySeats, ...pendingSeats].map((n) => `#${n}`).join(", ")} in this game.
+                </p>
+                <p className="mt-1 text-xs text-slate-500">
+                  No additional seats can be reserved from this link.
+                </p>
+              </div>
+            )}
+
             {/* Selection summary + reserve (logged in only) */}
-            {!notLoggedIn && (
+            {!notLoggedIn && !hasSeats && (
               <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-5">
                 <p className="text-sm text-slate-500">
                   {selected.length > 0
@@ -403,7 +418,14 @@ export default function PublicGamePage({
       {/* Payment popup */}
       {confirming && selected.length > 0 && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="w-full max-w-lg rounded-2xl bg-white p-6 text-center shadow-2xl max-h-[80vh] overflow-y-auto">
+          <div className="relative w-full max-w-lg rounded-2xl bg-white p-6 text-center shadow-2xl max-h-[80vh] overflow-y-auto">
+            <button
+              onClick={() => setConfirming(false)}
+              aria-label="Close payment modal"
+              className="absolute right-4 top-4 flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-slate-200 text-slate-400 transition-colors duration-300 hover:bg-slate-100 hover:text-slate-700"
+            >
+              <X size={18} />
+            </button>
             <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-blue-100">
               <CreditCard size={26} className="text-blue-600" />
             </div>
