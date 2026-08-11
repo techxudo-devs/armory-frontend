@@ -34,7 +34,7 @@ export function HowItWorks() {
           <p className="bg-gradient-to-r from-amber-500/20 to-amber-500/40 text-white w-fit mx-auto px-6 py-1.5 rounded-full font-plus">
             How it works
           </p>
-          <h2 className="text-4xl font-plus font-bold text-white mt-2">
+          <h2 className="text-3xl sm:text-4xl font-plus font-bold text-white mt-2">
             Three steps, no catch
           </h2>
           <p className="text-base font-plus text-[#B08A6C] mt-2 leading-relaxed">

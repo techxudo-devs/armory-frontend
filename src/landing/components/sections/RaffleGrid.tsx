@@ -26,13 +26,13 @@ export function RaffleGrid() {
   }, [activeFilter]);
 
   return (
-    <section id="raffles" className="max-w-[1200px] mx-auto px-8 py-10">
+    <section id="raffles" className="max-w-[1200px] mx-auto px-4 sm:px-8 py-10">
       <div className="flex justify-center text-center w-full mx-auto gap-4 mb-9">
         <div>
                   <p className="bg-gradient-to-r from-amber-500/20 to-amber-500/40 text-white w-fit mx-auto px-6 py-1.5 rounded-full font-plus">
             Get your seat now
           </p>
-          <h2 className="text-4xl font-plus font-bold leading-tight mt-4">
+          <h2 className="text-3xl sm:text-4xl font-plus font-bold leading-tight mt-4">
             All raffles, Grab your seat.
           </h2>
         </div>

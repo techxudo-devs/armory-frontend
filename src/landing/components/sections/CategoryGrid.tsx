@@ -3,12 +3,12 @@ import { categories } from "@/landing/data/content";
 
 export function CategoryGrid() {
   return (
-    <section id="category" className="max-w-[1200px] mx-auto px-8 py-10">
+    <section id="category" className="max-w-[1200px] mx-auto px-4 sm:px-8 py-10">
       <div className="max-w-[600px] mx-auto text-center mb-14">
         <p className="bg-gradient-to-r from-amber-500/20 to-amber-500/40 text-white w-fit mx-auto px-6 py-1.5 rounded-full font-plus">
             Browse by category
           </p>
-        <h2 className="text-4xl font-plus font-bold leading-tight mt-4">
+        <h2 className="text-3xl sm:text-4xl font-plus font-bold leading-tight mt-4">
           One seat away from any of them.
         </h2>
       </div>

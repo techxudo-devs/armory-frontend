@@ -18,8 +18,8 @@ const footerColumns = [
 export function Footer() {
   return (
     <footer className="pt-10 pb-8 border-t border-border/50">
-      <div className="max-w-[1300px] mx-auto px-8">
-        <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-10 mb-14">
+      <div className="max-w-[1300px] mx-auto px-4 sm:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr] gap-10 mb-14">
           <div>
             <div className="flex items-center gap-2.5">
               <Image
