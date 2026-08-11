@@ -10,7 +10,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   primary:
     "btn-gold border border-brass-light/40 text-[#241409] hover:brightness-110",
   outline:
-    "border border-border-strong text-text-primary hover:border-brass hover:text-brass-light",
+    "border border-[#A96E1F]/50 text-[#A96E1F] hover:border-[#A96E1F] hover:bg-[#D29A45]/10 hover:text-[#6f4510]",
   ghost:
     "border-b border-border-strong text-text-primary hover:border-brass px-1"
 };

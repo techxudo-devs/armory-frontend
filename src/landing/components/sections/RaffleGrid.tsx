@@ -44,17 +44,18 @@ export function RaffleGrid() {
     : "/dashboard/active-games";
 
   return (
-    <section id="raffles" className="max-w-[1200px] mx-auto px-4 sm:px-8 py-10">
-      <div className="flex justify-center text-center w-full mx-auto gap-4 mb-9">
-        <div>
-          <p className="bg-gradient-to-r from-amber-500/20 to-amber-500/40 text-white w-fit mx-auto px-6 py-1.5 rounded-full font-plus">
-            Get your seat now
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-plus font-bold leading-tight mt-4">
-            All raffles, Grab your seat.
-          </h2>
+    <section id="raffles" className="bg-[#FBF6EC] border-y border-[#E8D9C0]">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-8 py-10">
+        <div className="flex justify-center text-center w-full mx-auto gap-4 mb-9">
+          <div>
+            <p className="bg-gradient-to-r from-[#D29A45]/15 to-[#E3C49A]/30 text-[#A96E1F] w-fit mx-auto px-6 py-1.5 rounded-full font-plus">
+              Get your seat now
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-plus font-bold leading-tight mt-4 text-[#24140B]">
+              All raffles, Grab your seat.
+            </h2>
+          </div>
         </div>
-      </div>
 
       {categories.length > 1 && (
         <div className="flex flex-wrap justify-center gap-2.5 mb-9">
@@ -82,11 +83,11 @@ export function RaffleGrid() {
           ))}
         </div>
       ) : (
-        <div className="rounded-xl border border-border-strong surface-card py-16 text-center">
-          <p className="text-lg font-plus font-semibold text-text-primary">
+        <div className="rounded-xl border border-[#E8D9C0] bg-white py-16 text-center">
+          <p className="text-lg font-plus font-semibold text-[#24140B]">
             No live raffles right now
           </p>
-          <p className="mt-1 text-sm font-plus text-text-muted">
+          <p className="mt-1 text-sm font-plus text-[#9A7A5C]">
             New raffles drop soon — check back in a little while.
           </p>
         </div>
@@ -101,19 +102,20 @@ export function RaffleGrid() {
           View all raffles
         </Button>
       </div>
+      </div>
     </section>
   );
 }
 
 function RaffleCardSkeleton() {
   return (
-    <div className="animate-pulse surface-card border border-border rounded-xl">
-      <div className="h-60 bg-gradient-to-br from-[#331E10] to-[#150A06] border-b border-border rounded-t-xl" />
+    <div className="animate-pulse bg-white border border-[#E8D9C0] rounded-xl">
+      <div className="h-60 bg-gradient-to-br from-[#331E10] to-[#150A06] border-b border-[#E8D9C0] rounded-t-xl" />
       <div className="p-5 flex flex-col gap-3">
-        <div className="h-6 w-24 rounded bg-border-strong/60" />
-        <div className="h-5 w-full rounded bg-border-strong/60" />
-        <div className="h-2.5 w-full rounded bg-border-strong/40" />
-        <div className="mt-2 h-11 w-full rounded bg-border-strong/50" />
+        <div className="h-6 w-24 rounded bg-[#E8D9C0]" />
+        <div className="h-5 w-full rounded bg-[#E8D9C0]" />
+        <div className="h-2.5 w-full rounded bg-[#E0CBA4]" />
+        <div className="mt-2 h-11 w-full rounded bg-[#E0CBA4]" />
       </div>
     </div>
   );
