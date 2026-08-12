@@ -129,6 +129,15 @@ export function usePusherAdminNotifications({ enabled = true }: { enabled?: bool
         link: '/admin/approvals',
       })
     })
+    channel.bind('feedback:new', (payload?: { subject?: string; user?: string }) => {
+      dispatch(baseApi.util.invalidateTags(['Feedback']))
+      addRealtimeToast({
+        title: 'New Feedback',
+        message: `${payload?.user ?? 'A player'} sent: ${payload?.subject ?? ''}`,
+        tone: 'warning',
+        link: '/admin/feedback',
+      })
+    })
     channel.bind('approval:updated', () => {
       dispatch(
         baseApi.util.invalidateTags(['PendingApprovals', 'Game', 'Analytics']),

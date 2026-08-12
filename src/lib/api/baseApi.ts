@@ -101,7 +101,7 @@ export const withPagination = <T>(data: T[], meta?: unknown): Paginated<T> => ({
 export const baseApi = createApi({
   reducerPath: 'api',
   baseQuery: axiosBaseQuery,
-  tagTypes: ['Game', 'User', 'History', 'Analytics', 'Auth', 'JoinedGames', 'Notifications', 'PendingApprovals'],
+  tagTypes: ['Game', 'User', 'History', 'Analytics', 'Auth', 'JoinedGames', 'Notifications', 'PendingApprovals', 'Feedback'],
   refetchOnFocus: true,
   refetchOnReconnect: true,
   endpoints: () => ({}),

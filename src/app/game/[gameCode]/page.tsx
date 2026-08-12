@@ -491,15 +491,29 @@ export default function PublicGamePage({
               <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-[#E3C49A]">
                 Pay Here to reserve your seat
               </p>
-              <a
-                href="https://linktr.ee/metaltubesandseeds"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex w-fit items-center gap-1.5 text-sm font-semibold text-[#E3C49A] underline-offset-2 hover:underline"
-              >
-                https://linktr.ee/metaltubesandseeds
-                <ExternalLink size={13} />
-              </a>
+              <ul className="grid grid-cols-1 gap-x-3 gap-y-1.5 md:grid-cols-2">
+                {[
+                  { label: "Venmo", href: "https://venmo.com/u/Tommy-Hudson-3" },
+                  { label: "PayPal", href: "https://www.paypal.com/paypalme/TommyHudson1974" },
+                  { label: "Cash App", href: "https://cash.app/$vhhrott" },
+                  {
+                    label: "Debit/Credit Card",
+                    href: "https://checkout.square.site/merchant/ML3144VNCTC5J/checkout/FDHLXSM6SOCWYZHEE6Q2YQMV",
+                  },
+                ].map((method) => (
+                  <li key={method.label}>
+                    <a
+                      href={method.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex w-fit items-center gap-1.5 text-sm font-semibold text-[#E3C49A] underline-offset-2 hover:underline"
+                    >
+                      {method.label}
+                      <ExternalLink size={13} />
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
 
             {/* Payment reference */}

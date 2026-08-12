@@ -162,3 +162,28 @@ export interface PendingApproval {
   reservedAt: string
   expiresAt: string | null
 }
+
+export type FeedbackType = 'complaint' | 'good_word' | 'question' | 'suggestion'
+export type FeedbackStatus = 'new' | 'in_review' | 'resolved'
+
+export interface FeedbackItem {
+  _id: string
+  type: FeedbackType
+  subject: string
+  message: string
+  status: FeedbackStatus
+  user: {
+    _id: string
+    fullName: string
+    email: string
+    phone: string
+  }
+  createdAt: string
+  updatedAt: string
+}
+
+export interface FeedbackCounts {
+  new: number
+  inReview: number
+  resolved: number
+}

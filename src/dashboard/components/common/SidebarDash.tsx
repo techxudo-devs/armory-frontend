@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useLogoutMutation } from "@/lib/api/authApi";
 import { useGetPendingApprovalsQuery } from "@/lib/api/gamesApi";
+import { useGetFeedbackCountsQuery } from "@/lib/api/feedbackApi";
 import {
   Gamepad2,
   Ticket,
@@ -18,6 +19,8 @@ import {
   Archive,
   BadgeCheck,
   X,
+  Inbox,
+  MessageSquareText,
 } from "lucide-react";
 
 interface SidebarUser {
@@ -31,25 +34,34 @@ interface SidebarLink {
   href: string;
   icon: typeof Gamepad2;
   showCount?: boolean;
+  countType?: "pending" | "feedback";
 }
 
 const adminLinks: SidebarLink[] = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
-  { label: "Manage Games", href: "/admin/manage-games", icon: Gamepad2 },
-  {
-    label: "Seat Approvals",
-    href: "/admin/approvals",
-    icon: BadgeCheck,
-    showCount: true,
-  },
-  { label: "Ended Games", href: "/admin/ended-games", icon: Archive },
   {
     label: "Create Game",
     href: "/admin/create-game",
     icon: PlusCircle,
   },
+  { label: "Manage Games", href: "/admin/manage-games", icon: Gamepad2 },
+  { label: "Ended Games", href: "/admin/ended-games", icon: Archive },
   { label: "Game History", href: "/admin/game-history", icon: History },
+  {
+    label: "Seat Approvals",
+    href: "/admin/approvals",
+    icon: BadgeCheck,
+    showCount: true,
+    countType: "pending",
+  },
   { label: "Manage Users", href: "/admin/manage-users", icon: Users },
+  {
+    label: "Feedback Inbox",
+    href: "/admin/feedback",
+    icon: Inbox,
+    showCount: true,
+    countType: "feedback",
+  },
 ];
 
 const userLinks: SidebarLink[] = [
@@ -57,6 +69,7 @@ const userLinks: SidebarLink[] = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { label: "My Seats", href: "/dashboard/my-seats", icon: Ticket },
   { label: "Notifications", href: "/dashboard/notifications", icon: Bell },
+  { label: "Feedback", href: "/dashboard/feedback", icon: MessageSquareText },
   { label: "My Profile", href: "/dashboard/my-profile", icon: User },
 ];
 
@@ -79,6 +92,11 @@ function SidebarContent({
     skip: user.role !== "admin",
   });
   const pendingCount = pendingApprovals?.length ?? 0;
+
+  const { data: feedbackCounts } = useGetFeedbackCountsQuery(undefined, {
+    skip: user.role !== "admin",
+  });
+  const newFeedbackCount = feedbackCounts?.new ?? 0;
 
   const handleSignOut = async () => {
     try {
@@ -157,6 +175,7 @@ function SidebarContent({
           {links.map((link) => {
             const Icon = link.icon;
             const isActive = pathname === link.href;
+            const count = link.countType === "feedback" ? newFeedbackCount : pendingCount;
             return (
               <Link
                 key={link.href}
@@ -172,9 +191,15 @@ function SidebarContent({
               >
                 <Icon className="w-4 h-4 shrink-0" />
                 <span className={`truncate ${linkLabel}`}>{link.label}</span>
-                {link.showCount && pendingCount > 0 && (
-                  <span className="ml-auto inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-amber-500/20 px-1.5 text-[10px] font-bold text-amber-400">
-                    {pendingCount}
+                {link.showCount && count > 0 && (
+                  <span
+                    className={`ml-auto inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 text-[10px] font-bold ${
+                      isActive
+                        ? "bg-[#1a1408] text-[#D29A45]"
+                        : "bg-amber-500/20 text-amber-400"
+                    }`}
+                  >
+                    {count}
                   </span>
                 )}
               </Link>
