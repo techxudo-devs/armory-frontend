@@ -6,7 +6,7 @@ import { SeatGauge } from "@/landing/components/ui/SeatGauge";
 import { Countdown } from "@/landing/components/ui/Countdown";
 import { CategoryImage } from "@/landing/components/ui/CategoryIcon";
 import { useLiveGames } from "@/landing/hooks/useLiveGames";
-import { mapGameToFeatured, fillRatio } from "@/landing/data/games";
+import { mapGameToFeatured } from "@/landing/data/games";
 import { useGetMeQuery } from "@/lib/api/authApi";
 
 export function FeaturedSpotlight() {
@@ -14,7 +14,10 @@ export function FeaturedSpotlight() {
   const { isError: notLoggedIn } = useGetMeQuery();
 
   const featured =
-    [...games].sort((a, b) => fillRatio(b) - fillRatio(a))[0] ?? null;
+    [...games].sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+    )[0] ?? null;
   const raffle = featured ? mapGameToFeatured(featured) : null;
 
   const href = raffle?.gameCode
