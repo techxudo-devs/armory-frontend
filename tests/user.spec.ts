@@ -35,9 +35,9 @@ test.describe('User dashboard', () => {
     const main = page.locator('main')
     await expect(main.getByRole('heading', { name: 'Available Games' })).toBeVisible()
 
-    const joinButtons = main.getByRole('button', { name: 'Join Game' })
-    const joinedAll = main.getByText('You have joined all active games')
-    await expect(joinButtons.first().or(joinedAll)).toBeVisible({ timeout: 15000 })
+    const gameAction = main.getByRole('button', { name: /Join Game|Participated/ }).first()
+    const emptyState = main.getByText('No active games right now')
+    await expect(gameAction.or(emptyState)).toBeVisible({ timeout: 15000 })
   })
 
   test('my seats page shows summary, reserved seats and game history', async ({ page }) => {

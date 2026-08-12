@@ -5,25 +5,32 @@ test.describe('Public landing page', () => {
   test('renders header, hero and raffle sections', async ({ page }) => {
     await page.goto('/')
 
-    await expect(page.getByText('IGY6ARMORY')).toBeVisible()
-    // Nav links are intentionally hidden below the md breakpoint (mobile project).
+    await expect(page.getByText(/Metal Tubes/).first()).toBeVisible()
+    // Nav links are intentionally hidden below the lg breakpoint.
     if (!test.info().project.name.toLowerCase().includes('mobile')) {
-      const nav = page.getByRole('navigation')
+      const nav = page.getByRole('banner').getByRole('navigation')
       await expect(nav.getByRole('link', { name: 'Live raffles' })).toBeVisible()
       await expect(nav.getByRole('link', { name: 'How it works' })).toBeVisible()
       await expect(nav.getByRole('link', { name: 'Categories' })).toBeVisible()
       await expect(nav.getByRole('link', { name: 'FAQ' })).toBeVisible()
     }
 
-    await expect(page.getByRole('heading', { name: /Premium gear armony/ })).toBeVisible()
-    await expect(page.getByRole('link', { name: 'Browse live raffles' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: /Premium gear,\s+One seat away\./ })).toBeVisible()
+    await expect(page.getByRole('link', { name: 'Browse live raffles' }).first()).toBeVisible()
     await expect(page.getByRole('heading', { name: /All raffles, Grab your seat/ })).toBeVisible()
-    await expect(page.getByRole('link', { name: 'View all 38 raffles' })).toBeVisible()
+    await expect(page.getByRole('link', { name: 'View all raffles' })).toBeVisible()
   })
 
   test('navigates from the header to the login page', async ({ page }) => {
     await page.goto('/')
-    await page.getByRole('link', { name: 'Log in' }).click()
+
+    if (test.info().project.name.toLowerCase().includes('mobile')) {
+      await page.getByRole('button', { name: 'Open menu' }).click()
+      await page.getByRole('complementary').getByRole('link', { name: 'Log in' }).click()
+    } else {
+      await page.getByRole('banner').getByRole('link', { name: 'Log in' }).click()
+    }
+
     await expect(page).toHaveURL(/\/login/)
     await expect(page.getByRole('heading', { name: 'Log in to your account' })).toBeVisible()
   })

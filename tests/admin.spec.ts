@@ -123,7 +123,7 @@ test.describe('Admin dashboard', () => {
     if (await announceBtn.first().isVisible().catch(() => false)) {
       await announceBtn.first().click()
       await expect(page.getByRole('heading', { name: 'Participants' })).toBeVisible()
-      await page.getByRole('button', { name: 'Close' }).click()
+      await page.getByRole('button', { name: 'Close', exact: true }).click()
     }
   })
 

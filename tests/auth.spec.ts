@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 import { ADMIN_USER, TEST_USER, expectToast, loginViaUI, signOut } from './helpers'
 
 test.describe('Authentication', () => {
-  test('registers a new user account and lands on the user dashboard', async ({ page }) => {
+  test('registers a new user account and lands on active games', async ({ page }) => {
     const stamp = Date.now()
     const fullName = 'PW Register Test'
     const email = `pwregister.${stamp}@test.com`
@@ -17,17 +17,17 @@ test.describe('Authentication', () => {
     await page.locator('input[name="terms"]').check()
     await page.getByRole('button', { name: 'Create account' }).click()
 
-    await expect(page).toHaveURL(/\/dashboard/, { timeout: 15000 })
+    await expect(page).toHaveURL(/\/dashboard\/active-games/, { timeout: 15000 })
     await expectToast(page, 'Account created successfully!')
-    await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Active Games' })).toBeVisible()
   })
 
-  test('logs in a regular user and is redirected to /dashboard', async ({ page }) => {
+  test('logs in a regular user and is redirected to /dashboard/active-games', async ({ page }) => {
     await loginViaUI(page, TEST_USER.email, TEST_USER.password)
 
-    await expect(page).toHaveURL(/\/dashboard/, { timeout: 15000 })
+    await expect(page).toHaveURL(/\/dashboard\/active-games/, { timeout: 15000 })
     await expectToast(page, 'Logged in successfully!')
-    await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Active Games' })).toBeVisible()
   })
 
   test('logs in as admin and is redirected to /admin', async ({ page }) => {
@@ -66,7 +66,7 @@ test.describe('Authentication', () => {
 
   test('signs out from the dashboard and returns to login', async ({ page }) => {
     await loginViaUI(page, TEST_USER.email, TEST_USER.password)
-    await expect(page).toHaveURL(/\/dashboard/, { timeout: 15000 })
+    await expect(page).toHaveURL(/\/dashboard\/active-games/, { timeout: 15000 })
 
     await signOut(page)
     await expect(page).toHaveURL(/\/login/, { timeout: 10000 })
