@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, use, useRef, useLayoutEffect } from "react";
+import { useEffect, useState, use, useRef, useLayoutEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Trophy,
   Users,
@@ -54,9 +55,10 @@ export default function PublicGamePage({
   params: Promise<{ gameCode: string }>;
 }) {
   const { gameCode: rawGameCode } = use(params);
+  const router = useRouter();
   const gameCode = rawGameCode.toUpperCase();
   const { data, isLoading, isError } = useGetGameByCodeQuery(gameCode);
-  const { isError: notLoggedIn } = useGetMeQuery();
+  const { data: user, isError: notLoggedIn } = useGetMeQuery();
   const [reserveSeats, { isLoading: isReserving }] = useReserveSeatsMutation();
   const [selected, setSelected] = useState<number[]>([]);
   const [confirming, setConfirming] = useState(false);
@@ -73,11 +75,18 @@ export default function PublicGamePage({
   const mySeats = data?.userReservedSeats ?? [];
   const pendingSeats = data?.pendingSeats ?? [];
   const hasSeats = mySeats.length + pendingSeats.length > 0;
+  const isAdmin = user?.role === "admin";
 
   const dispatch = useDispatch();
   usePusherEvents(game?._id ? `game-${game._id}` : null, ["seat-map:updated"], () => {
     dispatch(baseApi.util.invalidateTags(["Game"]));
   });
+
+  useEffect(() => {
+    if (!isAdmin) return;
+    toast.error("Admins cannot join games. Redirecting to admin dashboard.");
+    router.replace("/admin");
+  }, [isAdmin, router]);
 
   useLayoutEffect(() => {
     const seatCard = seatCardRef.current;
@@ -209,7 +218,7 @@ export default function PublicGamePage({
               </Link>
               <div className="flex items-center gap-2">
                 <Link
-                  href={notLoggedIn ? "/login?next=/dashboard/active-games" : "/dashboard/active-games"}
+                  href={notLoggedIn ? "/login?next=/dashboard/active-games" : isAdmin ? "/admin" : "/dashboard/active-games"}
                   prefetch={false}
                   className="flex cursor-pointer items-center gap-2 rounded-xl border border-[#3D2715] bg-white/[0.03] px-4 py-2 text-sm font-semibold text-[#E3C49A] transition-colors duration-300 hover:border-[#D29A45]/60 hover:text-white"
                 >

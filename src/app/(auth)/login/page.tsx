@@ -33,10 +33,14 @@ function LoginForm() {
       toast.success("Logged in successfully!");
       const safeNext =
         next && next.startsWith("/") && !next.startsWith("//") ? next : null;
-      router.replace(
-        safeNext ??
-          (result.user.role === "admin" ? "/admin" : "/dashboard/active-games")
-      );
+      if (result.user.role === "admin") {
+        if (safeNext?.startsWith("/game") || safeNext?.startsWith("/dashboard")) {
+          toast.error("Admins cannot join games. Redirecting to admin dashboard.");
+        }
+        router.replace("/admin");
+        return;
+      }
+      router.replace(safeNext ?? "/dashboard/active-games");
     } catch (error) {
       toast.error(getErrorMessage(error));
     }

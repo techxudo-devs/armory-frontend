@@ -33,6 +33,12 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
     }
   }, [isLoading, user, pathname, router])
 
+  useEffect(() => {
+    if (!isLoading && user?.role === 'admin' && pathname.startsWith('/dashboard')) {
+      router.replace('/admin')
+    }
+  }, [isLoading, user, pathname, router])
+
   if (isLoading || !user) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#150A06]">

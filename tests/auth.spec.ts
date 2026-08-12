@@ -38,6 +38,16 @@ test.describe('Authentication', () => {
     await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible()
   })
 
+  test('keeps admins out of game booking links after login', async ({ page }) => {
+    await page.goto('/login?next=/game/D6508095')
+    await page.getByLabel('Email or phone').fill(ADMIN_USER.email)
+    await page.locator('input[name="password"]').fill(ADMIN_USER.password)
+    await page.getByRole('button', { name: 'Log in' }).click()
+
+    await expect(page).toHaveURL(/\/admin$/, { timeout: 15000 })
+    await expectToast(page, 'Admins cannot join games. Redirecting to admin dashboard.')
+  })
+
   test('shows an error toast for invalid credentials and stays on login', async ({ page }) => {
     await loginViaUI(page, TEST_USER.email, 'DefinitelyWrong!')
 

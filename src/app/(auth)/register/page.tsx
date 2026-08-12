@@ -35,10 +35,11 @@ function RegisterForm() {
       toast.success("Account created successfully!");
       const safeNext =
         next && next.startsWith("/") && !next.startsWith("//") ? next : null;
-      router.replace(
-        safeNext ??
-          (result.user.role === "admin" ? "/admin" : "/dashboard/active-games")
-      );
+      if (result.user.role === "admin") {
+        router.replace("/admin");
+        return;
+      }
+      router.replace(safeNext ?? "/dashboard/active-games");
     } catch (error) {
       toast.error(getErrorMessage(error));
     }

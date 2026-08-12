@@ -1,6 +1,8 @@
 'use client'
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { Button } from "@/landing/components/ui/Button";
 import { SeatGauge } from "@/landing/components/ui/SeatGauge";
 import { Countdown } from "@/landing/components/ui/Countdown";
@@ -10,8 +12,10 @@ import { mapGameToFeatured } from "@/landing/data/games";
 import { useGetMeQuery } from "@/lib/api/authApi";
 
 export function FeaturedSpotlight() {
+  const router = useRouter();
   const { games } = useLiveGames(12);
-  const { isError: notLoggedIn } = useGetMeQuery();
+  const { data: user, isError: notLoggedIn } = useGetMeQuery();
+  const isAdmin = user?.role === "admin";
 
   const featured =
     [...games].sort(
@@ -23,6 +27,8 @@ export function FeaturedSpotlight() {
   const href = raffle?.gameCode
     ? notLoggedIn
       ? `/login?next=/game/${encodeURIComponent(raffle.gameCode)}`
+      : isAdmin
+        ? "/admin"
       : `/game/${encodeURIComponent(raffle.gameCode)}`
     : "#raffles";
 
@@ -98,6 +104,12 @@ export function FeaturedSpotlight() {
                   </div>
                   <Button
                     href={href}
+                    onClick={(event) => {
+                      if (!isAdmin) return;
+                      event.preventDefault();
+                      toast.error("Admins cannot join games. Redirecting to admin dashboard.");
+                      router.push("/admin");
+                    }}
                     className="whitespace-nowrap rounded-lg text-center hover:scale-97 transition-transform duration-300"
                   >
                     Claim your seat

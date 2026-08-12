@@ -13,7 +13,7 @@ const allLabel = "All raffles";
 
 export function RaffleGrid() {
   const { games, isLoading } = useLiveGames(12);
-  const { isError: notLoggedIn } = useGetMeQuery();
+  const { data: user, isError: notLoggedIn } = useGetMeQuery();
 
   const categories = useMemo(() => {
     const set = new Set<RaffleCategory>();
@@ -41,7 +41,9 @@ export function RaffleGrid() {
 
   const viewAllHref = notLoggedIn
     ? "/login?next=/dashboard/active-games"
-    : "/dashboard/active-games";
+    : user?.role === "admin"
+      ? "/admin"
+      : "/dashboard/active-games";
 
   return (
     <section id="raffles" className="bg-[#FBF6EC] border-y border-[#E8D9C0]">

@@ -19,6 +19,7 @@ export function Header() {
   const { data: user, isSuccess } = useGetMeQuery();
 
   const loggedIn = isSuccess && !!user;
+  const dashboardHref = user?.role === "admin" ? "/admin" : "/dashboard/active-games";
 
   useEffect(() => {
     if (open) {
@@ -61,7 +62,7 @@ export function Header() {
           <div className="hidden lg:flex items-center gap-5">
             {loggedIn ? (
               <Link
-                href="/dashboard/active-games"
+                href={dashboardHref}
                 prefetch={false}
                 className="flex items-center gap-2 text-sm font-plus text-brass-light hover:text-text-primary transition-colors duration-300"
               >
@@ -149,7 +150,7 @@ export function Header() {
           })}
           {loggedIn ? (
             <Link
-              href="/dashboard/active-games"
+              href={dashboardHref}
               prefetch={false}
               onClick={() => setOpen(false)}
               className="flex items-center gap-3 rounded-lg pr-4 py-3 text-base font-plus text-text-secondary hover:bg-panel-2 hover:text-text-primary transition-colors duration-300"

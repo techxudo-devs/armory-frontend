@@ -3,7 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 import { useLogoutMutation } from "@/lib/api/authApi";
+import { baseApi } from "@/lib/api/baseApi";
 import { useGetPendingApprovalsQuery } from "@/lib/api/gamesApi";
 import { useGetFeedbackCountsQuery } from "@/lib/api/feedbackApi";
 import {
@@ -86,6 +88,7 @@ function SidebarContent({
 }) {
   const pathname = usePathname();
   const router = useRouter();
+  const dispatch = useDispatch();
   const [logout] = useLogoutMutation();
 
   const { data: pendingApprovals } = useGetPendingApprovalsQuery(undefined, {
@@ -101,6 +104,7 @@ function SidebarContent({
   const handleSignOut = async () => {
     try {
       await logout().unwrap();
+      dispatch(baseApi.util.resetApiState());
     } catch (error) {
       console.error("Logout error", error);
     }
