@@ -223,7 +223,7 @@ export default function PublicGamePage({
                   className="flex cursor-pointer items-center gap-2 rounded-xl border border-[#3D2715] bg-white/[0.03] px-4 py-2 text-sm font-semibold text-[#E3C49A] transition-colors duration-300 hover:border-[#D29A45]/60 hover:text-white"
                 >
                   <LayoutDashboard size={16} />
-                  Go to your dashboard
+                  Dashboard
                 </Link>
                 <button
                   onClick={handleShare}

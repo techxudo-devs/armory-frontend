@@ -14,7 +14,7 @@ export default function Home() {
       <main>
         <Hero2 />
         <FeaturedSpotlight />
-        <CategoryGrid />
+        {/* <CategoryGrid /> */}
         <RaffleGrid />
         {/* <WinnersTicker /> */}
         <HowItWorks />

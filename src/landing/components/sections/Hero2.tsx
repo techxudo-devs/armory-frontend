@@ -51,10 +51,8 @@ export function Hero2() {
             <br />
             One <span className="text-brass-light">seat</span> away.
           </h1>
-          <p className="text-base sm:text-lg text-white max-w-3xl mb-9 leading-relaxed font-plus mx-auto">
-            Claim a seat on the gear you actually want, knives, optics, ammo,
-            and kit, for a fraction of retail. Every listing draws live once
-            seats sell out, no exceptions.
+          <p className="text-base sm:text-lg text-white max-w-[670px] mb-9 leading-relaxed font-plus mx-auto">
+            Claim a seat on the game or your choice for a fraction of the retail price.  Drawing will be live once all seats are filled.
           </p>
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3.5 mb-10">
             <Button
