@@ -22,11 +22,13 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
   usePusherAdminNotifications({ enabled: user?.role === 'admin' })
 
   useEffect(() => {
-    // Only redirect if query is completely done loading & fetching and resulted in error
-    if (!isLoading && !isFetching && isError) {
+    // Only redirect if there is genuinely no authenticated user.
+    // Guarding on `!user` prevents a redirect loop when the cache still
+    // holds stale data after sign out (isError + cached data).
+    if (!isLoading && !isFetching && isError && !user) {
       router.replace('/login')
     }
-  }, [isLoading, isFetching, isError, router])
+  }, [isLoading, isFetching, isError, user, router])
 
   useEffect(() => {
     if (!isLoading && user && pathname.startsWith('/admin') && user.role !== 'admin') {

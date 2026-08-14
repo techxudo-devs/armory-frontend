@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Mail, Lock } from "lucide-react";
@@ -16,20 +16,7 @@ function LoginForm() {
   const searchParams = useSearchParams();
   const next = searchParams.get("next") || "";
   const [login, { isLoading }] = useLoginMutation();
-  const { data: currentUser, refetch } = useGetMeQuery();
-
-  // If already logged in when visiting /login page directly
-  useEffect(() => {
-    if (currentUser) {
-      const safeNext =
-        next && next.startsWith("/") && !next.startsWith("//") ? next : null;
-      if (currentUser.role === "admin") {
-        router.replace("/admin");
-      } else {
-        router.replace(safeNext ?? "/dashboard/active-games");
-      }
-    }
-  }, [currentUser, next, router]);
+  const { refetch } = useGetMeQuery();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

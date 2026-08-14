@@ -103,15 +103,17 @@ function SidebarContent({
 
   const handleSignOut = async () => {
     try {
-      if (typeof window !== "undefined") {
-        localStorage.removeItem("token");
-      }
+      // Logout first while the token is still available so the server can
+      // clear its cookie (the /auth/logout route is protected).
       await logout().unwrap();
-      dispatch(baseApi.util.resetApiState());
-    } catch (error) {
-      console.error("Logout error", error);
+    } catch {
+      // Ignore server errors - local session is cleared below regardless.
     }
-    router.push("/login");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("token");
+    }
+    dispatch(baseApi.util.resetApiState());
+    router.replace("/login");
   };
 
   const links = user.role === "admin" ? adminLinks : userLinks;
