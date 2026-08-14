@@ -2,21 +2,19 @@
 
 import { Suspense } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Mail, Lock } from "lucide-react";
 import { toast } from "sonner";
 import { AuthCard } from "@/auth/components/AuthCard";
 import { Field } from "@/auth/components/Field";
 import { SubmitButton } from "@/auth/components/SubmitButton";
-import { useLoginMutation, useGetMeQuery } from "@/lib/api/authApi";
+import { useLoginMutation } from "@/lib/api/authApi";
 import { getErrorMessage } from "@/lib/api/baseApi";
 
 function LoginForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const next = searchParams.get("next") || "";
   const [login, { isLoading }] = useLoginMutation();
-  const { refetch } = useGetMeQuery();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,27 +29,30 @@ function LoginForm() {
 
     try {
       const result = await login({ identifier, password }).unwrap();
-      
+
       const token = result.token;
       if (token) {
         localStorage.setItem("token", token);
       }
 
       toast.success("Logged in successfully!");
-      await refetch();
 
       const safeNext =
         next && next.startsWith("/") && !next.startsWith("//") ? next : null;
       const userRole = result.user?.role;
 
+      // Full page navigation clears the in-memory API cache so the dashboard
+      // boots fresh and `getMe` re-runs with the freshly stored token. SPA
+      // `router.replace` here can hand a stale 401 / old-user cache to the
+      // dashboard, causing the "login again" bounce and wrong role routing.
       if (userRole === "admin") {
         if (safeNext?.startsWith("/game") || safeNext?.startsWith("/dashboard")) {
           toast.error("Admins cannot join games. Redirecting to admin dashboard.");
         }
-        router.replace("/admin");
+        window.location.replace("/admin");
         return;
       }
-      router.replace(safeNext ?? "/dashboard/active-games");
+      window.location.replace(safeNext ?? "/dashboard/active-games");
     } catch (error) {
       toast.error(getErrorMessage(error));
     }

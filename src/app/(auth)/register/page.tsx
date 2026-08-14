@@ -2,7 +2,7 @@
 
 import { Suspense } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { User, Phone, Mail, Lock } from "lucide-react";
 import { toast } from "sonner";
 import { AuthCard } from "@/auth/components/AuthCard";
@@ -12,7 +12,6 @@ import { useRegisterMutation } from "@/lib/api/authApi";
 import { getErrorMessage } from "@/lib/api/baseApi";
 
 function RegisterForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const next = searchParams.get("next") || "";
   const [register, { isLoading }] = useRegisterMutation();
@@ -39,13 +38,17 @@ function RegisterForm() {
       }
 
       toast.success("Account created successfully!");
+
       const safeNext =
         next && next.startsWith("/") && !next.startsWith("//") ? next : null;
+
+      // Full page navigation clears the in-memory API cache so the dashboard
+      // boots fresh and `getMe` re-runs with the freshly stored token.
       if (result.user?.role === "admin") {
-        router.replace("/admin");
+        window.location.replace("/admin");
         return;
       }
-      router.replace(safeNext ?? "/dashboard/active-games");
+      window.location.replace(safeNext ?? "/dashboard/active-games");
     } catch (error) {
       toast.error(getErrorMessage(error));
     }
