@@ -6,7 +6,7 @@ out
 .DS_Store
 next-env.d.ts
 combined_project_code_frontend.txt
-comined_project_code.txt
+combined_project_code.txt
 
 # Playwright
 /test-results/

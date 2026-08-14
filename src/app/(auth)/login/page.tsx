@@ -16,9 +16,9 @@ function LoginForm() {
   const searchParams = useSearchParams();
   const next = searchParams.get("next") || "";
   const [login, { isLoading }] = useLoginMutation();
-  const { data: currentUser } = useGetMeQuery();
+  const { data: currentUser, refetch } = useGetMeQuery();
 
-  // If already logged in, redirect away from login page
+  // If already logged in when visiting /login page directly
   useEffect(() => {
     if (currentUser) {
       const safeNext =
@@ -44,23 +44,22 @@ function LoginForm() {
 
     try {
       const result = await login({ identifier, password }).unwrap();
-
-      // Save token to localStorage for Incognito / Cross-domain fallback
-      if (result.token) {
-        localStorage.setItem("token", result.token);
+      
+      const token = result.token;
+      if (token) {
+        localStorage.setItem("token", token);
       }
 
       toast.success("Logged in successfully!");
+      await refetch();
+
       const safeNext =
         next && next.startsWith("/") && !next.startsWith("//") ? next : null;
-      if (result.user?.role === "admin") {
-        if (
-          safeNext?.startsWith("/game") ||
-          safeNext?.startsWith("/dashboard")
-        ) {
-          toast.error(
-            "Admins cannot join games. Redirecting to admin dashboard.",
-          );
+      const userRole = result.user?.role;
+
+      if (userRole === "admin") {
+        if (safeNext?.startsWith("/game") || safeNext?.startsWith("/dashboard")) {
+          toast.error("Admins cannot join games. Redirecting to admin dashboard.");
         }
         router.replace("/admin");
         return;
@@ -138,11 +137,7 @@ export default function LoginPage() {
   return (
     <Suspense
       fallback={
-        <AuthCard
-          badge="Loading"
-          title="Please wait..."
-          subtitle="Loading login form."
-        >
+        <AuthCard badge="Loading" title="Please wait..." subtitle="Loading login form.">
           <p className="text-center text-xs text-text-muted">Loading...</p>
         </AuthCard>
       }

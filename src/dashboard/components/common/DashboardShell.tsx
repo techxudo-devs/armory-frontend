@@ -11,7 +11,7 @@ import { RealtimeToasts } from '../RealtimeToasts'
 export function DashboardShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const router = useRouter()
-  const { data: user, isLoading, isError } = useGetMeQuery()
+  const { data: user, isLoading, isFetching, isError } = useGetMeQuery()
   const [mobileOpen, setMobileOpen] = useState(false)
 
   usePusherNotifications({
@@ -22,10 +22,11 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
   usePusherAdminNotifications({ enabled: user?.role === 'admin' })
 
   useEffect(() => {
-    if (isError) {
+    // Only redirect if query is completely done loading & fetching and resulted in error
+    if (!isLoading && !isFetching && isError) {
       router.replace('/login')
     }
-  }, [isError, router])
+  }, [isLoading, isFetching, isError, router])
 
   useEffect(() => {
     if (!isLoading && user && pathname.startsWith('/admin') && user.role !== 'admin') {
@@ -39,7 +40,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
     }
   }, [isLoading, user, pathname, router])
 
-  if (isLoading || !user) {
+  if (isLoading || isFetching || !user) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#150A06]">
         <div className="flex flex-col items-center gap-3">
