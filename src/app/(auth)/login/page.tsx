@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Mail, Lock } from "lucide-react";
@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { AuthCard } from "@/auth/components/AuthCard";
 import { Field } from "@/auth/components/Field";
 import { SubmitButton } from "@/auth/components/SubmitButton";
-import { useLoginMutation } from "@/lib/api/authApi";
+import { useLoginMutation, useGetMeQuery } from "@/lib/api/authApi";
 import { getErrorMessage } from "@/lib/api/baseApi";
 
 function LoginForm() {
@@ -16,6 +16,20 @@ function LoginForm() {
   const searchParams = useSearchParams();
   const next = searchParams.get("next") || "";
   const [login, { isLoading }] = useLoginMutation();
+  const { data: currentUser } = useGetMeQuery();
+
+  // If already logged in, redirect away from login page
+  useEffect(() => {
+    if (currentUser) {
+      const safeNext =
+        next && next.startsWith("/") && !next.startsWith("//") ? next : null;
+      if (currentUser.role === "admin") {
+        router.replace("/admin");
+      } else {
+        router.replace(safeNext ?? "/dashboard/active-games");
+      }
+    }
+  }, [currentUser, next, router]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,12 +44,23 @@ function LoginForm() {
 
     try {
       const result = await login({ identifier, password }).unwrap();
+
+      // Save token to localStorage for Incognito / Cross-domain fallback
+      if (result.token) {
+        localStorage.setItem("token", result.token);
+      }
+
       toast.success("Logged in successfully!");
       const safeNext =
         next && next.startsWith("/") && !next.startsWith("//") ? next : null;
-      if (result.user.role === "admin") {
-        if (safeNext?.startsWith("/game") || safeNext?.startsWith("/dashboard")) {
-          toast.error("Admins cannot join games. Redirecting to admin dashboard.");
+      if (result.user?.role === "admin") {
+        if (
+          safeNext?.startsWith("/game") ||
+          safeNext?.startsWith("/dashboard")
+        ) {
+          toast.error(
+            "Admins cannot join games. Redirecting to admin dashboard.",
+          );
         }
         router.replace("/admin");
         return;
@@ -98,7 +123,7 @@ function LoginForm() {
       <p className="text-center text-xs text-text-muted font-plus mt-4">
         Don&apos;t have an account?{" "}
         <Link
-          href="/register"
+          href={`/register${next ? `?next=${encodeURIComponent(next)}` : ""}`}
           prefetch={false}
           className="text-brass-light hover:underline font-semibold"
         >
@@ -113,7 +138,11 @@ export default function LoginPage() {
   return (
     <Suspense
       fallback={
-        <AuthCard badge="Loading" title="Please wait..." subtitle="Loading login form.">
+        <AuthCard
+          badge="Loading"
+          title="Please wait..."
+          subtitle="Loading login form."
+        >
           <p className="text-center text-xs text-text-muted">Loading...</p>
         </AuthCard>
       }

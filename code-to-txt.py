@@ -12,7 +12,9 @@ EXCLUDED_DIRS = {
     '.idea',
     'test-reports',
     'tests','reporters',
-    '.next'
+    '.next',
+    'tests',
+    'test-results'
 }
 
 EXCLUDED_EXTENSIONS = {

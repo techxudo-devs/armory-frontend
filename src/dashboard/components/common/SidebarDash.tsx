@@ -103,6 +103,9 @@ function SidebarContent({
 
   const handleSignOut = async () => {
     try {
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("token");
+      }
       await logout().unwrap();
       dispatch(baseApi.util.resetApiState());
     } catch (error) {
@@ -123,7 +126,9 @@ function SidebarContent({
     ? "justify-center lg:justify-start px-3 lg:px-3.5"
     : "justify-start px-3.5";
   const linkLabel = compact ? "hidden lg:inline" : "inline";
-  const userRow = compact ? "justify-center lg:justify-between" : "justify-between";
+  const userRow = compact
+    ? "justify-center lg:justify-between"
+    : "justify-between";
   const userName = compact ? "hidden lg:flex" : "flex";
   const signOutText = compact ? "hidden lg:inline" : "inline";
   const bottomPad = compact ? "p-1.5 md:p-3 lg:p-4" : "p-4";
@@ -179,7 +184,8 @@ function SidebarContent({
           {links.map((link) => {
             const Icon = link.icon;
             const isActive = pathname === link.href;
-            const count = link.countType === "feedback" ? newFeedbackCount : pendingCount;
+            const count =
+              link.countType === "feedback" ? newFeedbackCount : pendingCount;
             return (
               <Link
                 key={link.href}
@@ -213,9 +219,7 @@ function SidebarContent({
       </div>
 
       {/* Bottom Sidebar: User Details & Sign Out Button */}
-      <div
-        className={`border-t border-[#3D2715] bg-[#1D0F08] ${bottomPad}`}
-      >
+      <div className={`border-t border-[#3D2715] bg-[#1D0F08] ${bottomPad}`}>
         <div className={`flex items-center gap-2 mb-3 px-1 ${userRow}`}>
           <div className={`flex-col min-w-0 ${userName}`}>
             <span className="text-xs font-semibold text-white truncate">

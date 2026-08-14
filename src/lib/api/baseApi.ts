@@ -1,89 +1,101 @@
-import axios, { AxiosError, type AxiosRequestConfig } from 'axios'
-import { createApi, type BaseQueryFn } from '@reduxjs/toolkit/query/react'
+import axios, { AxiosError, type AxiosRequestConfig } from "axios";
+import { createApi, type BaseQueryFn } from "@reduxjs/toolkit/query/react";
 
 export interface Pagination {
-  totalDocs: number
-  totalPages: number
-  currentPage: number
-  limit: number
-  hasNextPage: boolean
-  hasPrevPage: boolean
+  totalDocs: number;
+  totalPages: number;
+  currentPage: number;
+  limit: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
 }
 
 export interface Paginated<T> {
-  items: T[]
-  pagination: Pagination
+  items: T[];
+  pagination: Pagination;
 }
 
 export interface ApiErrorBody {
-  message?: string
-  errors?: string[]
-  statusCode?: number
+  message?: string;
+  errors?: string[];
+  statusCode?: number;
 }
 
 export type ApiErrorPayload = {
-  status: number | undefined
-  data?: ApiErrorBody
-  message: string
-}
+  status: number | undefined;
+  data?: ApiErrorBody;
+  message: string;
+};
 
 interface QueryArgs {
-  url: string
-  method?: AxiosRequestConfig['method']
-  body?: unknown
-  params?: AxiosRequestConfig['params']
+  url: string;
+  method?: AxiosRequestConfig["method"];
+  body?: unknown;
+  params?: AxiosRequestConfig["params"];
 }
 
 interface BaseQueryMeta {
-  pagination?: Pagination
-  message?: string
+  pagination?: Pagination;
+  message?: string;
 }
 
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api",
   withCredentials: true,
-  headers: { 'Content-Type': 'application/json' },
-})
+  headers: { "Content-Type": "application/json" },
+});
+
+// Attach Bearer Token from localStorage for Incognito / Cross-domain support
+axiosInstance.interceptors.request.use((config) => {
+  if (typeof window !== "undefined") {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+  }
+  return config;
+});
 
 export const axiosBaseQuery: BaseQueryFn<
   QueryArgs,
   unknown,
   ApiErrorPayload
-> = async ({ url, method = 'GET', body, params }) => {
+> = async ({ url, method = "GET", body, params }) => {
   try {
-    const headers = body instanceof FormData ? { 'Content-Type': undefined } : undefined
+    const headers =
+      body instanceof FormData ? { "Content-Type": undefined } : undefined;
     const result = await axiosInstance({
       url,
       method,
       data: body,
       params,
       headers,
-    })
-    const envelope = result.data
+    });
+    const envelope = result.data;
     return {
       data: envelope?.data ?? envelope,
       meta: {
         pagination: envelope?.pagination,
         message: envelope?.message,
       } satisfies BaseQueryMeta,
-    }
+    };
   } catch (axiosError) {
-    const err = axiosError as AxiosError<ApiErrorBody>
+    const err = axiosError as AxiosError<ApiErrorBody>;
     return {
       error: {
         status: err.response?.status,
         data: err.response?.data,
         message: err.response?.data?.message || err.message,
       },
-    }
+    };
   }
-}
+};
 
 export function getErrorMessage(error: unknown): string {
-  if (error && typeof error === 'object' && 'message' in error) {
-    return String((error as { message: string }).message)
+  if (error && typeof error === "object" && "message" in error) {
+    return String((error as { message: string }).message);
   }
-  return 'Something went wrong. Please try again.'
+  return "Something went wrong. Please try again.";
 }
 
 export const withPagination = <T>(data: T[], meta?: unknown): Paginated<T> => ({
@@ -96,13 +108,23 @@ export const withPagination = <T>(data: T[], meta?: unknown): Paginated<T> => ({
     hasNextPage: false,
     hasPrevPage: false,
   },
-})
+});
 
 export const baseApi = createApi({
-  reducerPath: 'api',
+  reducerPath: "api",
   baseQuery: axiosBaseQuery,
-  tagTypes: ['Game', 'User', 'History', 'Analytics', 'Auth', 'JoinedGames', 'Notifications', 'PendingApprovals', 'Feedback'],
+  tagTypes: [
+    "Game",
+    "User",
+    "History",
+    "Analytics",
+    "Auth",
+    "JoinedGames",
+    "Notifications",
+    "PendingApprovals",
+    "Feedback",
+  ],
   refetchOnFocus: true,
   refetchOnReconnect: true,
   endpoints: () => ({}),
-})
+});
