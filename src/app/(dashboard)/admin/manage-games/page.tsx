@@ -11,6 +11,7 @@ import {
   CircleStop,
   Loader2,
   Link2,
+  Trophy,
 } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
@@ -52,9 +53,6 @@ const toFormData = (data: Partial<Game> & { prizeImage?: File | null }) => {
   append("totalSeats", data.totalSeats);
   append("numberOfWinners", data.numberOfWinners);
   append("category", data.category);
-  append("endType", data.endType);
-  if (data.endType === "automatic" && data.endDate)
-    append("endDate", new Date(data.endDate).toISOString());
   append("prizeImage", data.prizeImage);
   return formData;
 };
@@ -67,6 +65,8 @@ export default function ManageGamesPage() {
   const deleteModal = useModal();
   const [gameToDelete, setGameToDelete] = useState<string | null>(null);
   const [participantsGame, setParticipantsGame] = useState<Game | null>(null);
+  const [winnersGame, setWinnersGame] = useState<Game | null>(null);
+  const [endingGameId, setEndingGameId] = useState<string | null>(null);
 
   const { data, isLoading, isError, isFetching } = useGetAdminGamesQuery({
     page,
@@ -131,11 +131,14 @@ export default function ManageGamesPage() {
   };
 
   const handleEndGame = async (game: Game) => {
+    setEndingGameId(game._id);
     try {
       await endGame(game._id).unwrap();
       toast.success(`Game "${game.title}" ended. You can now select winners.`);
     } catch (error) {
       toast.error(getErrorMessage(error));
+    } finally {
+      setEndingGameId(null);
     }
   };
 
@@ -330,16 +333,25 @@ export default function ManageGamesPage() {
                         {game.status === "active" && (
                           <button
                             onClick={() => handleEndGame(game)}
-                            disabled={isEnding}
+                            disabled={endingGameId !== null}
                             className="flex cursor-pointer items-center gap-1 rounded-lg p-2 text-[#C09A76] transition-colors duration-300 hover:bg-amber-500/15 hover:text-amber-400 disabled:cursor-not-allowed disabled:opacity-40"
                             title="End Game"
                           >
-                            {isEnding ? (
+                            {endingGameId === game._id ? (
                               <Loader2 size={16} className="animate-spin" />
                             ) : (
                               <CircleStop size={16} />
                             )}
-                            {isEnding && <span className="text-xs">Ending</span>}
+                            {endingGameId === game._id && <span className="text-xs">Ending</span>}
+                          </button>
+                        )}
+                        {game.status === "ended" && (
+                          <button
+                            onClick={() => setWinnersGame(game)}
+                            className="cursor-pointer rounded-lg p-2 text-[#C09A76] transition-colors duration-300 hover:bg-[#8FAD7A]/15 hover:text-[#8FAD7A]"
+                            title="Announce Winners"
+                          >
+                            <Trophy size={18} />
                           </button>
                         )}
                         <button
@@ -406,6 +418,13 @@ export default function ManageGamesPage() {
         isOpen={!!participantsGame}
         game={participantsGame}
         onClose={() => setParticipantsGame(null)}
+      />
+
+      <ParticipantsModal
+        isOpen={!!winnersGame}
+        game={winnersGame}
+        onClose={() => setWinnersGame(null)}
+        allowWinnerSelection
       />
     </div>
   );

@@ -282,18 +282,6 @@ export default function PublicGamePage({
                       {game.reservedSeatsCount}/{game.totalSeats}
                     </span>
                   </div>
-                  {game.endDate && (
-                    <div className="flex items-center gap-2 text-sm">
-                      <Clock size={16} className="text-[#8FAD7A]" />
-                      <span className="text-[#C09A76]">Ends</span>
-                      <span className="font-semibold text-[#F4EADD]">
-                        {new Date(game.endDate).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                        })}
-                      </span>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>

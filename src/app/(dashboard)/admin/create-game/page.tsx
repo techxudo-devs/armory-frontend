@@ -18,8 +18,6 @@ interface GameForm {
   totalSeats: string
   numberOfWinners: string
   category: string
-  endType: 'manual' | 'automatic'
-  endDate: string
 }
 
 const inputClass =
@@ -41,8 +39,6 @@ export default function CreateGamePage() {
       totalSeats: '100',
       numberOfWinners: '1',
       category: 'Accessories',
-      endType: 'manual',
-      endDate: '',
     },
     async (data) => {
       const formData = new FormData()
@@ -51,12 +47,8 @@ export default function CreateGamePage() {
       formData.append('totalSeats', data.totalSeats)
       formData.append('numberOfWinners', data.numberOfWinners)
       formData.append('category', data.category)
-      formData.append('endType', data.endType)
       if (data.description) formData.append('description', data.description)
       if (data.rules) formData.append('rules', data.rules)
-      if (data.endType === 'automatic' && data.endDate) {
-        formData.append('endDate', new Date(data.endDate).toISOString())
-      }
       if (prizeImage) formData.append('prizeImage', prizeImage)
 
       try {
@@ -247,41 +239,10 @@ export default function CreateGamePage() {
                   <option value="Ammo">Ammo</option>
                   <option value="Accessories">Accessories</option>
                   <option value="Firearms">Firearms</option>
-                </select>
-              </div>
-              <div>
-                <label htmlFor="endType" className={labelClass}>
-                  End Type *
-                </label>
-                <select
-                  id="endType"
-                  name="endType"
-                  value={values.endType}
-                  onChange={handleChange}
-                  className={`${inputClass} cursor-pointer`}
-                >
-                  <option value="manual">Manual End</option>
-                  <option value="automatic">Automatic End</option>
+                  <option value="Other">Other</option>
                 </select>
               </div>
             </div>
-
-            {values.endType === 'automatic' && (
-              <div className="mt-4 max-w-md">
-                <label htmlFor="endDate" className={labelClass}>
-                  End Date &amp; Time *
-                </label>
-                <input
-                  id="endDate"
-                  type="datetime-local"
-                  name="endDate"
-                  value={values.endDate}
-                  onChange={handleChange}
-                  className={inputClass}
-                  required
-                />
-              </div>
-            )}
           </div>
 
           {/* Actions */}

@@ -77,6 +77,12 @@ export interface NotificationItem {
   message: string
   isRead: boolean
   gameId?: string
+  metadata?: {
+    seatNumbers?: number[]
+    gameId?: string
+    gameTitle?: string
+    paymentReference?: string
+  } | null
   createdAt: string
   updatedAt: string
 }

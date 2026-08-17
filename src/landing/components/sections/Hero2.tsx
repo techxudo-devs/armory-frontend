@@ -19,7 +19,7 @@ export function Hero2() {
 
   const stats = [
     { value: isLoading ? "…" : String(games.length), label: "Raffles live" },
-    { value: "$412K", label: "Gear given away" },
+    // { value: "$412K", label: "Gear given away" },
     { value: isLoading ? "…" : seatsTotal.toLocaleString(), label: "Seats live" },
   ];
   return (

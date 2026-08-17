@@ -143,6 +143,25 @@ export const gamesApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['PendingApprovals', 'Game', 'JoinedGames'],
     }),
+
+    // User re-request rejected seats
+    reRequestSeats: builder.mutation<
+      { seatNumbers: number[]; status: string; pendingExpiresAt: string },
+      { gameId: string; seatNumbers: number[]; paymentReference: string; paymentProof?: File }
+    >({
+      query: ({ gameId, seatNumbers, paymentReference, paymentProof }) => {
+        const formData = new FormData();
+        formData.append('seatNumbers', JSON.stringify(seatNumbers));
+        formData.append('paymentReference', paymentReference);
+        if (paymentProof) formData.append('paymentProof', paymentProof);
+        return {
+          url: `/seats/${gameId}/re-request`,
+          method: 'POST',
+          body: formData,
+        };
+      },
+      invalidatesTags: ['PendingApprovals', 'Game', 'JoinedGames'],
+    }),
   }),
 })
 
@@ -164,4 +183,5 @@ export const {
   useGetPendingApprovalsQuery,
   useApprovePendingSeatsMutation,
   useRejectPendingSeatsMutation,
+  useReRequestSeatsMutation,
 } = gamesApi

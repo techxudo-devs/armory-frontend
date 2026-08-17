@@ -18,11 +18,11 @@ import {
   LayoutDashboard,
   PlusCircle,
   History,
-  Archive,
   BadgeCheck,
   X,
   Inbox,
   MessageSquareText,
+  MonitorPlay,
 } from "lucide-react";
 
 interface SidebarUser {
@@ -47,7 +47,6 @@ const adminLinks: SidebarLink[] = [
     icon: PlusCircle,
   },
   { label: "Manage Games", href: "/admin/manage-games", icon: Gamepad2 },
-  { label: "Ended Games", href: "/admin/ended-games", icon: Archive },
   { label: "Game History", href: "/admin/game-history", icon: History },
   {
     label: "Seat Approvals",
@@ -64,6 +63,7 @@ const adminLinks: SidebarLink[] = [
     showCount: true,
     countType: "feedback",
   },
+  { label: "Webinars", href: "/", icon: MonitorPlay },
 ];
 
 const userLinks: SidebarLink[] = [
@@ -73,6 +73,7 @@ const userLinks: SidebarLink[] = [
   { label: "Notifications", href: "/dashboard/notifications", icon: Bell },
   { label: "Feedback", href: "/dashboard/feedback", icon: MessageSquareText },
   { label: "My Profile", href: "/dashboard/my-profile", icon: User },
+  { label: "Webinars", href: "/", icon: MonitorPlay },
 ];
 
 function SidebarContent({

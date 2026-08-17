@@ -25,19 +25,11 @@ const initialGameState: Partial<Game> = {
   numberOfWinners: 1,
   category: 'Accessories',
   status: 'active',
-  endType: 'manual',
-  endDate: null,
 }
 
 const inputClass =
   'w-full rounded-xl border border-[#3D2715] bg-[#24140B] px-3.5 py-2.5 text-sm text-[#F4EADD] placeholder-[#9A7A5C] outline-none transition-colors duration-300 focus:border-[#D29A45] focus:ring-2 focus:ring-[#D29A45]/20 disabled:opacity-50 disabled:cursor-not-allowed'
 const labelClass = 'mb-1.5 block text-sm font-medium text-[#C09A76]'
-
-const toDateTimeLocal = (iso: string) => {
-  const d = new Date(iso)
-  const pad = (n: number) => String(n).padStart(2, '0')
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`
-}
 
 export function GameModal({ isOpen, type, game, onClose, onSubmit, isLoading = false }: GameModalProps) {
   const resetRef = useRef<() => void>(() => {})
@@ -234,25 +226,7 @@ export function GameModal({ isOpen, type, game, onClose, onSubmit, isLoading = f
                 <option value="Ammo">Ammo</option>
                 <option value="Accessories">Accessories</option>
                 <option value="Firearms">Firearms</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label htmlFor="endType" className={labelClass}>
-                End Type *
-              </label>
-              <select
-                id="endType"
-                name="endType"
-                value={values.endType || 'manual'}
-                onChange={handleChange}
-                disabled={isViewOnly || isLoading}
-                className={`${inputClass} cursor-pointer`}
-              >
-                <option value="manual">Manual End</option>
-                <option value="automatic">Automatic End</option>
+                <option value="Other">Other</option>
               </select>
             </div>
             {(type === 'edit' || type === 'view') && (
@@ -275,24 +249,6 @@ export function GameModal({ isOpen, type, game, onClose, onSubmit, isLoading = f
               </div>
             )}
           </div>
-
-          {values.endType === 'automatic' && (
-            <div className="max-w-xs">
-              <label htmlFor="endDate" className={labelClass}>
-                End Date &amp; Time *
-              </label>
-              <input
-                id="endDate"
-                type="datetime-local"
-                name="endDate"
-                value={values.endDate ? toDateTimeLocal(values.endDate) : ''}
-                onChange={handleChange}
-                disabled={isViewOnly || isLoading}
-                className={inputClass}
-                required
-              />
-            </div>
-          )}
 
           <div>
             <label htmlFor="description" className={labelClass}>

@@ -172,50 +172,45 @@ export default function PendingApprovalsPage() {
                 </span>
               </div>
 
-              <div className="mb-5 space-y-2">
-                {group.seats.map((seat) => (
-                  <div
-                    key={seat.seatId}
-                    className="flex flex-col gap-1 rounded-xl border border-[#3D2715] bg-[#24140B]/60 px-4 py-3 sm:flex-row sm:items-center sm:gap-3"
-                  >
-                    <span className="inline-flex w-fit items-center rounded-lg bg-[#D29A45]/10 px-2.5 py-1 text-xs font-bold text-[#E3C49A]">
-                      Seat #{seat.seatNumber}
+              <div className="mb-5 rounded-xl border border-[#3D2715] bg-[#24140B]/60 px-4 py-3">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs text-[#C09A76]">Seats:</span>
+                  {group.seats.map((seat) => (
+                    <span
+                      key={seat.seatId}
+                      className="inline-flex items-center rounded-lg bg-[#D29A45]/10 px-2 py-0.5 text-xs font-bold text-[#E3C49A]"
+                    >
+                      #{seat.seatNumber}
                     </span>
-                    <div className="flex min-w-0 flex-1 flex-col sm:flex-row sm:items-center sm:justify-between sm:gap-3">
-                      <div className="flex min-w-0 items-center gap-2">
-                        <span className="truncate text-xs text-[#C09A76]">
-                          <span className="text-[#C09A76]">Reference:</span>{' '}
-                          {seat.paymentReference || (
-                            <span className="italic text-[#9A7A5C]">not provided</span>
-                          )}
+                  ))}
+                </div>
+                {group.seats[0]?.paymentReference && (
+                  <p className="mt-2 text-xs text-[#C09A76]">
+                    Reference: <span className="text-[#F4EADD]">{group.seats[0].paymentReference}</span>
+                  </p>
+                )}
+                {group.seats.some((s) => s.paymentProof) && (
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {group.seats.filter((s) => s.paymentProof).map((seat) => (
+                      <button
+                        key={seat.seatId}
+                        onClick={() => setLightbox(seat.paymentProof)}
+                        title={`Payment screenshot - Seat #${seat.seatNumber}`}
+                        className="group relative h-10 w-10 shrink-0 cursor-pointer overflow-hidden rounded-lg ring-1 ring-[#3D2715] transition-transform hover:scale-105"
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={seat.paymentProof}
+                          alt={`Payment screenshot - Seat #${seat.seatNumber}`}
+                          className="h-full w-full object-cover"
+                        />
+                        <span className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity group-hover:opacity-100">
+                          <Maximize2 size={14} className="text-white" />
                         </span>
-                        {seat.paymentProof && (
-                          <button
-                            onClick={() => setLightbox(seat.paymentProof)}
-                            title="View payment screenshot"
-                            className="group relative h-10 w-10 shrink-0 cursor-pointer overflow-hidden rounded-lg ring-1 ring-[#3D2715] transition-transform hover:scale-105"
-                          >
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              src={seat.paymentProof}
-                              alt="Payment screenshot"
-                              className="h-full w-full object-cover"
-                            />
-                            <span className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity group-hover:opacity-100">
-                              <Maximize2 size={14} className="text-white" />
-                            </span>
-                          </button>
-                        )}
-                      </div>
-                      <span className="shrink-0 text-xs text-[#9A7A5C]">
-                        {new Date(seat.reservedAt).toLocaleTimeString('en-US', {
-                          hour: 'numeric',
-                          minute: '2-digit',
-                        })}
-                      </span>
-                    </div>
+                      </button>
+                    ))}
                   </div>
-                ))}
+                )}
               </div>
 
               <div className="flex gap-3">
