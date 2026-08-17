@@ -18,7 +18,7 @@ export function RaffleCard({ raffle }: RaffleCardProps) {
   const isAdmin = user?.role === "admin";
   const href = raffle.gameCode
     ? notLoggedIn
-      ? `/login?next=/game/${encodeURIComponent(raffle.gameCode)}`
+      ? `/game/${encodeURIComponent(raffle.gameCode)}/details`
       : isAdmin
         ? "/admin"
       : `/game/${encodeURIComponent(raffle.gameCode)}`

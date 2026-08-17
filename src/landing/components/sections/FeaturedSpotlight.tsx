@@ -26,7 +26,7 @@ export function FeaturedSpotlight() {
 
   const href = raffle?.gameCode
     ? notLoggedIn
-      ? `/login?next=/game/${encodeURIComponent(raffle.gameCode)}`
+      ? `/game/${encodeURIComponent(raffle.gameCode)}/details`
       : isAdmin
         ? "/admin"
       : `/game/${encodeURIComponent(raffle.gameCode)}`
