@@ -213,6 +213,7 @@ export default function GameDetailsPage({
                     label: "Debit/Credit Card",
                     href: "https://checkout.square.site/merchant/ML3144VNCTC5J/checkout/FDHLXSM6SOCWYZHEE6Q2YQMV",
                   },
+                  { label: "Zelle", href: "mailto:Metaltands@gmail.com" },
                 ].map((method) => (
                   <a
                     key={method.label}
